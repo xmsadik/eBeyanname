@@ -54,7 +54,7 @@
           <fs_output>-bukrs = p_bukrs.
           <fs_output>-gjahr = p_gjahr.
           <fs_output>-monat = p_monat.
-
+          <fs_output>-currency = 'TRY'.
           lv_lineitem = lv_lineitem + 1.
           <fs_output>-lineitem = lv_lineitem.
 
@@ -67,17 +67,7 @@
 *          APPEND ls_output TO lt_output.
 *        ENDLOOP.
 
-clear : lt_output[].
-APPEND VALUE #(
-    bukrs     = '1000'
-    gjahr     = '2025'
-    monat     = '09'
-    lineitem  = 1
-    acklm1    = 'KDV'
-    matrah    = 1000
-    vergi     = 180
-    currency  = 'TRY'
-) TO lt_output.
+
 
         IF io_request->is_total_numb_of_rec_requested(  ).
           io_response->set_total_number_of_records( iv_total_number_of_records = lines( lt_output ) ).
