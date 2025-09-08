@@ -603,21 +603,21 @@
                                                                 kiril2 = ls_map-kiril2
                                                                 kiril3 = ls_map-mwskz.
           IF <fs_collect> IS ASSIGNED..
-            CLEAR lv_oran.
-            TRY.
-                lv_oran = ( abs( lv_kbetr_s ) / abs( lv_kbetr_h ) ) * 10.
-              CATCH cx_sy_zerodivide.
-            ENDTRY.
-            CLEAR lv_oran_int.
-            lv_oran_int = lv_oran.
-            <fs_collect>-tevkifato = lv_oran_int.
-            CLEAR lv_oran_int.
-            lv_oran_int = abs( lv_kbetr_h ) / 10.
-            <fs_collect>-oran      = lv_oran_int.
-            SHIFT <fs_collect>-oran LEFT DELETING LEADING space.
-            SHIFT <fs_collect>-tevkifato LEFT DELETING LEADING space.
-            CONCATENATE <fs_collect>-tevkifato '/10' INTO <fs_collect>-tevkifato.
-            UNASSIGN <fs_collect>.
+*            CLEAR lv_oran.
+*            TRY.
+*                lv_oran = ( abs( lv_kbetr_s ) / abs( lv_kbetr_h ) ) * 10.
+*              CATCH cx_sy_zerodivide.
+*            ENDTRY.
+*            CLEAR lv_oran_int.
+*            lv_oran_int = lv_oran.
+*            <fs_collect>-tevkifato = lv_oran_int.
+*            CLEAR lv_oran_int.
+*            lv_oran_int = abs( lv_kbetr_h ) / 10.
+*            <fs_collect>-oran      = lv_oran_int.
+*            SHIFT <fs_collect>-oran LEFT DELETING LEADING space.
+*            SHIFT <fs_collect>-tevkifato LEFT DELETING LEADING space.
+*            CONCATENATE <fs_collect>-tevkifato '/10' INTO <fs_collect>-tevkifato.
+*            UNASSIGN <fs_collect>.
           ENDIF.
         WHEN '004'."Kural 4-Önceki Dönem Hesap Bakiyesi
 *          CLEAR lt_account_balances.
