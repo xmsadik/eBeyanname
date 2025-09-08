@@ -34,7 +34,49 @@
 
         fill_monat_range( ).
         fill_det_kural_range( ).
-        kdv1( ).
+*        kdv1( ).
+
+        CALL METHOD kdv1
+          EXPORTING
+            iv_bukrs   = p_bukrs
+            iv_gjahr   = p_gjahr
+            iv_monat   = p_monat
+            iv_donemb  = p_donemb
+            iv_beyant  = p_beyant
+          IMPORTING
+            et_collect = mt_collect
+            er_monat   = mr_monat.
+
+
+        LOOP AT mt_collect INTO DATA(ls_collect).
+          APPEND INITIAL LINE TO lt_output ASSIGNING FIELD-SYMBOL(<fs_output>).
+          MOVE-CORRESPONDING ls_collect TO <fs_output>.
+          <fs_output>-bukrs = p_bukrs.
+          <fs_output>-gjahr = p_gjahr.
+          <fs_output>-monat = p_monat.
+
+          lv_lineitem = lv_lineitem + 1.
+          <fs_output>-lineitem = lv_lineitem.
+
+        ENDLOOP.
+
+        SORT lt_output BY kiril1 kiril2 kiril3.
+
+*        LOOP AT mt_kesinti INTO DATA(ls_lesinti) .
+*          MOVE-CORRESPONDING ls_lesinti TO ls_output.
+*          APPEND ls_output TO lt_output.
+*        ENDLOOP.
+
+
+
+
+        IF io_request->is_total_numb_of_rec_requested(  ).
+          io_response->set_total_number_of_records( iv_total_number_of_records = lines( lt_output ) ).
+        ENDIF.
+        io_response->set_data( it_data = lt_output ).
+
+
+
       CATCH cx_rap_query_filter_no_range.
     ENDTRY.
   ENDMETHOD.

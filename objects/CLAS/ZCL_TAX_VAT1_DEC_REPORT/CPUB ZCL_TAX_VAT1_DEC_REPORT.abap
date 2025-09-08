@@ -169,7 +169,7 @@ CLASS zcl_tax_vat1_dec_report DEFINITION
     CONSTANTS mc_kschl_character TYPE string VALUE 'QWERTYUIOPĞÜASDFGHJKLŞİZXCVBNMÖÇ'.
     CONSTANTS mc_new_line_belnr    TYPE belnr_d VALUE '**********'.
 
-    DATA mt_collect                TYPE TABLE OF mty_collect.
+    DATA mt_collect                TYPE TABLE OF ztax_ddl_i_vat1_dec_report."mty_collect.
 
     TYPES mtty_collect TYPE TABLE OF ztax_ddl_i_vat1_dec_report..
 
@@ -194,7 +194,7 @@ CLASS zcl_tax_vat1_dec_report DEFINITION
                               ir_saknr    TYPE mtty_saknr_range OPTIONAL
                               ir_mwskz    TYPE mtty_mwskz_range OPTIONAL
                     EXPORTING et_bkpf     TYPE mtty_bkpf
-*                              et_bset     TYPE mtty_bset
+                              et_bset     TYPE mtty_bset
                               et_bseg     TYPE mtty_bseg,
       get_fieldname EXPORTING et_tevita TYPE mtty_tevita,
       get_gib EXPORTING et_gib TYPE mtty_gib,

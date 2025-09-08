@@ -17,7 +17,7 @@
     DATA lv_oran_int TYPE i.
     DATA lv_kiril3 TYPE ztax_e_acklm.
 
-    DATA ls_collect TYPE mty_collect.
+    DATA ls_collect TYPE ztax_ddl_i_vat1_dec_report."mty_collect.
 *    DATA ls_account_balances TYPE bapi1028_4.
 *    DATA lt_account_balances TYPE TABLE OF bapi1028_4.
     DATA lt_tax_voran TYPE TABLE OF ztax_t_voran.
@@ -82,7 +82,7 @@
     DATA lr_saknr TYPE RANGE OF I_OperationalAcctgDocItem-OperationalGLAccount.
     FIELD-SYMBOLS <fs_range>   TYPE any.
     FIELD-SYMBOLS <fs_field>   TYPE any.
-    FIELD-SYMBOLS <fs_collect> TYPE mty_collect.
+    FIELD-SYMBOLS <fs_collect> TYPE ztax_ddl_i_vat1_dec_report." mty_collect.
 *    FIELD-SYMBOLS <fs_detail>  TYPE ztax_s_detay_001.
     FIELD-SYMBOLS <lt_outtab> TYPE any .
 
@@ -113,7 +113,7 @@
     me->find_document( EXPORTING is_read_tab = ls_read_tab
                                  ir_saknr    = lr_saknr
                        IMPORTING et_bkpf     = lt_bkpf
-*                                 et_bset     = lt_bset
+                                 et_bset     = lt_bset
                                  et_bseg     = lt_bseg ).
 
     SELECT bukrs ,
@@ -151,10 +151,10 @@
           lr_ktosl = VALUE #( sign = 'I' option = 'EQ' ( low =  'MWS' )
                                                        ( low =  'VST' ) ).
           IF ls_map-saknr IS NOT INITIAL.
-*            LOOP AT lt_bset INTO ls_bset WHERE mwskz EQ ls_map-mwskz
-*                                           AND hkont EQ ls_map-saknr
-*                                           AND ktosl IN lr_ktosl.
-*
+            LOOP AT lt_bset INTO ls_bset WHERE mwskz EQ ls_map-mwskz
+                                           AND hkont EQ ls_map-saknr
+                                           AND ktosl IN lr_ktosl.
+
 *              APPEND INITIAL LINE TO mt_detail ASSIGNING <fs_detail>.
 *              IF <fs_detail> IS ASSIGNED.
 *                CLEAR ls_bkpf.
@@ -187,59 +187,59 @@
 *                <fs_detail>-tevkt  = 0.
 *                UNASSIGN <fs_detail>.
 *              ENDIF.
-*
-*              "1
-*              CLEAR ls_collect.
-*              ls_collect-kiril1 = ls_map-kiril1.
-*              ls_collect-acklm1 = ls_map-acklm1.
-*              IF ls_bset-shkzg EQ 'H'.
-*                ls_collect-matrah = ls_bset-hwbas * -1.
-*                ls_collect-vergi  = ls_bset-hwste * -1.
-*              ELSEIF ls_bset-shkzg EQ 'S'.
-*                ls_collect-matrah = ls_bset-hwbas.
-*                ls_collect-vergi  = ls_bset-hwste.
-*              ENDIF.
-*              COLLECT ls_collect INTO mt_collect.
-*              CLEAR ls_collect.
-*              "2
-*              CLEAR ls_collect.
-*              ls_collect-kiril1 = ls_map-kiril1.
-*              ls_collect-acklm1 = ls_map-acklm1.
-*              ls_collect-kiril2 = ls_map-kiril2.
-*              ls_collect-acklm2 = ls_map-acklm2.
-*              IF ls_bset-shkzg EQ 'S'.
-*                ls_collect-matrah = ls_bset-hwbas * -1.
-*                ls_collect-vergi  = ls_bset-hwste * -1.
-*              ELSEIF ls_bset-shkzg EQ 'H'.
-*                ls_collect-matrah = ls_bset-hwbas.
-*                ls_collect-vergi  = ls_bset-hwste.
-*              ENDIF.
-*              "<<D_ANANTU Comment
-*              COLLECT ls_collect INTO mt_collect.
-*              CLEAR ls_collect.
-*              "3
-*              CLEAR ls_collect.
-*              ls_collect-kiril1 = ls_map-kiril1.
-*              ls_collect-acklm1 = ls_map-acklm1.
-*              ls_collect-kiril2 = ls_map-kiril2.
-*              ls_collect-acklm2 = ls_map-acklm2.
-*              ">>D_ANANTU Comment
-*              ls_collect-kiril3 = ls_map-mwskz.
-*
-*              CLEAR lv_oran_int.
-*              lv_oran_int = abs( ls_bset-kbetr ) / 10.
-*              ls_collect-oran = lv_oran_int.
-*              SHIFT ls_collect-oran LEFT DELETING LEADING space.
-*              IF ls_bset-shkzg EQ 'H'.
-*                ls_collect-matrah = ls_bset-hwbas * -1.
-*                ls_collect-vergi  = ls_bset-hwste * -1.
-*              ELSEIF ls_bset-shkzg EQ 'S'.
-*                ls_collect-matrah = ls_bset-hwbas.
-*                ls_collect-vergi  = ls_bset-hwste.
-*              ENDIF.
-*              COLLECT ls_collect INTO mt_collect.
-*              CLEAR ls_collect.
-*            ENDLOOP.
+
+              "1
+              CLEAR ls_collect.
+              ls_collect-kiril1 = ls_map-kiril1.
+              ls_collect-acklm1 = ls_map-acklm1.
+              IF ls_bset-shkzg EQ 'H'.
+                ls_collect-matrah = ls_bset-hwbas * -1.
+                ls_collect-vergi  = ls_bset-hwste * -1.
+              ELSEIF ls_bset-shkzg EQ 'S'.
+                ls_collect-matrah = ls_bset-hwbas.
+                ls_collect-vergi  = ls_bset-hwste.
+              ENDIF.
+              COLLECT ls_collect INTO mt_collect.
+              CLEAR ls_collect.
+              "2
+              CLEAR ls_collect.
+              ls_collect-kiril1 = ls_map-kiril1.
+              ls_collect-acklm1 = ls_map-acklm1.
+              ls_collect-kiril2 = ls_map-kiril2.
+              ls_collect-acklm2 = ls_map-acklm2.
+              IF ls_bset-shkzg EQ 'S'.
+                ls_collect-matrah = ls_bset-hwbas * -1.
+                ls_collect-vergi  = ls_bset-hwste * -1.
+              ELSEIF ls_bset-shkzg EQ 'H'.
+                ls_collect-matrah = ls_bset-hwbas.
+                ls_collect-vergi  = ls_bset-hwste.
+              ENDIF.
+              "<<D_ANANTU Comment
+              COLLECT ls_collect INTO mt_collect.
+              CLEAR ls_collect.
+              "3
+              CLEAR ls_collect.
+              ls_collect-kiril1 = ls_map-kiril1.
+              ls_collect-acklm1 = ls_map-acklm1.
+              ls_collect-kiril2 = ls_map-kiril2.
+              ls_collect-acklm2 = ls_map-acklm2.
+              ">>D_ANANTU Comment
+              ls_collect-kiril3 = ls_map-mwskz.
+
+              CLEAR lv_oran_int.
+              lv_oran_int = abs( ls_bset-kbetr ) / 10.
+              ls_collect-oran = lv_oran_int.
+              SHIFT ls_collect-oran LEFT DELETING LEADING space.
+              IF ls_bset-shkzg EQ 'H'.
+                ls_collect-matrah = ls_bset-hwbas * -1.
+                ls_collect-vergi  = ls_bset-hwste * -1.
+              ELSEIF ls_bset-shkzg EQ 'S'.
+                ls_collect-matrah = ls_bset-hwbas.
+                ls_collect-vergi  = ls_bset-hwste.
+              ENDIF.
+              COLLECT ls_collect INTO mt_collect.
+              CLEAR ls_collect.
+            ENDLOOP.
             IF sy-subrc IS NOT INITIAL.
               CLEAR ls_collect.
               ls_collect-kiril1 = ls_map-kiril1.
@@ -255,8 +255,8 @@
 
           ELSE.
 
-*            LOOP AT lt_bset INTO ls_bset WHERE mwskz EQ ls_map-mwskz
-*                                           AND ktosl IN lr_ktosl.
+            LOOP AT lt_bset INTO ls_bset WHERE mwskz EQ ls_map-mwskz
+                                           AND ktosl IN lr_ktosl.
 *              APPEND INITIAL LINE TO mt_detail ASSIGNING <fs_detail>.
 *              IF <fs_detail> IS ASSIGNED.
 *                CLEAR ls_bkpf.
@@ -291,57 +291,57 @@
 *              ENDIF.
 *
 *              "1
-*              CLEAR ls_collect.
-*              ls_collect-kiril1 = ls_map-kiril1.
-*              ls_collect-acklm1 = ls_map-acklm1.
-*              IF ls_bset-shkzg EQ 'H'.
-*                ls_collect-matrah = ls_bset-hwbas * -1.
-*                ls_collect-vergi  = ls_bset-hwste * -1.
-*              ELSEIF ls_bset-shkzg EQ 'S'.
-*                ls_collect-matrah = ls_bset-hwbas.
-*                ls_collect-vergi  = ls_bset-hwste.
-*              ENDIF.
-*              COLLECT ls_collect INTO mt_collect.
-*              CLEAR ls_collect.
-*              "2
-*              CLEAR ls_collect.
-*              ls_collect-kiril1 = ls_map-kiril1.
-*              ls_collect-acklm1 = ls_map-acklm1.
-*              ls_collect-kiril2 = ls_map-kiril2.
-*              ls_collect-acklm2 = ls_map-acklm2.
-*              IF ls_bset-shkzg EQ 'S'.
-*                ls_collect-matrah = ls_bset-hwbas * -1.
-*                ls_collect-vergi  = ls_bset-hwste * -1.
-*              ELSEIF ls_bset-shkzg EQ 'H'.
-*                ls_collect-matrah = ls_bset-hwbas.
-*                ls_collect-vergi  = ls_bset-hwste.
-*              ENDIF.
-*              "<<D_ANANTU Alper NANTU Comment
-*              COLLECT ls_collect INTO mt_collect.
-*              CLEAR ls_collect.
-*              "3
-*              CLEAR ls_collect.
-*              ls_collect-kiril1 = ls_map-kiril1.
-*              ls_collect-acklm1 = ls_map-acklm1.
-*              ls_collect-kiril2 = ls_map-kiril2.
-*              ls_collect-acklm2 = ls_map-acklm2.
-*              ">>D_ANANTU Alper NANTU comment
-*              ls_collect-kiril3 = ls_map-mwskz.
-*
-*              CLEAR lv_oran_int.
-*              lv_oran_int = abs( ls_bset-kbetr ) / 10.
-*              ls_collect-oran = lv_oran_int.
-*              SHIFT ls_collect-oran LEFT DELETING LEADING space.
-*              IF ls_bset-shkzg EQ 'H'.
-*                ls_collect-matrah = ls_bset-hwbas * -1.
-*                ls_collect-vergi  = ls_bset-hwste * -1.
-*              ELSEIF ls_bset-shkzg EQ 'S'.
-*                ls_collect-matrah = ls_bset-hwbas.
-*                ls_collect-vergi  = ls_bset-hwste.
-*              ENDIF.
-*              COLLECT ls_collect INTO mt_collect.
-*              CLEAR ls_collect.
-*            ENDLOOP.
+              CLEAR ls_collect.
+              ls_collect-kiril1 = ls_map-kiril1.
+              ls_collect-acklm1 = ls_map-acklm1.
+              IF ls_bset-shkzg EQ 'H'.
+                ls_collect-matrah = ls_bset-hwbas * -1.
+                ls_collect-vergi  = ls_bset-hwste * -1.
+              ELSEIF ls_bset-shkzg EQ 'S'.
+                ls_collect-matrah = ls_bset-hwbas.
+                ls_collect-vergi  = ls_bset-hwste.
+              ENDIF.
+              COLLECT ls_collect INTO mt_collect.
+              CLEAR ls_collect.
+              "2
+              CLEAR ls_collect.
+              ls_collect-kiril1 = ls_map-kiril1.
+              ls_collect-acklm1 = ls_map-acklm1.
+              ls_collect-kiril2 = ls_map-kiril2.
+              ls_collect-acklm2 = ls_map-acklm2.
+              IF ls_bset-shkzg EQ 'S'.
+                ls_collect-matrah = ls_bset-hwbas * -1.
+                ls_collect-vergi  = ls_bset-hwste * -1.
+              ELSEIF ls_bset-shkzg EQ 'H'.
+                ls_collect-matrah = ls_bset-hwbas.
+                ls_collect-vergi  = ls_bset-hwste.
+              ENDIF.
+              "<<D_ANANTU Alper NANTU Comment
+              COLLECT ls_collect INTO mt_collect.
+              CLEAR ls_collect.
+              "3
+              CLEAR ls_collect.
+              ls_collect-kiril1 = ls_map-kiril1.
+              ls_collect-acklm1 = ls_map-acklm1.
+              ls_collect-kiril2 = ls_map-kiril2.
+              ls_collect-acklm2 = ls_map-acklm2.
+              ">>D_ANANTU Alper NANTU comment
+              ls_collect-kiril3 = ls_map-mwskz.
+
+              CLEAR lv_oran_int.
+              lv_oran_int = abs( ls_bset-kbetr ) / 10.
+              ls_collect-oran = lv_oran_int.
+              SHIFT ls_collect-oran LEFT DELETING LEADING space.
+              IF ls_bset-shkzg EQ 'H'.
+                ls_collect-matrah = ls_bset-hwbas * -1.
+                ls_collect-vergi  = ls_bset-hwste * -1.
+              ELSEIF ls_bset-shkzg EQ 'S'.
+                ls_collect-matrah = ls_bset-hwbas.
+                ls_collect-vergi  = ls_bset-hwste.
+              ENDIF.
+              COLLECT ls_collect INTO mt_collect.
+              CLEAR ls_collect.
+            ENDLOOP.
             IF sy-subrc IS NOT INITIAL.
               CLEAR ls_collect.
               ls_collect-kiril1 = ls_map-kiril1.
@@ -375,8 +375,8 @@
               AND mwskz EQ @ls_map-mwskz
               INTO @ls_tax_voran.
 
-*          LOOP AT lt_bset INTO ls_bset WHERE mwskz EQ ls_map-mwskz.
-*
+          LOOP AT lt_bset INTO ls_bset WHERE mwskz EQ ls_map-mwskz.
+
 *            APPEND INITIAL LINE TO mt_detail ASSIGNING <fs_detail>.
 *            IF <fs_detail> IS ASSIGNED.
 *              CLEAR ls_bkpf.
@@ -418,169 +418,171 @@
 *              UNASSIGN <fs_detail>.
 *            ENDIF.
 *
-*            CLEAR ls_collect.
-*
-*            IF ls_map-kiril1 NE '031'.
-*              IF lines( mt_tevita ) GT 0.
-*                LOOP AT mt_tevita INTO DATA(ls_tevita).
-*                  ASSIGN COMPONENT ls_tevita-fieldname OF STRUCTURE ls_bseg TO <fs_value>.
-*                  IF <fs_value> IS ASSIGNED.
-*
-*                    IF <fs_value> EQ ls_map-kiril2.
-*                      "1
-*                      ls_collect-kiril1 = ls_map-kiril1.
-*                      ls_collect-acklm1 = ls_map-acklm1.
-*                      IF ls_tax_voran-oran IS NOT INITIAL .
-*                        CASE ls_bset-shkzg.
-*                          WHEN 'H'.
-*                            ls_collect-matrah   = ls_bset-hwbas.
-*                            ls_collect-vergi    = ( ls_bset-hwbas * ls_tax_voran-oran ) / 100.
-*                            lv_kbetr_h          = ( ls_tax_voran-oran * 10 ).
-*                            lv_kbetr_s          = ( ls_tax_voran-oran * 10 ) - ls_bset-kbetr.
-*                            ls_collect-tevkifat = ( ( ls_bset-hwbas * ls_tax_voran-oran ) / 100 - ls_bset-hwste ).
-*                            ls_collect-vergi    = ls_collect-vergi + ( -1 * ( ( ls_bset-hwbas * ls_tax_voran-oran ) / 100 - ls_bset-hwste ) ).
-*
-*                        ENDCASE.
-*                      ELSE.
-*                        CASE ls_bset-shkzg.
-*                          WHEN 'H'.
-*                            ls_collect-matrah   = ls_bset-hwbas.
-*                            ls_collect-vergi    = ls_bset-hwste.
-*                            lv_kbetr_h          = ls_bset-kbetr.
-*                          WHEN 'S'.
-*                            lv_kbetr_s          = ls_bset-kbetr.
-*                            ls_collect-tevkifat = ls_bset-hwste.
-*                            ls_collect-vergi    = -1 * ls_bset-hwste.
-*                        ENDCASE.
-*                      ENDIF.
-*                      COLLECT ls_collect INTO mt_collect.
-*
-*                      ls_collect-kiril2 = ls_map-kiril2.
-*                      ls_collect-acklm2 = ls_map-acklm2.
-*                      COLLECT ls_collect INTO mt_collect.
-*                      "3
-*                      ls_collect-kiril3 = ls_map-mwskz.
-*                      COLLECT ls_collect INTO mt_collect.
-*                      UNASSIGN <fs_value>.
-*                    ENDIF.
-*                  ENDIF.
-*                ENDLOOP.
-*
-*              ELSEIF lines( mt_gib ) GT 0.
-*
-*
-*                LOOP AT mt_gib INTO DATA(ls_gib).
-*
-*                  CREATE DATA : dref_it TYPE (ls_gib-fieldname).
-*                  ASSIGN dref_it->* TO <lt_outtab>.
-*                  ASSIGN COMPONENT ls_gib-alan OF STRUCTURE <lt_outtab> TO <t_outtab>.
-*
-*                  CASE ls_bkpf-awtyp(1).
-*                    WHEN 'R' OR 'V'.
-*                      SELECT SINGLE awkey FROM bkpf
-*                         INTO @DATA(lv_awkey)
-*                        WHERE bukrs = @ls_bkpf-bukrs
-*                          AND belnr = @ls_bkpf-belnr
-*                          AND gjahr = @ls_bkpf-gjahr.
-*
-*                      IF sy-subrc EQ 0.
-*                        SELECT SINGLE (ls_gib-alan) FROM (ls_gib-fieldname)
-*                           INTO  @<t_outtab>
-*                           WHERE bukrs = @ls_bkpf-bukrs
-*                             AND belnr = @lv_awkey(10)
-*                             AND gjahr = @ls_bkpf-gjahr.
-*                      ENDIF.
-*
-*                    WHEN 'B' .
-*                      SELECT SINGLE (ls_gib-alan) FROM (ls_gib-fieldname)
-*                         INTO  @<t_outtab>
-*                       WHERE bukrs = @ls_bkpf-bukrs
-*                         AND belnr = @ls_bkpf-belnr
-*                         AND gjahr = @ls_bkpf-gjahr.
-*
-*
-*
-*                  ENDCASE.
-*
-*                  IF <t_outtab> EQ ls_map-kiril2.
-*                    "1
-*                    ls_collect-kiril1 = ls_map-kiril1.
-*                    ls_collect-acklm1 = ls_map-acklm1.
-*                    IF ls_tax_voran-oran IS NOT INITIAL .
-*                      CASE ls_bset-shkzg.
-*                        WHEN 'H'.
-*                          ls_collect-matrah   = ls_bset-hwbas.
-*                          ls_collect-vergi    = ( ls_bset-hwbas * ls_tax_voran-oran ) / 100.
-*                          lv_kbetr_h          = ( ls_tax_voran-oran * 10 ).
-*                          lv_kbetr_s          = ( ls_tax_voran-oran * 10 ) - ls_bset-kbetr.
-*                          ls_collect-tevkifat = ( ( ls_bset-hwbas * ls_tax_voran-oran ) / 100 - ls_bset-hwste ).
-*                          ls_collect-vergi    = ls_collect-vergi + ( -1 * ( ( ls_bset-hwbas * ls_tax_voran-oran ) / 100 - ls_bset-hwste ) ).
-*
-*                      ENDCASE.
-*                    ELSE.
-*                      CASE ls_bset-shkzg.
-*                        WHEN 'H'.
-*                          ls_collect-matrah   = ls_bset-hwbas.
-*                          ls_collect-vergi    = ls_bset-hwste.
-*                          lv_kbetr_h          = ls_bset-kbetr.
-*                        WHEN 'S'.
-*                          lv_kbetr_s          = ls_bset-kbetr.
-*                          ls_collect-tevkifat = ls_bset-hwste.
-*                          ls_collect-vergi    = -1 * ls_bset-hwste.
-*                      ENDCASE.
-*                    ENDIF.
-*                    COLLECT ls_collect INTO mt_collect.
-*
-*                    ls_collect-kiril2 = ls_map-kiril2.
-*                    ls_collect-acklm2 = ls_map-acklm2.
-*                    COLLECT ls_collect INTO mt_collect.
-*                    "3
-*                    ls_collect-kiril3 = ls_map-mwskz.
-*                    COLLECT ls_collect INTO mt_collect.
-*                    UNASSIGN <fs_value>.
-*                  ENDIF.
-*                ENDLOOP.
-*              ENDIF.
-*
-*            ELSE.
-*              "1
-*              ls_collect-kiril1 = ls_map-kiril1.
-*              ls_collect-acklm1 = ls_map-acklm1.
-*              IF ls_tax_voran-oran IS NOT INITIAL .
-*                CASE ls_bset-shkzg.
-*                  WHEN 'H'.
-*                    ls_collect-matrah   = ls_bset-hwbas.
-*                    ls_collect-vergi    = ( ls_bset-hwbas * ls_tax_voran-oran ) / 100.
-*                    lv_kbetr_h          = ( ls_tax_voran-oran * 10 ).
-*                    lv_kbetr_s          = ( ls_tax_voran-oran * 10 ) - ls_bset-kbetr.
-*                    ls_collect-tevkifat = ( ( ls_bset-hwbas * ls_tax_voran-oran ) / 100 - ls_bset-hwste ).
-*                    ls_collect-vergi    = ls_collect-vergi + ( -1 * ( ( ls_bset-hwbas * ls_tax_voran-oran ) / 100 - ls_bset-hwste ) ).
-*
-*                ENDCASE.
-*              ELSE.
-*                CASE ls_bset-shkzg.
-*                  WHEN 'H'.
-*                    ls_collect-matrah   = ls_bset-hwbas.
-*                    ls_collect-vergi    = ls_bset-hwste.
-*                    lv_kbetr_h          = ls_bset-kbetr.
-*                  WHEN 'S'.
-*                    lv_kbetr_s          = ls_bset-kbetr.
-*                    ls_collect-tevkifat = ls_bset-hwste.
-*                    ls_collect-vergi    = -1 * ls_bset-hwste.
-*                ENDCASE.
-*              ENDIF.
-*              COLLECT ls_collect INTO mt_collect.
-*
-*              ls_collect-kiril2 = ls_map-kiril2.
-*              ls_collect-acklm2 = ls_map-acklm2.
-*              COLLECT ls_collect INTO mt_collect.
-*
-*              "3
-*              ls_collect-kiril3 = ls_map-mwskz.
-*              COLLECT ls_collect INTO mt_collect.
-*            ENDIF.
-*
-*          ENDLOOP.
+            CLEAR ls_collect.
+
+            IF ls_map-kiril1 NE '031'.
+              IF lines( mt_tevita ) GT 0.
+                LOOP AT mt_tevita INTO DATA(ls_tevita).
+                  ASSIGN COMPONENT ls_tevita-fieldname OF STRUCTURE ls_bseg TO <fs_value>.
+                  IF <fs_value> IS ASSIGNED.
+
+                    IF <fs_value> EQ ls_map-kiril2.
+                      "1
+                      ls_collect-kiril1 = ls_map-kiril1.
+                      ls_collect-acklm1 = ls_map-acklm1.
+                      IF ls_tax_voran-oran IS NOT INITIAL .
+                        CASE ls_bset-shkzg.
+                          WHEN 'H'.
+                            ls_collect-matrah   = ls_bset-hwbas.
+                            ls_collect-vergi    = ( ls_bset-hwbas * ls_tax_voran-oran ) / 100.
+                            lv_kbetr_h          = ( ls_tax_voran-oran * 10 ).
+                            lv_kbetr_s          = ( ls_tax_voran-oran * 10 ) - ls_bset-kbetr.
+                            ls_collect-tevkifat = ( ( ls_bset-hwbas * ls_tax_voran-oran ) / 100 - ls_bset-hwste ).
+                            ls_collect-vergi    = ls_collect-vergi + ( -1 * ( ( ls_bset-hwbas * ls_tax_voran-oran ) / 100 - ls_bset-hwste ) ).
+
+                        ENDCASE.
+                      ELSE.
+                        CASE ls_bset-shkzg.
+                          WHEN 'H'.
+                            ls_collect-matrah   = ls_bset-hwbas.
+                            ls_collect-vergi    = ls_bset-hwste.
+                            lv_kbetr_h          = ls_bset-kbetr.
+                          WHEN 'S'.
+                            lv_kbetr_s          = ls_bset-kbetr.
+                            ls_collect-tevkifat = ls_bset-hwste.
+                            ls_collect-vergi    = -1 * ls_bset-hwste.
+                        ENDCASE.
+                      ENDIF.
+                      COLLECT ls_collect INTO mt_collect.
+
+                      ls_collect-kiril2 = ls_map-kiril2.
+                      ls_collect-acklm2 = ls_map-acklm2.
+                      COLLECT ls_collect INTO mt_collect.
+                      "3
+                      ls_collect-kiril3 = ls_map-mwskz.
+                      COLLECT ls_collect INTO mt_collect.
+                      UNASSIGN <fs_value>.
+                    ENDIF.
+                  ENDIF.
+                ENDLOOP.
+
+              ELSEIF lines( mt_gib ) GT 0.
+
+
+                LOOP AT mt_gib INTO DATA(ls_gib).
+
+                  CREATE DATA : dref_it TYPE (ls_gib-fieldname).
+                  ASSIGN dref_it->* TO <lt_outtab>.
+                  ASSIGN COMPONENT ls_gib-alan OF STRUCTURE <lt_outtab> TO <t_outtab>.
+
+                  CASE ls_bkpf-awtyp(1).
+                    WHEN 'R' OR 'V'.
+                      SELECT SINGLE OriginalReferenceDocument FROM i_journalentry
+
+                        WHERE CompanyCode = @ls_bkpf-bukrs
+                          AND AccountingDocument = @ls_bkpf-belnr
+                          AND FiscalYear = @ls_bkpf-gjahr
+                          INTO @DATA(lv_awkey).
+
+                      IF sy-subrc EQ 0.
+                        SELECT SINGLE (ls_gib-alan) FROM (ls_gib-fieldname)
+
+                           WHERE bukrs = @ls_bkpf-bukrs
+                             AND belnr = @lv_awkey(10)
+                             AND gjahr = @ls_bkpf-gjahr
+                             INTO  @<t_outtab>.
+                      ENDIF.
+
+                    WHEN 'B' .
+                      SELECT SINGLE (ls_gib-alan) FROM (ls_gib-fieldname)
+                       WHERE bukrs = @ls_bkpf-bukrs
+                         AND belnr = @ls_bkpf-belnr
+                         AND gjahr = @ls_bkpf-gjahr
+                         INTO  @<t_outtab>.
+
+
+
+                  ENDCASE.
+
+                  IF <t_outtab> EQ ls_map-kiril2.
+                    "1
+                    ls_collect-kiril1 = ls_map-kiril1.
+                    ls_collect-acklm1 = ls_map-acklm1.
+                    IF ls_tax_voran-oran IS NOT INITIAL .
+                      CASE ls_bset-shkzg.
+                        WHEN 'H'.
+                          ls_collect-matrah   = ls_bset-hwbas.
+                          ls_collect-vergi    = ( ls_bset-hwbas * ls_tax_voran-oran ) / 100.
+                          lv_kbetr_h          = ( ls_tax_voran-oran * 10 ).
+                          lv_kbetr_s          = ( ls_tax_voran-oran * 10 ) - ls_bset-kbetr.
+                          ls_collect-tevkifat = ( ( ls_bset-hwbas * ls_tax_voran-oran ) / 100 - ls_bset-hwste ).
+                          ls_collect-vergi    = ls_collect-vergi + ( -1 * ( ( ls_bset-hwbas * ls_tax_voran-oran ) / 100 - ls_bset-hwste ) ).
+
+                      ENDCASE.
+                    ELSE.
+                      CASE ls_bset-shkzg.
+                        WHEN 'H'.
+                          ls_collect-matrah   = ls_bset-hwbas.
+                          ls_collect-vergi    = ls_bset-hwste.
+                          lv_kbetr_h          = ls_bset-kbetr.
+                        WHEN 'S'.
+                          lv_kbetr_s          = ls_bset-kbetr.
+                          ls_collect-tevkifat = ls_bset-hwste.
+                          ls_collect-vergi    = -1 * ls_bset-hwste.
+                      ENDCASE.
+                    ENDIF.
+                    COLLECT ls_collect INTO mt_collect.
+
+                    ls_collect-kiril2 = ls_map-kiril2.
+                    ls_collect-acklm2 = ls_map-acklm2.
+                    COLLECT ls_collect INTO mt_collect.
+                    "3
+                    ls_collect-kiril3 = ls_map-mwskz.
+                    COLLECT ls_collect INTO mt_collect.
+                    UNASSIGN <fs_value>.
+                  ENDIF.
+                ENDLOOP.
+              ENDIF.
+
+            ELSE.
+              "1
+              ls_collect-kiril1 = ls_map-kiril1.
+              ls_collect-acklm1 = ls_map-acklm1.
+              IF ls_tax_voran-oran IS NOT INITIAL .
+                CASE ls_bset-shkzg.
+                  WHEN 'H'.
+                    ls_collect-matrah   = ls_bset-hwbas.
+                    ls_collect-vergi    = ( ls_bset-hwbas * ls_tax_voran-oran ) / 100.
+                    lv_kbetr_h          = ( ls_tax_voran-oran * 10 ).
+                    lv_kbetr_s          = ( ls_tax_voran-oran * 10 ) - ls_bset-kbetr.
+                    ls_collect-tevkifat = ( ( ls_bset-hwbas * ls_tax_voran-oran ) / 100 - ls_bset-hwste ).
+                    ls_collect-vergi    = ls_collect-vergi + ( -1 * ( ( ls_bset-hwbas * ls_tax_voran-oran ) / 100 - ls_bset-hwste ) ).
+
+                ENDCASE.
+              ELSE.
+                CASE ls_bset-shkzg.
+                  WHEN 'H'.
+                    ls_collect-matrah   = ls_bset-hwbas.
+                    ls_collect-vergi    = ls_bset-hwste.
+                    lv_kbetr_h          = ls_bset-kbetr.
+                  WHEN 'S'.
+                    lv_kbetr_s          = ls_bset-kbetr.
+                    ls_collect-tevkifat = ls_bset-hwste.
+                    ls_collect-vergi    = -1 * ls_bset-hwste.
+                ENDCASE.
+              ENDIF.
+              COLLECT ls_collect INTO mt_collect.
+
+              ls_collect-kiril2 = ls_map-kiril2.
+              ls_collect-acklm2 = ls_map-acklm2.
+              COLLECT ls_collect INTO mt_collect.
+
+              "3
+              ls_collect-kiril3 = ls_map-mwskz.
+              COLLECT ls_collect INTO mt_collect.
+            ENDIF.
+
+          ENDLOOP.
 
           IF sy-subrc IS NOT INITIAL.
             CLEAR ls_collect.

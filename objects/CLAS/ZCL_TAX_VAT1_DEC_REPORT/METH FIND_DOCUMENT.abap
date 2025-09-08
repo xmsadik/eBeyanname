@@ -135,6 +135,29 @@
 *                 AND bset~belnr EQ et_bkpf-belnr
 *                 AND bset~gjahr EQ et_bkpf-gjahr
 *                 AND bset~mwskz IN ir_mwskz.
+
+
+        SELECT
+            bset~companycode         AS bukrs,
+            bset~Accountingdocument  AS belnr,
+            bset~fiscalyear          AS gjahr,
+            bset~taxitem             AS buzei,
+            bset~taxcode             AS mwskz,
+            bset~debitcreditcode     AS shkzg,
+            bset~TaxBaseAmountInCoCodeCrcy AS hwbas,
+            bset~TaxAmountInCoCodeCrcy     AS hwste,
+            cond~kbetr AS kbetr ,
+              cond~kschl AS kschl
+
+          FROM i_operationalAcctgDocTaxItem AS bset
+          LEFT JOIN ztax_t_taxcond AS cond ON
+           cond~bukrs = bset~companycode
+
+          FOR ALL ENTRIES IN @et_bkpf
+          WHERE bset~companycode        = @et_bkpf-bukrs
+            AND bset~Accountingdocument = @et_bkpf-belnr
+            AND bset~fiscalyear         = @et_bkpf-gjahr
+        INTO TABLE @et_bset.
       ENDIF.
     ENDIF.
 

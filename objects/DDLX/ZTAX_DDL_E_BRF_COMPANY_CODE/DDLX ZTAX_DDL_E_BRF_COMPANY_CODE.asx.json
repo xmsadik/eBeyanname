@@ -7,9 +7,9 @@
     "DDLXNAME":"ZTAX_DDL_E_BRF_COMPANY_CODE",
     "VERSION":"A",
     "CHANGED_BY":"SAP_CUSTOMER",
-    "CHANGED_ON":"2024-10-18",
-    "CHANGED_AT":"14:33:34",
-    "UUID":"C1CC6765374D1EEFA3ABBE770370C232",
+    "CHANGED_ON":"2025-08-26",
+    "CHANGED_AT":"06:46:33",
+    "UUID":"FA163EBBCF7E1FE0A0C90CD550D785AC",
     "ABAP_LANGUAGE_VERSION":"5"
    }
   ]
@@ -34,7 +34,7 @@
     "DDLXNAME":"ZTAX_DDL_E_BRF_COMPANY_CODE",
     "VERSION":"A",
     "UUID":"",
-    "SOURCE":"@Metadata.layer : #CORE\r\n@Search.searchable:true\r\n@UI:{\r\nheaderInfo:{\r\ntypeNamePlural:'Muhtasar Şirket Tabloları',\r\ntypeName:'KDV1 Şirket Tablosu',\r\ntitle:{type:#STANDARD,label:'KDV1 Şirket Tablosu',value:'CompanyCode'}\r\n}\r\n}\r\nannotate entity ZTAX_DDL_P_BRF_COMPANY_CODE with\r\n{\r\n  @UI.facet:[{id      :'Informations',\r\n              purpose :#STANDARD,\r\n              type    :#IDENTIFICATION_REFERENCE,\r\n              label   :'Şirket Kodu',\r\n              position:10},\r\n         { id      : 'Lesson',\r\n          purpose :#STANDARD,\r\n          type    : #LINEITEM_REFERENCE,\r\n          label   : 'Item',\r\n          position: 20,\r\n          targetElement: '_Header'}]\r\n\r\n  @UI: { lineItem :      [{ position: 10,importance:#HIGH, label: 'Şirket Kodu' }],\r\n         identification: [{ position: 10 }],\r\n         selectionField: [{ position: 10 }]}\r\n  @Search.defaultSearchElement: true\r\n  @Consumption.valueHelpDefinition: [ { entity: { name: 'I_CompanyCode', element: 'CompanyCode' }}]\r\n\r\n  CompanyCode;\r\n\r\n}"
+    "SOURCE":"@Metadata.layer : #CORE\r\n@Search.searchable:true\r\n@UI:{\r\nheaderInfo:{\r\ntypeNamePlural:'Muhtasar Şirket Tabloları',\r\ntypeName:'KDV1 Şirket Tablosu',\r\ntitle:{type:#STANDARD,label:'Muhtasar Şirket Tablosu',value:'CompanyCode'}\r\n}\r\n}\r\nannotate entity ZTAX_DDL_P_BRF_COMPANY_CODE with\r\n{\r\n  @UI.facet:[{id      :'Informations',\r\n              purpose :#STANDARD,\r\n              type    :#IDENTIFICATION_REFERENCE,\r\n              label   :'Şirket Kodu',\r\n              position:10},\r\n         { id      : 'Lesson',\r\n          purpose :#STANDARD,\r\n          type    : #LINEITEM_REFERENCE,\r\n          label   : 'Item',\r\n          position: 20,\r\n          targetElement: '_Header'}]\r\n\r\n  @UI: { lineItem :      [{ position: 10,importance:#HIGH, label: 'Şirket Kodu' }],\r\n         identification: [{ position: 10 }],\r\n         selectionField: [{ position: 10 }]}\r\n  @Search.defaultSearchElement: true\r\n  @Consumption.valueHelpDefinition: [ { entity: { name: 'I_CompanyCode', element: 'CompanyCode' }}]\r\n\r\n  CompanyCode;\r\n\r\n}"
    }
   ]
  },
@@ -54,7 +54,7 @@
     "ELEMENT":"",
     "NAME":"UI.HEADERINFO.TITLE.LABEL",
     "ELEMENT_TYPE":"N",
-    "VALUE":"'KDV1 Şirket Tablosu'"
+    "VALUE":"'Muhtasar Şirket Tablosu'"
    },
    {
     "DDLXNAME":"ZTAX_DDL_E_BRF_COMPANY_CODE",
@@ -228,7 +228,7 @@
     "DDLANGUAGE":"T",
     "ELEMENT":"",
     "NAME":"UI.HEADERINFO.TITLE.LABEL",
-    "TEXT":"KDV1 Şirket Tablosu"
+    "TEXT":"Muhtasar Şirket Tablosu"
    },
    {
     "DDLXNAME":"ZTAX_DDL_E_BRF_COMPANY_CODE",
@@ -276,8 +276,8 @@
     "EXTENDED_ARTIFACT":"ZTAX_DDL_P_BRF_COMPANY_CODE",
     "VARIANT":"",
     "LAYER":1500,
-    "DT_UUID":"C1CC6765374D1EEFA3ABBE770370C232",
-    "RT_HASH":"EB87877AC965D977830AFEFBB78DA4E0A473B2B9",
+    "DT_UUID":"FA163EBBCF7E1FE0A0C90CD550D785AC",
+    "RT_HASH":"0E34D5F04FC3E168A15AFE2492D8FD5DF78A8319",
     "GEN_VERSION":"0",
     "TYPE":"0"
    }

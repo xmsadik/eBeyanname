@@ -7,9 +7,9 @@
     "DDLXNAME":"ZTAX_DDL_E_BRF_HEADER",
     "VERSION":"A",
     "CHANGED_BY":"SAP_CUSTOMER",
-    "CHANGED_ON":"2024-10-01",
-    "CHANGED_AT":"08:01:21",
-    "UUID":"076F643A4AD31EEF9FF96AFBFD74A1F2",
+    "CHANGED_ON":"2025-08-26",
+    "CHANGED_AT":"11:13:31",
+    "UUID":"FA163EBBCF7E1FE0A0CDB65D1697C5AD",
     "ABAP_LANGUAGE_VERSION":"5"
    }
   ]
@@ -34,7 +34,7 @@
     "DDLXNAME":"ZTAX_DDL_E_BRF_HEADER",
     "VERSION":"A",
     "UUID":"",
-    "SOURCE":"@Metadata.layer: #CORE\r\n//@Search.searchable: true\r\n@UI:{\r\nheaderInfo:{\r\n                typeNamePlural: 'Üst Başlık',\r\n                typeName: 'Üst Başlık',\r\n                title:{ type: #STANDARD, label: 'Üst Başlık', value: 'CompanyCode' }\r\n           }\r\n}\r\nannotate entity ZTAX_DDL_P_BRF_HEADER with\r\n{\r\n  @UI.facet: [ { id:              'Header',\r\n                purpose:         #STANDARD,\r\n                type:            #IDENTIFICATION_REFERENCE,\r\n                label:           'Başlık Bilgileri',\r\n                position:        10 },\r\n\r\n              { id:              'Fieldgroup1-ID',\r\n                purpose:         #STANDARD,\r\n                position:        20 ,\r\n                label:           'Alt Başlık',\r\n                type:            #LINEITEM_REFERENCE,\r\n                targetElement:   '_SubHead' }\r\n               ]\r\n\r\n  @UI: { lineItem:       [ { position: 10, importance: #HIGH } ],\r\n         selectionField: [ { position: 10 } ],\r\n         identification: [ { position: 10 }]}\r\n  //  @Search.defaultSearchElement: true\r\n  //  @Consumption.valueHelpDefinition: [ { entity: { name: 'I_CompanyCodeVH', element: 'CompanyCode' }}]\r\n  CompanyCode;\r\n  @UI: { lineItem:       [ { position: 20, importance: #HIGH } ],\r\n         selectionField: [ { position: 20 }],\r\n         identification: [ { position: 20 }] }\r\n  @Consumption.valueHelpDefinition: [ { entity: { name: 'ZTAX_DDL_VH_VAT1_REFRECTION1', element: 'Refrection1' }}]\r\n\r\n  Refrection1;\r\n\r\n  @UI: { lineItem:       [ { position: 30, importance: #HIGH } ],\r\n         selectionField: [ { position: 30 }],\r\n         identification: [ { position: 30 }]}\r\n  Xmlsr;\r\n\r\n\r\n}"
+    "SOURCE":"@Metadata.layer: #CORE\r\n//@Search.searchable: true\r\n@UI:{\r\nheaderInfo:{\r\n                typeNamePlural: 'Üst Başlık',\r\n                typeName: 'Üst Başlık',\r\n                title:{ type: #STANDARD, label: 'Üst Başlık', value: 'CompanyCode' }\r\n           }\r\n}\r\nannotate entity ZTAX_DDL_P_BRF_HEADER with\r\n{\r\n  @UI.facet: [ { id:              'Header',\r\n                purpose:         #STANDARD,\r\n                type:            #IDENTIFICATION_REFERENCE,\r\n                label:           'Başlık Bilgileri',\r\n                position:        10 },\r\n\r\n              { id:              'Fieldgroup1-ID',\r\n                purpose:         #STANDARD,\r\n                position:        20 ,\r\n                label:           'Alt Başlık',\r\n                type:            #LINEITEM_REFERENCE,\r\n                targetElement:   '_SubHead' }\r\n               ]\r\n\r\n  @UI: { lineItem:       [ { position: 10, importance: #HIGH } ],\r\n         selectionField: [ { position: 10 } ],\r\n         identification: [ { position: 10 }]}\r\n  //  @Search.defaultSearchElement: true\r\n  //  @Consumption.valueHelpDefinition: [ { entity: { name: 'I_CompanyCodeVH', element: 'CompanyCode' }}]\r\n  CompanyCode;\r\n  @UI: { lineItem:       [ { position: 20, importance: #HIGH } ],\r\n         selectionField: [ { position: 20 }],\r\n         identification: [ { position: 20 }] }\r\n  @Consumption.valueHelpDefinition: [ { entity: { name: 'ZTAX_DDL_VH_MUH_REFRECTION1', element: 'Refrection1' }}]\r\n\r\n  Refrection1;\r\n\r\n  @UI: { lineItem:       [ { position: 30, importance: #HIGH } ],\r\n         selectionField: [ { position: 30 }],\r\n         identification: [ { position: 30 }]}\r\n  Xmlsr;\r\n\r\n\r\n}"
    }
   ]
  },
@@ -194,7 +194,7 @@
     "ELEMENT":"REFRECTION1",
     "NAME":"CONSUMPTION.VALUEHELPDEFINITION$1$.ENTITY.NAME",
     "ELEMENT_TYPE":"S",
-    "VALUE":"'ZTAX_DDL_VH_VAT1_REFRECTION1'"
+    "VALUE":"'ZTAX_DDL_VH_MUH_REFRECTION1'"
    },
    {
     "DDLXNAME":"ZTAX_DDL_E_BRF_HEADER",
@@ -304,8 +304,8 @@
     "EXTENDED_ARTIFACT":"ZTAX_DDL_P_BRF_HEADER",
     "VARIANT":"",
     "LAYER":1500,
-    "DT_UUID":"076F643A4AD31EEF9FF96AFBFD74A1F2",
-    "RT_HASH":"8E13B4A02A83F4AD90EF3B664E6C153694A41FCC",
+    "DT_UUID":"FA163EBBCF7E1FE0A0CDB65D1697C5AD",
+    "RT_HASH":"BD0ECF91B044D186BEFF310262B24942284D6E4D",
     "GEN_VERSION":"0",
     "TYPE":"0"
    }
@@ -349,10 +349,10 @@
     "DDLXNAME":"ZTAX_DDL_E_BRF_HEADER",
     "ELEMENT":"REFRECTION1",
     "NAME":"CONSUMPTION.VALUEHELPDEFINITION$1$.ENTITY.NAME",
-    "PATH":"ZTAX_DDL_VH_VAT1_REFRECTION1",
+    "PATH":"ZTAX_DDL_VH_MUH_REFRECTION1",
     "REF_OBJECT_TYPE":"STOB",
     "REF_OBJECT_SUBTYPE":"DO",
-    "REF_OBJECT_NAME":"ZTAX_DDL_VH_VAT1_REFRECTION1",
+    "REF_OBJECT_NAME":"ZTAX_DDL_VH_MUH_REFRECTION1",
     "REF_OBJECT_ELEMENT":""
    }
   ]
