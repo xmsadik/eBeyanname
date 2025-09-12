@@ -2,7 +2,7 @@
 
     DATA : lv_lineitem TYPE int1.
 
-    TRY.
+
         DATA(lt_filter) = io_request->get_filter( )->get_as_ranges( ).
         DATA: lt_bukrs_range  TYPE RANGE OF bukrs,
               lt_gjahr_range  TYPE RANGE OF gjahr,
@@ -62,20 +62,33 @@
 
         SORT lt_output BY kiril1 kiril2 kiril3.
 
-*        LOOP AT mt_kesinti INTO DATA(ls_lesinti) .
-*          MOVE-CORRESPONDING ls_lesinti TO ls_output.
-*          APPEND ls_output TO lt_output.
-*        ENDLOOP.
 
-
-
-        IF io_request->is_total_numb_of_rec_requested(  ).
-          io_response->set_total_number_of_records( iv_total_number_of_records = lines( lt_output ) ).
+        DATA(lv_skip) = io_request->get_paging( )->get_offset( ).
+        DATA(lv_top) = io_request->get_paging( )->get_page_size( ).
+        IF lv_top < 0.
+          lv_top = 1.
         ENDIF.
-        io_response->set_data( it_data = lt_output ).
+
+        SELECT * FROM @lt_output AS output
+        ORDER BY kiril1, kiril2 ,kiril3
+          INTO TABLE @DATA(lt_outputfinal)
+                UP TO @lv_top ROWS
+          OFFSET @lv_skip.
+
+        SELECT COUNT( * ) FROM @lt_output AS lt_output
+          INTO @DATA(lv_cnt).
+
+        DATA lv_count TYPE int8.
+        lv_count = lv_cnt.
+        TRY.
+
+            IF io_request->is_total_numb_of_rec_requested( ).
+              io_response->set_total_number_of_records( lv_count ).
+            ENDIF.
+            io_response->set_data( it_data = lt_output ).
 
 
 
-      CATCH cx_rap_query_filter_no_range.
-    ENDTRY.
-  ENDMETHOD.
+          CATCH cx_rap_query_filter_no_range.
+        ENDTRY.
+      ENDMETHOD.
