@@ -11,7 +11,12 @@
               lt_output       TYPE TABLE OF ztax_ddl_i_vat1_dec_report,
               ls_output       TYPE ztax_ddl_i_vat1_dec_report.
 
-        DATA(lt_paging) = io_request->get_paging( ).
+        DATA(lo_paging) = io_request->get_paging( ).
+        DATA(top)       = lo_paging->get_page_size( ).
+        DATA(skip)      = lo_paging->get_offset( ).
+        IF top < 0.
+          top = 1.
+        ENDIF.
 
         LOOP AT lt_filter INTO DATA(ls_filter).
           CASE ls_filter-name.
@@ -51,34 +56,21 @@
 
         SORT mt_collect BY kiril1 kiril2 kiril3.
         LOOP AT mt_collect INTO DATA(ls_collect).
+          lv_lineitem = lv_lineitem + 1.
+          IF skip IS NOT INITIAL.
+            CHECK sy-tabix > skip.
+          ENDIF.
           APPEND INITIAL LINE TO lt_output ASSIGNING FIELD-SYMBOL(<fs_output>).
           MOVE-CORRESPONDING ls_collect TO <fs_output>.
           <fs_output>-bukrs = p_bukrs.
           <fs_output>-gjahr = p_gjahr.
           <fs_output>-monat = p_monat.
           <fs_output>-currency = 'TRY'.
-          lv_lineitem = lv_lineitem + 1.
           <fs_output>-lineitem = lv_lineitem.
+          IF lines( lt_output ) >= top.
+            EXIT.
+          ENDIF.
         ENDLOOP.
-
-*        DATA(lv_skip) = io_request->get_paging( )->get_offset( ).
-*        DATA(lv_top) = io_request->get_paging( )->get_page_size( ).
-*        IF lv_top < 0.
-*          lv_top = 1.
-*        ENDIF.
-
-*        SELECT * FROM @lt_output AS output
-*        ORDER BY kiril1, kiril2 ,kiril3
-*          INTO TABLE @DATA(lt_outputfinal)
-*                UP TO @lv_top ROWS
-*          OFFSET @lv_skip.
-*
-*        SELECT COUNT( * ) FROM @lt_output AS lt_output
-*          INTO @DATA(lv_cnt).
-*
-*        DATA lv_count TYPE int8.
-*        lv_count = lv_cnt.
-*        TRY.
 
         IF io_request->is_total_numb_of_rec_requested(  ).
           io_response->set_total_number_of_records( iv_total_number_of_records = lines( lt_output ) ).
