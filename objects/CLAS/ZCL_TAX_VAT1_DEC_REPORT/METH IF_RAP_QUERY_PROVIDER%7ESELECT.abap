@@ -73,7 +73,7 @@
         ENDLOOP.
 
         IF io_request->is_total_numb_of_rec_requested(  ).
-          io_response->set_total_number_of_records( iv_total_number_of_records = lines( lt_output ) ).
+          io_response->set_total_number_of_records( iv_total_number_of_records = lines( mt_collect ) ).
         ENDIF.
         io_response->set_data( it_data = lt_output ).
 
