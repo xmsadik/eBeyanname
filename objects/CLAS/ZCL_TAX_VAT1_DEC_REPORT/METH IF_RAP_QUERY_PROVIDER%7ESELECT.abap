@@ -1,15 +1,16 @@
   METHOD if_rap_query_provider~select.
 
     DATA : lv_lineitem TYPE int1.
-
-
+    TRY.
         DATA(lt_filter) = io_request->get_filter( )->get_as_ranges( ).
+
         DATA: lt_bukrs_range  TYPE RANGE OF bukrs,
               lt_gjahr_range  TYPE RANGE OF gjahr,
               lt_monat_range  TYPE RANGE OF monat,
               lt_donemb_range TYPE RANGE OF ztax_e_donemb,
               lt_output       TYPE TABLE OF ztax_ddl_i_vat1_dec_report,
               ls_output       TYPE ztax_ddl_i_vat1_dec_report.
+
         DATA(lt_paging) = io_request->get_paging( ).
 
         LOOP AT lt_filter INTO DATA(ls_filter).
@@ -48,6 +49,7 @@
             er_monat   = mr_monat.
 
 
+        SORT mt_collect BY kiril1 kiril2 kiril3.
         LOOP AT mt_collect INTO DATA(ls_collect).
           APPEND INITIAL LINE TO lt_output ASSIGNING FIELD-SYMBOL(<fs_output>).
           MOVE-CORRESPONDING ls_collect TO <fs_output>.
@@ -57,38 +59,32 @@
           <fs_output>-currency = 'TRY'.
           lv_lineitem = lv_lineitem + 1.
           <fs_output>-lineitem = lv_lineitem.
-
         ENDLOOP.
 
-        SORT lt_output BY kiril1 kiril2 kiril3.
+*        DATA(lv_skip) = io_request->get_paging( )->get_offset( ).
+*        DATA(lv_top) = io_request->get_paging( )->get_page_size( ).
+*        IF lv_top < 0.
+*          lv_top = 1.
+*        ENDIF.
 
+*        SELECT * FROM @lt_output AS output
+*        ORDER BY kiril1, kiril2 ,kiril3
+*          INTO TABLE @DATA(lt_outputfinal)
+*                UP TO @lv_top ROWS
+*          OFFSET @lv_skip.
+*
+*        SELECT COUNT( * ) FROM @lt_output AS lt_output
+*          INTO @DATA(lv_cnt).
+*
+*        DATA lv_count TYPE int8.
+*        lv_count = lv_cnt.
+*        TRY.
 
-        DATA(lv_skip) = io_request->get_paging( )->get_offset( ).
-        DATA(lv_top) = io_request->get_paging( )->get_page_size( ).
-        IF lv_top < 0.
-          lv_top = 1.
+        IF io_request->is_total_numb_of_rec_requested(  ).
+          io_response->set_total_number_of_records( iv_total_number_of_records = lines( lt_output ) ).
         ENDIF.
+        io_response->set_data( it_data = lt_output ).
 
-        SELECT * FROM @lt_output AS output
-        ORDER BY kiril1, kiril2 ,kiril3
-          INTO TABLE @DATA(lt_outputfinal)
-                UP TO @lv_top ROWS
-          OFFSET @lv_skip.
-
-        SELECT COUNT( * ) FROM @lt_output AS lt_output
-          INTO @DATA(lv_cnt).
-
-        DATA lv_count TYPE int8.
-        lv_count = lv_cnt.
-        TRY.
-
-            IF io_request->is_total_numb_of_rec_requested( ).
-              io_response->set_total_number_of_records( lv_count ).
-            ENDIF.
-            io_response->set_data( it_data = lt_output ).
-
-
-
-          CATCH cx_rap_query_filter_no_range.
-        ENDTRY.
-      ENDMETHOD.
+      CATCH cx_rap_query_filter_no_range.
+    ENDTRY.
+  ENDMETHOD.
