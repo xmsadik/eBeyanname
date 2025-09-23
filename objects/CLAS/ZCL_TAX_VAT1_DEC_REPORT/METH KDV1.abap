@@ -98,6 +98,26 @@
 *    CLEAR mt_detail.
 *    CLEAR mt_detail_alv.
 
+    IF iv_bukrs IS NOT INITIAL.
+      p_bukrs = iv_bukrs.
+    ENDIF.
+
+    IF iv_gjahr IS NOT INITIAL.
+      p_gjahr = iv_gjahr.
+    ENDIF.
+
+    IF iv_monat IS NOT INITIAL.
+      p_monat = iv_monat.
+    ENDIF.
+
+    IF iv_beyant IS NOT INITIAL.
+      P_beyant = iv_beyant.
+    ENDIF.
+
+    IF iv_donemb IS NOT INITIAL.
+      p_donemb = iv_donemb.
+    ENDIF.
+
     me->get_condition_type( IMPORTING et_kostr = lt_kostr ).
     me->get_map_tab( IMPORTING et_map = lt_map ).
 

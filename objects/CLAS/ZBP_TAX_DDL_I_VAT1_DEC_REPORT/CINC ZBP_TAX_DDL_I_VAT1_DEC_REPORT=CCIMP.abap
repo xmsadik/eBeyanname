@@ -1209,6 +1209,29 @@ FIELD-SYMBOLS <fs_out_tev> TYPE STANDARD TABLE.        "YiğitcanÖzdemir
                 '.xml'
                 INTO lv_filename.
 
+    IF lv_xml_string IS NOT INITIAL.
+      TRY.
+          DATA(lo_mail) = cl_bcs_mail_message=>create_instance( ).
+
+
+          lo_mail->set_sender( iv_address    = CONV #( 'deneme@nttdata.com' ) ).
+          lo_mail->add_recipient( iv_address = CONV #( 'yigitcan.ozdemir@nttdata.com' ) ).
+
+
+          DATA(lv_subject) = |Beyanname;|.
+          DATA(lv_content) = |{ lv_xml_string }|.
+
+          lo_mail->set_subject( CONV #( lv_subject ) ).
+          lo_mail->set_main( cl_bcs_mail_textpart=>create_instance( iv_content      = lv_content
+                                                                    iv_content_type = 'application/xml'
+                                                                    iv_filename     = 'beyanname.txt' ) ).
+          lo_mail->send( IMPORTING et_status = DATA(lt_status) ).
+
+*          COMMIT WORK.
+        CATCH cx_bcs_mail INTO DATA(lo_err).
+          DATA(lv_error) = lo_err->get_longtext( ) .
+      ENDTRY.
+    ENDIF.
 
   ENDMETHOD.
 
