@@ -128,20 +128,19 @@
             bset~debitcreditcode     AS shkzg,
             bset~TaxBaseAmountInCoCodeCrcy AS hwbas,
             bset~TaxAmountInCoCodeCrcy     AS hwste,
-
+            bset~TransactionTypeDetermination AS ktosl,
             cond~kbetr AS kbetr ,
-              cond~kschl AS kschl,
-*               bset~hkont
-*               bset~ktosl
-docitem~GLAccount AS hkont,
-      bset~TransactionTypeDetermination AS ktosl
+            cond~kschl AS kschl,
+            docitem~GLAccount AS hkont
           FROM i_operationalAcctgDocTaxItem AS bset
+
           LEFT JOIN ztax_t_taxcond AS cond ON
-           cond~bukrs = bset~companycode
-        LEFT JOIN i_operationalacctgdocitem AS docitem ON
-        docitem~CompanyCode = bset~companycode AND
-        docitem~AccountingDocument = bset~Accountingdocument AND
-         docitem~fiscalyear = bset~fiscalyear
+           cond~bukrs                 = bset~companycode
+
+          LEFT JOIN i_operationalacctgdocitem AS docitem ON
+           docitem~CompanyCode        = bset~companycode AND
+           docitem~AccountingDocument = bset~Accountingdocument AND
+           docitem~fiscalyear         = bset~fiscalyear
 
           FOR ALL ENTRIES IN @et_bkpf
           WHERE bset~companycode        = @et_bkpf-bukrs

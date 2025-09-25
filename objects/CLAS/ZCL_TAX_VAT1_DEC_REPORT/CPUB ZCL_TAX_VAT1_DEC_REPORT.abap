@@ -48,10 +48,11 @@ CLASS zcl_tax_vat1_dec_report DEFINITION
     TYPES shkzg TYPE shkzg.
     TYPES hwbas TYPE p LENGTH 16 DECIMALS 2.
     TYPES hwste TYPE p LENGTH 16 DECIMALS 2. "hwste.
+    TYPES ktosl TYPE ktosl.
     TYPES kbetr TYPE p LENGTH 16 DECIMALS 2. "kbetr.
     TYPES kschl TYPE kschl.
     TYPES hkont TYPE hkont.
-    TYPES ktosl TYPE ktosl.
+
     TYPES END OF mty_bset.
     TYPES mtty_bset TYPE SORTED TABLE OF mty_bset WITH UNIQUE KEY bukrs belnr gjahr buzei.
 
