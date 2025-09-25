@@ -133,16 +133,21 @@
               cond~kschl AS kschl,
 *               bset~hkont
 *               bset~ktosl
-      bset~TransactionTypeDetermination as ktosl
+docitem~GLAccount AS hkont,
+      bset~TransactionTypeDetermination AS ktosl
           FROM i_operationalAcctgDocTaxItem AS bset
           LEFT JOIN ztax_t_taxcond AS cond ON
            cond~bukrs = bset~companycode
+        LEFT JOIN i_operationalacctgdocitem AS docitem ON
+        docitem~CompanyCode = bset~companycode AND
+        docitem~AccountingDocument = bset~Accountingdocument AND
+         docitem~fiscalyear = bset~fiscalyear
 
           FOR ALL ENTRIES IN @et_bkpf
           WHERE bset~companycode        = @et_bkpf-bukrs
             AND bset~Accountingdocument = @et_bkpf-belnr
             AND bset~fiscalyear         = @et_bkpf-gjahr
-            and bset~taxcode           in @ir_mwskz
+            AND bset~taxcode           IN @ir_mwskz
         INTO TABLE @et_bset.
       ENDIF.
     ENDIF.
