@@ -140,7 +140,8 @@
           LEFT JOIN i_operationalacctgdocitem AS docitem ON
            docitem~CompanyCode        = bset~companycode AND
            docitem~AccountingDocument = bset~Accountingdocument AND
-           docitem~fiscalyear         = bset~fiscalyear
+           docitem~fiscalyear         = bset~fiscalyear and
+           docitem~AccountingDocumentItem = bset~TaxItem
 
           FOR ALL ENTRIES IN @et_bkpf
           WHERE bset~companycode        = @et_bkpf-bukrs
