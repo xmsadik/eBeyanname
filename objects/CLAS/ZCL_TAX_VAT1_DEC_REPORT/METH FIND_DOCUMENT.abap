@@ -116,25 +116,7 @@
 
     IF is_read_tab-bset EQ abap_true.
       IF lines( et_bkpf ) GT 0.
-*        SELECT bset~bukrs
-*               bset~belnr
-*               bset~gjahr
-*               bset~buzei
-*               bset~mwskz
-*               bset~shkzg
-*               bset~hwbas
-*               bset~hwste
-*               bset~kbetr
-*               bset~kschl
-*               bset~hkont
-*               bset~ktosl
-*               INTO TABLE et_bset
-*               FROM bset
-*               FOR ALL ENTRIES IN et_bkpf
-*               WHERE bset~bukrs EQ et_bkpf-bukrs
-*                 AND bset~belnr EQ et_bkpf-belnr
-*                 AND bset~gjahr EQ et_bkpf-gjahr
-*                 AND bset~mwskz IN ir_mwskz.
+
 
 
         SELECT
@@ -146,9 +128,12 @@
             bset~debitcreditcode     AS shkzg,
             bset~TaxBaseAmountInCoCodeCrcy AS hwbas,
             bset~TaxAmountInCoCodeCrcy     AS hwste,
-            cond~kbetr AS kbetr ,
-              cond~kschl AS kschl
 
+            cond~kbetr AS kbetr ,
+              cond~kschl AS kschl,
+*               bset~hkont
+*               bset~ktosl
+      bset~TransactionTypeDetermination as ktosl
           FROM i_operationalAcctgDocTaxItem AS bset
           LEFT JOIN ztax_t_taxcond AS cond ON
            cond~bukrs = bset~companycode
@@ -157,6 +142,7 @@
           WHERE bset~companycode        = @et_bkpf-bukrs
             AND bset~Accountingdocument = @et_bkpf-belnr
             AND bset~fiscalyear         = @et_bkpf-gjahr
+            and bset~taxcode           in @ir_mwskz
         INTO TABLE @et_bset.
       ENDIF.
     ENDIF.
