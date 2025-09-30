@@ -10,7 +10,7 @@ authorization master ( instance )
   create ( authorization : global );
   update;
   delete;
-  field ( readonly ) bukrs, kschl;
+  field ( readonly : update ) bukrs, kschl;
 
   mapping for ztax_t_taxcond
     {
