@@ -391,7 +391,8 @@ CLASS lhc_ZTAX_DDL_I_VAT1_DEC_REPORT IMPLEMENTATION.
     CONCATENATE '<ay>'
                 lv_monat
                 '</ay>'
-                INTO lv_ay.
+*                INTO lv_ay.
+                 into p_monat.
 
     CONCATENATE '<vergiNo>'
                  ls_beyg-mvkno
