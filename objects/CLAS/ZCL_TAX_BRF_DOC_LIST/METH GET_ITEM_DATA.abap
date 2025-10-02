@@ -10,8 +10,8 @@
       APPEND INITIAL LINE TO mr_monat ASSIGNING FIELD-SYMBOL(<fs_monat>).
       <fs_monat>-sign = 'I'.
       <fs_monat>-option = 'EQ'.
-      <fs_monat>-low = ''.
-      <fs_monat>-high = p_monat.
+      <fs_monat>-low = p_monat.
+      <fs_monat>-high = ''.
     ENDIF.
 
     me->fill_period( EXPORTING ir_monat       = mr_monat
