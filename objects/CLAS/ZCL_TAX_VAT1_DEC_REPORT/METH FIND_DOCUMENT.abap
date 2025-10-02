@@ -129,18 +129,19 @@
             bset~TaxBaseAmountInCoCodeCrcy AS hwbas,
             bset~TaxAmountInCoCodeCrcy     AS hwste,
             bset~TransactionTypeDetermination AS ktosl,
-            taxratio~conditionrateratio AS kbetr ,
+*            taxratio~conditionrateratio AS kbetr ,
+            cond~kbetr AS kbetr,
             cond~kschl AS kschl,
             docitem~GLAccount AS hkont
           FROM i_operationalAcctgDocTaxItem AS bset
 
-          INNER JOIN i_companycode AS t001
-          ON t001~companycode = bset~companycode
-
-          LEFT JOIN i_taxcoderate AS taxratio
-          ON  taxratio~taxcode = bset~taxcode
-          AND taxratio~Country = t001~Country
-          AND taxratio~cndnrecordvalidityenddate = '99991231'
+*          INNER JOIN i_companycode AS t001
+*          ON t001~companycode = bset~companycode
+*
+*          LEFT JOIN i_taxcoderate AS taxratio
+*          ON  taxratio~taxcode = bset~taxcode
+*          AND taxratio~Country = t001~Country
+*          AND taxratio~cndnrecordvalidityenddate = '99991231'
 
           LEFT JOIN ztax_t_taxcond AS cond "kullanılmıyor
           ON  cond~bukrs = bset~companycode
