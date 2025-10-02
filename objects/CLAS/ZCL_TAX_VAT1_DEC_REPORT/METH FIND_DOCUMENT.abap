@@ -133,15 +133,21 @@
             cond~kschl AS kschl,
             docitem~GLAccount AS hkont
           FROM i_operationalAcctgDocTaxItem AS bset
-           LEFT JOIN i_taxcoderate AS taxratio
+
+          INNER JOIN i_companycode AS t001
+          ON t001~companycode = bset~companycode
+
+          LEFT JOIN i_taxcoderate AS taxratio
           ON  taxratio~taxcode = bset~taxcode
+          AND taxratio~Country = t001~Country
           AND taxratio~cndnrecordvalidityenddate = '99991231'
-              LEFT JOIN ztax_t_taxcond AS cond "kullanılmıyor
+
+          LEFT JOIN ztax_t_taxcond AS cond "kullanılmıyor
           ON  cond~bukrs = bset~companycode
           LEFT JOIN i_operationalacctgdocitem AS docitem ON
            docitem~CompanyCode        = bset~companycode AND
            docitem~AccountingDocument = bset~Accountingdocument AND
-           docitem~fiscalyear         = bset~fiscalyear and
+           docitem~fiscalyear         = bset~fiscalyear AND
            docitem~AccountingDocumentItem = bset~TaxItem
 
           FOR ALL ENTRIES IN @et_bkpf
