@@ -7,9 +7,9 @@
     "DDLXNAME":"ZTAX_DDL_E_TAXCOND",
     "VERSION":"A",
     "CHANGED_BY":"SAP_CUSTOMER",
-    "CHANGED_ON":"2025-08-14",
-    "CHANGED_AT":"22:21:44",
-    "UUID":"FA163EBBCF7E1FE09EABA1E96BB8058D",
+    "CHANGED_ON":"2025-09-30",
+    "CHANGED_AT":"19:35:26",
+    "UUID":"FA163EBBCF7E1FE0A7C693923731E62C",
     "ABAP_LANGUAGE_VERSION":"5"
    }
   ]
@@ -34,7 +34,7 @@
     "DDLXNAME":"ZTAX_DDL_E_TAXCOND",
     "VERSION":"A",
     "UUID":"",
-    "SOURCE":"@Metadata.layer : #CORE\r\n@Search.searchable:true\r\n@UI:{\r\nheaderInfo:{\r\ntypeNamePlural:'Vergi oran ve koşul türü',\r\ntypeName:'Vergi oran ve koşul türü',\r\ntitle:{type:#STANDARD,label:'Vergi oran ve koşul türü',value:'bukrs'}\r\n} \r\n}\r\nannotate entity ztax_ddl_p_taxcond with\r\n{\r\n  @UI.facet:[{id:'Informations',\r\n  purpose:#STANDARD,\r\n  type:#IDENTIFICATION_REFERENCE,\r\n  label:'GIB Beyanname',\r\n  position:10}]\r\n\r\n  @UI:{lineItem:[{position:10,importance:#HIGH}],\r\n  identification:[{position:10}],\r\n  selectionField:[{position:10}]}\r\n  @Search.defaultSearchElement:true\r\n  @Consumption.valueHelpDefinition: [ { entity: { name: 'I_CompanyCodeVH', element: 'CompanyCode' }}]\r\n  bukrs;\r\n  @UI:{lineItem:[{position:20}],\r\n  identification:[{position:20}],\r\n  selectionField:[{position:20}]}\r\n  @Consumption.valueHelpDefinition: [ { entity: { name: 'ztax_ddl_vh_beyant', element: 'beyant' }}]\r\n  kschl;\r\n  @UI:{lineItem:[{position:30}],\r\n  identification:[{position:30}],\r\n  selectionField:[{position:30}]}\r\n  kbetr;\r\n  @UI:{lineItem:[{position:40}],\r\n  identification:[{position:40}],\r\n  selectionField:[{position:40}]}\r\n   @UI.hidden: true\r\n  waers;\r\n\r\n\r\n}"
+    "SOURCE":"@Metadata.layer : #CORE\r\n@Search.searchable:true\r\n@UI:{\r\nheaderInfo:{\r\ntypeNamePlural:'Vergi oran ve koşul türü',\r\ntypeName:'Vergi oran ve koşul türü',\r\ntitle:{type:#STANDARD,label:'Vergi oran ve koşul türü',value:'bukrs'}\r\n} \r\n}\r\nannotate entity ztax_ddl_p_taxcond with\r\n{\r\n  @UI.facet:[{id:'Informations',\r\n  purpose:#STANDARD,\r\n  type:#IDENTIFICATION_REFERENCE,\r\n  label:'GIB Beyanname',\r\n  position:10}]\r\n\r\n  @UI:{lineItem:[{position:10,importance:#HIGH}],\r\n  identification:[{position:10}],\r\n  selectionField:[{position:10}]}\r\n  @Search.defaultSearchElement:true\r\n  @Consumption.valueHelpDefinition: [ { entity: { name: 'I_CompanyCodeVH', element: 'CompanyCode' }}]\r\n  bukrs;\r\n  @UI:{lineItem:[{position:20}],\r\n  identification:[{position:20}],\r\n  selectionField:[{position:20}]}\r\n  kschl;\r\n  @UI:{lineItem:[{position:30}],\r\n  identification:[{position:30}],\r\n  selectionField:[{position:30}]}\r\n  kbetr;\r\n  @UI:{lineItem:[{position:40}],\r\n  identification:[{position:40}],\r\n  selectionField:[{position:40}]}\r\n   @UI.hidden: true\r\n  waers;\r\n\r\n\r\n}"
    }
   ]
  },
@@ -192,20 +192,6 @@
    {
     "DDLXNAME":"ZTAX_DDL_E_TAXCOND",
     "ELEMENT":"KSCHL",
-    "NAME":"CONSUMPTION.VALUEHELPDEFINITION$1$.ENTITY.ELEMENT",
-    "ELEMENT_TYPE":"S",
-    "VALUE":"'beyant'"
-   },
-   {
-    "DDLXNAME":"ZTAX_DDL_E_TAXCOND",
-    "ELEMENT":"KSCHL",
-    "NAME":"CONSUMPTION.VALUEHELPDEFINITION$1$.ENTITY.NAME",
-    "ELEMENT_TYPE":"S",
-    "VALUE":"'ztax_ddl_vh_beyant'"
-   },
-   {
-    "DDLXNAME":"ZTAX_DDL_E_TAXCOND",
-    "ELEMENT":"KSCHL",
     "NAME":"UI.IDENTIFICATION$1$.POSITION",
     "ELEMENT_TYPE":"S",
     "VALUE":"20"
@@ -297,8 +283,8 @@
     "EXTENDED_ARTIFACT":"ZTAX_DDL_P_TAXCOND",
     "VARIANT":"",
     "LAYER":1500,
-    "DT_UUID":"FA163EBBCF7E1FE09EABA1E96BB8058D",
-    "RT_HASH":"0C516B508225A029A1E63C04672352AFC8A23FEF",
+    "DT_UUID":"FA163EBBCF7E1FE0A7C693923731E62C",
+    "RT_HASH":"8F373FF59A7C4809DFAC9CB6D30674269A7DA632",
     "GEN_VERSION":"0",
     "TYPE":"0"
    }
@@ -326,16 +312,6 @@
     "REF_OBJECT_TYPE":"STOB",
     "REF_OBJECT_SUBTYPE":"DO",
     "REF_OBJECT_NAME":"I_COMPANYCODEVH",
-    "REF_OBJECT_ELEMENT":""
-   },
-   {
-    "DDLXNAME":"ZTAX_DDL_E_TAXCOND",
-    "ELEMENT":"KSCHL",
-    "NAME":"CONSUMPTION.VALUEHELPDEFINITION$1$.ENTITY.NAME",
-    "PATH":"ZTAX_DDL_VH_BEYANT",
-    "REF_OBJECT_TYPE":"STOB",
-    "REF_OBJECT_SUBTYPE":"DO",
-    "REF_OBJECT_NAME":"ZTAX_DDL_VH_BEYANT",
     "REF_OBJECT_ELEMENT":""
    }
   ]
