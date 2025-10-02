@@ -130,13 +130,14 @@
             bset~TaxAmountInCoCodeCrcy     AS hwste,
             bset~TransactionTypeDetermination AS ktosl,
             taxratio~conditionrateratio AS kbetr ,
-*            cond~kschl AS kschl,
+            cond~kschl AS kschl,
             docitem~GLAccount AS hkont
           FROM i_operationalAcctgDocTaxItem AS bset
            LEFT JOIN i_taxcoderate AS taxratio
           ON  taxratio~taxcode = bset~taxcode
           AND taxratio~cndnrecordvalidityenddate = '99991231'
-
+              LEFT JOIN ztax_t_taxcond AS cond "kullanılmıyor
+          ON  cond~bukrs = bset~companycode
           LEFT JOIN i_operationalacctgdocitem AS docitem ON
            docitem~CompanyCode        = bset~companycode AND
            docitem~AccountingDocument = bset~Accountingdocument AND
