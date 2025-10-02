@@ -1,0 +1,1 @@
+CLASS zbp_op_ddl_i_bankformat DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF yop_ddl_i_bankformat.

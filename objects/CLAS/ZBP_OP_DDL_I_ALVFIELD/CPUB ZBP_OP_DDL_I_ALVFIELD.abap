@@ -1,0 +1,1 @@
+CLASS zbp_op_ddl_i_alvfield DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF yop_ddl_i_alvfield.

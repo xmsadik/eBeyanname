@@ -1,0 +1,96 @@
+[
+ {
+  "table":"DD04L",
+  "data":
+  [
+   {
+    "ROLLNAME":"YOP_E_BANK_NAME",
+    "AS4LOCAL":"L",
+    "AS4VERS":0,
+    "DOMNAME":"TEXT100",
+    "ROUTPUTLEN":0,
+    "MEMORYID":"",
+    "LOGFLAG":"",
+    "HEADLEN":55,
+    "SCRLEN1":10,
+    "SCRLEN2":20,
+    "SCRLEN3":40,
+    "ACTFLAG":"",
+    "APPLCLASS":"",
+    "AUTHCLASS":0,
+    "AS4USER":"SAP_CUSTOMER",
+    "AS4DATE":"0000-00-00",
+    "AS4TIME":"00:00:00",
+    "DTELMASTER":"T",
+    "RESERVEDTE":"",
+    "DTELGLOBAL":"",
+    "SHLPNAME":"",
+    "SHLPFIELD":"",
+    "DEFFDNAME":"",
+    "DATATYPE":"CHAR",
+    "LENG":100,
+    "DECIMALS":0,
+    "OUTPUTLEN":100,
+    "LOWERCASE":"X",
+    "SIGNFLAG":"",
+    "CONVEXIT":"",
+    "VALEXI":"",
+    "ENTITYTAB":"",
+    "REFKIND":"D",
+    "REFTYPE":"",
+    "PROXYTYPE":"",
+    "LTRFLDDIS":"",
+    "BIDICTRLC":"",
+    "NOHISTORY":"",
+    "ABAP_LANGUAGE_VERSION":"5"
+   }
+  ]
+ },
+ {
+  "table":"DD04T",
+  "data":
+  [
+   {
+    "ROLLNAME":"YOP_E_BANK_NAME",
+    "DDLANGUAGE":"T",
+    "AS4LOCAL":"N",
+    "AS4VERS":0,
+    "DDTEXT":"Banka Adı",
+    "REPTEXT":"Banka Adı",
+    "SCRTEXT_S":"Banka Adı",
+    "SCRTEXT_M":"Banka Adı",
+    "SCRTEXT_L":"Banka Adı"
+   }
+  ]
+ },
+ {
+  "table":"TADIR",
+  "data":
+  [
+   {
+    "PGMID":"R3TR",
+    "OBJECT":"DTEL",
+    "OBJ_NAME":"YOP_E_BANK_NAME",
+    "KORRNUM":"",
+    "SRCSYSTEM":"...",
+    "AUTHOR":"SAP_CUSTOMER",
+    "SRCDEP":"",
+    "DEVCLASS":"YONLINEPOS",
+    "GENFLAG":"",
+    "EDTFLAG":"",
+    "CPROJECT":" L",
+    "MASTERLANG":"T",
+    "VERSID":"",
+    "PAKNOCHECK":"",
+    "OBJSTABLTY":"",
+    "COMPONENT":"",
+    "CRELEASE":"",
+    "DELFLAG":"",
+    "TRANSLTTXT":"",
+    "CREATED_ON":"2025-05-29",
+    "CHECK_DATE":"2025-05-29",
+    "CHECK_CFG":""
+   }
+  ]
+ }
+]
