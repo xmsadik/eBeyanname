@@ -6,6 +6,14 @@
     DATA lt_lifnr       TYPE mtty_data.
     DATA lt_data        TYPE mtty_data.
 
+    IF p_monat IS NOT INITIAL.
+      APPEND INITIAL LINE TO mr_monat ASSIGNING FIELD-SYMBOL(<fs_monat>).
+      <fs_monat>-sign = 'I'.
+      <fs_monat>-option = 'EQ'.
+      <fs_monat>-low = ''.
+      <fs_monat>-high = p_monat.
+    ENDIF.
+
     me->fill_period( EXPORTING ir_monat       = mr_monat
                      IMPORTING er_fiscyearper = lr_fiscyearper ).
 

@@ -213,12 +213,12 @@
 
     IF lines( lt_mmt ) GT 0.
 
-      SELECT Supplier as lifnr,
-             OrganizationBPName1 as name1,
-             OrganizationBPName2 as name2
-             FROM I_SUPPLIER
+      SELECT Supplier AS lifnr,
+             OrganizationBPName1 AS name1,
+             OrganizationBPName2 AS name2
+             FROM i_supplier
              FOR ALL ENTRIES IN @lt_mmt
-             WHERE I_SUPPLIER~Supplier EQ @lt_mmt-lifnr
+             WHERE i_supplier~Supplier EQ @lt_mmt-lifnr
               INTO TABLE @lt_lfa1.
 
     ENDIF.
