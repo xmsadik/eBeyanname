@@ -9,10 +9,10 @@
     "AS4USER":"SAP_CUSTOMER",
     "AS4DATE":"0000-00-00",
     "AS4TIME":"00:00:00",
-    "SOURCE":"@EndUserText.label: 'Muhtasar - Belge Listesi'\r\n@ObjectModel.query.implementedBy:'ABAP:ZCL_TAX_BRF_DOC_LIST'\r\n@UI:{\r\nheaderInfo:{\r\n                typeNamePlural: 'Muhtasar - Belge Listesi',\r\n                typeName: 'Muhtasar - Belge Listesi',\r\n                title:{ type: #STANDARD, label: 'Muhtasar - Belge Listesi', value: 'bukrs' }\r\n           }\r\n}\r\ndefine root custom entity ZTAX_DDL_I_BRF_DOC_LIST\r\n{\r\n      @UI      : { lineItem:       [ { position: 1, importance: #HIGH, hidden : true },\r\n              { type: #FOR_ACTION, dataAction: 'XML', label: 'XML Oluştur' } ] }\r\n      @Consumption.valueHelpDefinition: [ { entity: { name: 'I_CompanyCodeVH', element: 'CompanyCode' }}]\r\n  key bukrs    : bukrs;\r\n      @UI      : {\r\n      lineItem :     [ { position: 2 , hidden : true } ],\r\n      selectionField: [ { position: 2 } ] }\r\n  key gjahr    : gjahr;\r\n\r\n      @UI      : { lineItem:       [ { position: 4 , hidden : true } ],\r\n      selectionField: [ { position: 4 } ] }\r\n  key monat    : monat;\r\n      @UI      : { lineItem:       [ { position: 5 , hidden : true } ] }\r\n  key lineitem : int1;\r\n      @UI      : { lineItem:       [ { position: 6 , hidden : true} ] }\r\n      kiril1   : ztax_e_kiril1;\r\n      @UI      : { lineItem:       [ { position: 7,  label : 'Vergi Tipi / Vergi Göstergesi'  } ] }\r\n      acklm1   : abap.string;\r\n      @UI      : { lineItem:       [ { position: 8 , hidden : true} ] }\r\n      kiril2   : ztax_e_kiril2;\r\n      @UI      : { lineItem:       [ { position: 9 , label : 'Vergi Tipi / Vergi Göstergesi'  } ] }\r\n      acklm2   : abap.string;\r\n      @UI      : { lineItem:       [ { position: 10, label : 'Vergi Tipi / Vergi Göstergesi'  } ] }\r\n      kiril3   : abap.char(70);\r\n      @UI       : { lineItem:       [ { position: 11, label : 'Gayri Safi Tutar'  } ] }\r\n      @Semantics.amount.currencyCode: 'currency'\r\n      gyst     : abap.curr(15,2);\r\n      @UI       : { lineItem:       [ { position: 12, label : 'Kesinti Tutarı'  } ] }\r\n      @Semantics.amount.currencyCode: 'currency'\r\n      kst      : abap.curr(15,2);\r\n      \r\n      currency : waers;\r\n}\r\n/*+[internal] {\n\"BASEINFO\":\n{\n\"FROM\":\n[],\n\"ASSOCIATED\":\n[],\n\"BASE\":\n[],\n\"ANNO_REF\":\n[],\n\"SCALAR_FUNCTION\":\n[],\n\"VERSION\":0,\n\"ANNOREF_EVALUATION_ERROR\":\"\"\n}\n}*/",
+    "SOURCE":"@EndUserText.label: 'Muhtasar - Belge Listesi'\r\n@ObjectModel.query.implementedBy:'ABAP:ZCL_TAX_BRF_DOC_LIST'\r\n@UI:{\r\nheaderInfo:{\r\n                typeNamePlural: 'Muhtasar - Belge Listesi',\r\n                typeName: 'Muhtasar - Belge Listesi',\r\n                title:{ type: #STANDARD, label: 'Muhtasar - Belge Listesi', value: 'bukrs' }\r\n           }\r\n}\r\ndefine root custom entity ZTAX_DDL_I_BRF_DOC_LIST\r\n{\r\n      @UI      : { lineItem:       [ { position: 1, importance: #HIGH},\r\n              { type: #FOR_ACTION, dataAction: 'XML', label: 'XML Oluştur' } ] }\r\n      @Consumption.valueHelpDefinition: [ { entity: { name: 'I_CompanyCodeVH', element: 'CompanyCode' }}]\r\n  key bukrs    : bukrs;\r\n      @UI      : {\r\n      lineItem :     [ { position: 2 , hidden : true } ],\r\n      selectionField: [ { position: 2 } ] }\r\n  key gjahr    : gjahr;\r\n\r\n      @UI      : { lineItem:       [ { position: 4 , hidden : true } ],\r\n      selectionField: [ { position: 4 } ] }\r\n  key monat    : monat;\r\n      @UI      : { lineItem:       [ { position: 5 , hidden : true } ] }\r\n  key lineitem : int1;\r\n      @UI      : { lineItem:       [ { position: 6 , hidden : true} ] }\r\n      kiril1   : ztax_e_kiril1;\r\n      @UI      : { lineItem:       [ { position: 7,  label : 'Vergi Tipi / Vergi Göstergesi'  } ] }\r\n      acklm1   : abap.string;\r\n      @UI      : { lineItem:       [ { position: 8 , hidden : true} ] }\r\n      kiril2   : ztax_e_kiril2;\r\n      @UI      : { lineItem:       [ { position: 9 , label : 'Vergi Tipi / Vergi Göstergesi'  } ] }\r\n      acklm2   : abap.string;\r\n      @UI      : { lineItem:       [ { position: 10, label : 'Vergi Tipi / Vergi Göstergesi'  } ] }\r\n      kiril3   : abap.char(70);\r\n      @UI       : { lineItem:       [ { position: 11, label : 'Gayri Safi Tutar'  } ] }\r\n      @Semantics.amount.currencyCode: 'currency'\r\n      gyst     : abap.curr(15,2);\r\n      @UI       : { lineItem:       [ { position: 12, label : 'Kesinti Tutarı'  } ] }\r\n      @Semantics.amount.currencyCode: 'currency'\r\n      kst      : abap.curr(15,2);\r\n      \r\n      currency : waers;\r\n}\r\n/*+[internal] {\n\"BASEINFO\":\n{\n\"FROM\":\n[],\n\"ASSOCIATED\":\n[],\n\"BASE\":\n[],\n\"ANNO_REF\":\n[],\n\"SCALAR_FUNCTION\":\n[],\n\"VERSION\":0,\n\"ANNOREF_EVALUATION_ERROR\":\"\"\n}\n}*/",
     "PARENTNAME":"",
     "ACTFLAG":"",
-    "CHGFLAG":",W4T",
+    "CHGFLAG":"",
     "SOURCE_TYPE":"Q",
     "SOURCE_ORIGIN":"0",
     "ABAP_LANGUAGE_VERSION":"5"
@@ -52,70 +52,70 @@
     "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
     "LFIELDNAME":"ACKLM1",
     "NAME":"UI",
-    "POSITION":26,
+    "POSITION":25,
     "VALUE":""
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
     "LFIELDNAME":"ACKLM1",
     "NAME":"UI.LINEITEM$1$.LABEL",
-    "POSITION":28,
+    "POSITION":27,
     "VALUE":"'Vergi Tipi / Vergi Göstergesi'"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
     "LFIELDNAME":"ACKLM1",
     "NAME":"UI.LINEITEM$1$.POSITION",
-    "POSITION":27,
+    "POSITION":26,
     "VALUE":"7"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
     "LFIELDNAME":"ACKLM2",
     "NAME":"UI",
-    "POSITION":32,
+    "POSITION":31,
     "VALUE":""
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
     "LFIELDNAME":"ACKLM2",
     "NAME":"UI.LINEITEM$1$.LABEL",
-    "POSITION":34,
+    "POSITION":33,
     "VALUE":"'Vergi Tipi / Vergi Göstergesi'"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
     "LFIELDNAME":"ACKLM2",
     "NAME":"UI.LINEITEM$1$.POSITION",
-    "POSITION":33,
+    "POSITION":32,
     "VALUE":"9"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
     "LFIELDNAME":"BUKRS",
     "NAME":"CONSUMPTION",
-    "POSITION":8,
+    "POSITION":7,
     "VALUE":""
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
     "LFIELDNAME":"BUKRS",
     "NAME":"CONSUMPTION.VALUEHELPDEFINITION$1$.ENTITY",
-    "POSITION":9,
+    "POSITION":8,
     "VALUE":""
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
     "LFIELDNAME":"BUKRS",
     "NAME":"CONSUMPTION.VALUEHELPDEFINITION$1$.ENTITY.ELEMENT",
-    "POSITION":11,
+    "POSITION":10,
     "VALUE":"'CompanyCode'"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
     "LFIELDNAME":"BUKRS",
     "NAME":"CONSUMPTION.VALUEHELPDEFINITION$1$.ENTITY.NAME",
-    "POSITION":10,
+    "POSITION":9,
     "VALUE":"'I_CompanyCodeVH'"
    },
    {
@@ -124,13 +124,6 @@
     "NAME":"UI",
     "POSITION":1,
     "VALUE":""
-   },
-   {
-    "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
-    "LFIELDNAME":"BUKRS",
-    "NAME":"UI.LINEITEM$1$.HIDDEN",
-    "POSITION":4,
-    "VALUE":"true"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
@@ -150,231 +143,231 @@
     "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
     "LFIELDNAME":"BUKRS",
     "NAME":"UI.LINEITEM$2$.DATAACTION",
-    "POSITION":6,
+    "POSITION":5,
     "VALUE":"'XML'"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
     "LFIELDNAME":"BUKRS",
     "NAME":"UI.LINEITEM$2$.LABEL",
-    "POSITION":7,
+    "POSITION":6,
     "VALUE":"'XML Oluştur'"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
     "LFIELDNAME":"BUKRS",
     "NAME":"UI.LINEITEM$2$.TYPE",
-    "POSITION":5,
+    "POSITION":4,
     "VALUE":"#FOR_ACTION"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
     "LFIELDNAME":"GJAHR",
     "NAME":"UI",
-    "POSITION":12,
+    "POSITION":11,
     "VALUE":""
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
     "LFIELDNAME":"GJAHR",
     "NAME":"UI.LINEITEM$1$.HIDDEN",
-    "POSITION":14,
+    "POSITION":13,
     "VALUE":"true"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
     "LFIELDNAME":"GJAHR",
     "NAME":"UI.LINEITEM$1$.POSITION",
-    "POSITION":13,
+    "POSITION":12,
     "VALUE":"2"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
     "LFIELDNAME":"GJAHR",
     "NAME":"UI.SELECTIONFIELD$1$.POSITION",
-    "POSITION":15,
+    "POSITION":14,
     "VALUE":"2"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
     "LFIELDNAME":"GYST",
     "NAME":"SEMANTICS",
-    "POSITION":41,
+    "POSITION":40,
     "VALUE":""
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
     "LFIELDNAME":"GYST",
     "NAME":"SEMANTICS.AMOUNT.CURRENCYCODE",
-    "POSITION":42,
+    "POSITION":41,
     "VALUE":"'currency'"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
     "LFIELDNAME":"GYST",
     "NAME":"UI",
-    "POSITION":38,
+    "POSITION":37,
     "VALUE":""
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
     "LFIELDNAME":"GYST",
     "NAME":"UI.LINEITEM$1$.LABEL",
-    "POSITION":40,
+    "POSITION":39,
     "VALUE":"'Gayri Safi Tutar'"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
     "LFIELDNAME":"GYST",
     "NAME":"UI.LINEITEM$1$.POSITION",
-    "POSITION":39,
+    "POSITION":38,
     "VALUE":"11"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
     "LFIELDNAME":"KIRIL1",
     "NAME":"UI",
-    "POSITION":23,
+    "POSITION":22,
     "VALUE":""
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
     "LFIELDNAME":"KIRIL1",
     "NAME":"UI.LINEITEM$1$.HIDDEN",
-    "POSITION":25,
+    "POSITION":24,
     "VALUE":"true"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
     "LFIELDNAME":"KIRIL1",
     "NAME":"UI.LINEITEM$1$.POSITION",
-    "POSITION":24,
+    "POSITION":23,
     "VALUE":"6"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
     "LFIELDNAME":"KIRIL2",
     "NAME":"UI",
-    "POSITION":29,
+    "POSITION":28,
     "VALUE":""
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
     "LFIELDNAME":"KIRIL2",
     "NAME":"UI.LINEITEM$1$.HIDDEN",
-    "POSITION":31,
+    "POSITION":30,
     "VALUE":"true"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
     "LFIELDNAME":"KIRIL2",
     "NAME":"UI.LINEITEM$1$.POSITION",
-    "POSITION":30,
+    "POSITION":29,
     "VALUE":"8"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
     "LFIELDNAME":"KIRIL3",
     "NAME":"UI",
-    "POSITION":35,
+    "POSITION":34,
     "VALUE":""
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
     "LFIELDNAME":"KIRIL3",
     "NAME":"UI.LINEITEM$1$.LABEL",
-    "POSITION":37,
+    "POSITION":36,
     "VALUE":"'Vergi Tipi / Vergi Göstergesi'"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
     "LFIELDNAME":"KIRIL3",
     "NAME":"UI.LINEITEM$1$.POSITION",
-    "POSITION":36,
+    "POSITION":35,
     "VALUE":"10"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
     "LFIELDNAME":"KST",
     "NAME":"SEMANTICS",
-    "POSITION":46,
+    "POSITION":45,
     "VALUE":""
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
     "LFIELDNAME":"KST",
     "NAME":"SEMANTICS.AMOUNT.CURRENCYCODE",
-    "POSITION":47,
+    "POSITION":46,
     "VALUE":"'currency'"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
     "LFIELDNAME":"KST",
     "NAME":"UI",
-    "POSITION":43,
+    "POSITION":42,
     "VALUE":""
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
     "LFIELDNAME":"KST",
     "NAME":"UI.LINEITEM$1$.LABEL",
-    "POSITION":45,
+    "POSITION":44,
     "VALUE":"'Kesinti Tutarı'"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
     "LFIELDNAME":"KST",
     "NAME":"UI.LINEITEM$1$.POSITION",
-    "POSITION":44,
+    "POSITION":43,
     "VALUE":"12"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
     "LFIELDNAME":"LINEITEM",
     "NAME":"UI",
-    "POSITION":20,
+    "POSITION":19,
     "VALUE":""
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
     "LFIELDNAME":"LINEITEM",
     "NAME":"UI.LINEITEM$1$.HIDDEN",
-    "POSITION":22,
+    "POSITION":21,
     "VALUE":"true"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
     "LFIELDNAME":"LINEITEM",
     "NAME":"UI.LINEITEM$1$.POSITION",
-    "POSITION":21,
+    "POSITION":20,
     "VALUE":"5"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
     "LFIELDNAME":"MONAT",
     "NAME":"UI",
-    "POSITION":16,
+    "POSITION":15,
     "VALUE":""
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
     "LFIELDNAME":"MONAT",
     "NAME":"UI.LINEITEM$1$.HIDDEN",
-    "POSITION":18,
+    "POSITION":17,
     "VALUE":"true"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
     "LFIELDNAME":"MONAT",
     "NAME":"UI.LINEITEM$1$.POSITION",
-    "POSITION":17,
+    "POSITION":16,
     "VALUE":"4"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_DOC_LIST",
     "LFIELDNAME":"MONAT",
     "NAME":"UI.SELECTIONFIELD$1$.POSITION",
-    "POSITION":19,
+    "POSITION":18,
     "VALUE":"4"
    }
   ]
