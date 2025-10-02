@@ -119,7 +119,7 @@
 
 
 
-        SELECT
+        SELECT DISTINCT
             bset~companycode         AS bukrs,
             bset~Accountingdocument  AS belnr,
             bset~fiscalyear          AS gjahr,
