@@ -88,7 +88,7 @@
     "KEYFLAG":"X",
     "MANDATORY":"",
     "ROLLNAME":"BUKRS",
-    "CHECKTABLE":"ZTAX_T_MS",
+    "CHECKTABLE":"",
     "ADMINFIELD":"0",
     "INTTYPE":"C",
     "INTLEN":8,
@@ -101,7 +101,7 @@
     "LENG":4,
     "DECIMALS":0,
     "DOMNAME":"BUKRS",
-    "SHLPORIGIN":"P",
+    "SHLPORIGIN":"D",
     "TABLETYPE":"",
     "DEPTH":0,
     "COMPTYPE":"E",
@@ -153,7 +153,7 @@
     "POSITION":3,
     "KEYFLAG":"X",
     "MANDATORY":"",
-    "ROLLNAME":"ZTAX_E_KIRIL1",
+    "ROLLNAME":"ZTAX_E_KIRIL1M",
     "CHECKTABLE":"",
     "ADMINFIELD":"0",
     "INTTYPE":"N",
@@ -166,7 +166,7 @@
     "DATATYPE":"NUMC",
     "LENG":3,
     "DECIMALS":0,
-    "DOMNAME":"ZTAX_D_KIRIL1",
+    "DOMNAME":"ZTAX_D_KIRIL1M",
     "SHLPORIGIN":"",
     "TABLETYPE":"",
     "DEPTH":0,
@@ -223,69 +223,6 @@
     "AS4LOCAL":"N",
     "FIELDNAME":"CLIENT",
     "DDTEXT":""
-   }
-  ]
- },
- {
-  "table":"DD05S",
-  "data":
-  [
-   {
-    "TABNAME":"ZTAX_T_MK1S",
-    "FIELDNAME":"BUKRS",
-    "PRIMPOS":1,
-    "AS4LOCAL":"N",
-    "AS4VERS":0,
-    "FORTABLE":"ZTAX_T_MK1S",
-    "FORKEY":"CLIENT",
-    "FORSTRING":""
-   },
-   {
-    "TABNAME":"ZTAX_T_MK1S",
-    "FIELDNAME":"BUKRS",
-    "PRIMPOS":2,
-    "AS4LOCAL":"N",
-    "AS4VERS":0,
-    "FORTABLE":"ZTAX_T_MK1S",
-    "FORKEY":"BUKRS",
-    "FORSTRING":""
-   }
-  ]
- },
- {
-  "table":"DD08L",
-  "data":
-  [
-   {
-    "TABNAME":"ZTAX_T_MK1S",
-    "FIELDNAME":"BUKRS",
-    "AS4LOCAL":"N",
-    "AS4VERS":0,
-    "CHECKTABLE":"ZTAX_T_MS",
-    "FRKART":"",
-    "CLASFIELD":"",
-    "CLASVALUE":"",
-    "CARDLEFT":"",
-    "CARD":"",
-    "CHECKFLAG":"",
-    "ARBGB":"",
-    "MSGNR":"",
-    "NOINHERIT":""
-   }
-  ]
- },
- {
-  "table":"DD08T",
-  "data":
-  [
-   {
-    "TABNAME":"ZTAX_T_MK1S",
-    "FIELDNAME":"BUKRS",
-    "DDLANGUAGE":"T",
-    "AS4LOCAL":"N",
-    "AS4VERS":0,
-    "DDTEXT":"",
-    "MESTEXT":""
    }
   ]
  },

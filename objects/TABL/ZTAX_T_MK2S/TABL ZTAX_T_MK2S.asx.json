@@ -153,8 +153,8 @@
     "POSITION":3,
     "KEYFLAG":"X",
     "MANDATORY":"",
-    "ROLLNAME":"ZTAX_E_KIRIL1",
-    "CHECKTABLE":"ZTAX_T_MK1S",
+    "ROLLNAME":"ZTAX_E_KIRIL1M",
+    "CHECKTABLE":"",
     "ADMINFIELD":"0",
     "INTTYPE":"N",
     "INTLEN":6,
@@ -166,8 +166,8 @@
     "DATATYPE":"NUMC",
     "LENG":3,
     "DECIMALS":0,
-    "DOMNAME":"ZTAX_D_KIRIL1",
-    "SHLPORIGIN":"P",
+    "DOMNAME":"ZTAX_D_KIRIL1M",
+    "SHLPORIGIN":"",
     "TABLETYPE":"",
     "DEPTH":0,
     "COMPTYPE":"E",
@@ -186,7 +186,7 @@
     "POSITION":4,
     "KEYFLAG":"X",
     "MANDATORY":"",
-    "ROLLNAME":"ZTAX_E_KIRIL2",
+    "ROLLNAME":"ZTAX_E_KIRIL2M",
     "CHECKTABLE":"",
     "ADMINFIELD":"0",
     "INTTYPE":"N",
@@ -223,79 +223,6 @@
     "AS4LOCAL":"N",
     "FIELDNAME":"CLIENT",
     "DDTEXT":""
-   }
-  ]
- },
- {
-  "table":"DD05S",
-  "data":
-  [
-   {
-    "TABNAME":"ZTAX_T_MK2S",
-    "FIELDNAME":"KIRIL1",
-    "PRIMPOS":1,
-    "AS4LOCAL":"N",
-    "AS4VERS":0,
-    "FORTABLE":"ZTAX_T_MK2S",
-    "FORKEY":"CLIENT",
-    "FORSTRING":""
-   },
-   {
-    "TABNAME":"ZTAX_T_MK2S",
-    "FIELDNAME":"KIRIL1",
-    "PRIMPOS":2,
-    "AS4LOCAL":"N",
-    "AS4VERS":0,
-    "FORTABLE":"ZTAX_T_MK2S",
-    "FORKEY":"BUKRS",
-    "FORSTRING":""
-   },
-   {
-    "TABNAME":"ZTAX_T_MK2S",
-    "FIELDNAME":"KIRIL1",
-    "PRIMPOS":3,
-    "AS4LOCAL":"N",
-    "AS4VERS":0,
-    "FORTABLE":"ZTAX_T_MK2S",
-    "FORKEY":"KIRIL1",
-    "FORSTRING":""
-   }
-  ]
- },
- {
-  "table":"DD08L",
-  "data":
-  [
-   {
-    "TABNAME":"ZTAX_T_MK2S",
-    "FIELDNAME":"KIRIL1",
-    "AS4LOCAL":"N",
-    "AS4VERS":0,
-    "CHECKTABLE":"ZTAX_T_MK1S",
-    "FRKART":"",
-    "CLASFIELD":"",
-    "CLASVALUE":"",
-    "CARDLEFT":"",
-    "CARD":"",
-    "CHECKFLAG":"",
-    "ARBGB":"",
-    "MSGNR":"",
-    "NOINHERIT":""
-   }
-  ]
- },
- {
-  "table":"DD08T",
-  "data":
-  [
-   {
-    "TABNAME":"ZTAX_T_MK2S",
-    "FIELDNAME":"KIRIL1",
-    "DDLANGUAGE":"T",
-    "AS4LOCAL":"N",
-    "AS4VERS":0,
-    "DDTEXT":"",
-    "MESTEXT":""
    }
   ]
  },
