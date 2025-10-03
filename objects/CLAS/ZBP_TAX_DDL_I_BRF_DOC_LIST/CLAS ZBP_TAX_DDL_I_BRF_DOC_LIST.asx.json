@@ -17,7 +17,7 @@
    {
     "CLSNAME":"ZBP_TAX_DDL_I_BRF_DOC_LIST",
     "CLSTYPE":0,
-    "UUID":"+hY+u89+H+Cc/SQ9EHWlfw==",
+    "UUID":"+hY+u89+H+CohWcDsdImMg==",
     "REMOTE":""
    }
   ]
@@ -34,7 +34,7 @@
     "STATE":1,
     "RELEASE":0,
     "AUTHOR":"",
-    "CREATEDON":"2025-08-07",
+    "CREATEDON":"2025-10-03",
     "CHANGEDBY":"",
     "CHANGEDON":"0000-00-00",
     "CHGDANYBY":"",
@@ -101,8 +101,8 @@
     "CRELEASE":"",
     "DELFLAG":"",
     "TRANSLTTXT":"",
-    "CREATED_ON":"2025-08-07",
-    "CHECK_DATE":"2025-08-07",
+    "CREATED_ON":"2025-10-03",
+    "CHECK_DATE":"2025-10-03",
     "CHECK_CFG":""
    }
   ]

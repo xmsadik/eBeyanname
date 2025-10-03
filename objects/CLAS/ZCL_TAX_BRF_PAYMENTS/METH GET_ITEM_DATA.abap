@@ -45,230 +45,228 @@
      INTO TABLE @et_mg.
 *
 *
-*
-*    SELECT i_journalentryitem~companycode AS bukrs,"skar = GLACCOUNTTEXT i_journalentry= bkpf but000 =  I_BUSINESSPARTNER t001=i_companycode lfa1 = I_Supplier
-*           i_journalentryitem~fiscalyear AS gjahr,
-*           i_journalentryitem~accountingdocument AS belnr,
-**           i_journalentryitem~DocumentLine AS docln,
-**           I_JournalEntryItem~ as ryear,
-**           I_JournalEntryItem~FiscalYearPeriod,
-**           i_journalentryitem~debitcreditcode AS hsl,
-**           i_journalentryitem~debitcreditcode AS wsl, "?
-**           i_journalentryitem~debitcreditcode AS drcrk, "?
-**           I_JournalEntryItem~awref_rev,
-**           I_JournalEntryItem~aworg_rev,
-**           I_JournalEntryItem~awtyp,
-**           I_JournalEntryItem~awref,
-**           I_JournalEntryItem~aworg,
-**           I_JournalEntryItem~xreversing,
-**           I_JournalEntryItem~xreversed,
-*           i_journalentryitem~supplier AS lifnr,
-**           I_JournalEntryItem~racct,
-*            i_glaccounttext~glaccountlongname AS txt50,
-*           i_journalentryitem~documentitemtext AS sgtxt,
-*           i_businesspartner~firstname AS name1,
-*           i_businesspartner~lastname  AS name2,
-*           i_businesspartner~organizationbpname1 AS name_org1,
-*           i_businesspartner~organizationbpname2 AS name_org2,
-**           acdoca~rwcur,
-**           acdoca~zuonr,
-*           i_companycode~companycodename AS butxt,
-*           i_journalentry~documentreferenceid AS xblnr,
-*           i_journalentryitem~postingdate AS budat,
-*           i_supplier~streetname AS stras,
-*           i_supplier~cityname AS mcod3,
-*           i_supplier~region AS regio,
-*           i_supplier~country AS land1,
-*           i_supplier~taxnumber2 AS stcd2,
-*           i_journalentryitem~financialaccounttype AS koart
-*           "
-*
-*           FROM i_journalentryitem
-*           "
-*           INNER JOIN i_companycode
-*           ON i_companycode~companycode EQ i_journalentryitem~companycode
-*           "
-*           INNER JOIN i_journalentry
-*           ON i_journalentry~companycode  EQ i_journalentryitem~companycode
-*           AND i_journalentry~accountingdocument EQ i_journalentryitem~accountingdocument
-*           AND i_journalentry~fiscalyear EQ i_journalentryitem~fiscalyear
-*           "
-*           LEFT OUTER JOIN i_glaccounttext
-*           ON i_glaccounttext~language            EQ @sy-langu
-**           AND skat~ktopl           EQ i_journalentryitem~ktopl
-**           AND skat~saknr           EQ i_journalentryitem~racct
-*           "
-*           LEFT OUTER JOIN  i_businesspartner
-*           ON i_businesspartner~businesspartner        EQ i_journalentryitem~customer
-*           "
-*           LEFT OUTER JOIN  i_supplier
-*           ON  i_supplier~supplier           EQ i_journalentryitem~customer
-*           "
-*           WHERE i_journalentryitem~fiscalyear       EQ @p_gjahr
-*             AND i_journalentryitem~companycode      EQ @p_bukrs
-**             AND I_JournalEntryItem~fiscyearper IN @lr_fiscyearper
-**             AND ( ( acdoca~xreversing EQ @space AND acdoca~drcrk EQ 'H' ) OR ( acdoca~xreversing EQ @abap_true AND acdoca~drcrk  EQ 'S' ) )
-*             AND i_journalentryitem~referencedocumenttype       NE 'RMRP'
-**             AND acdoca~rldnr       EQ '0L'
-*             AND EXISTS ( "
-*                          SELECT *
-*                           FROM i_journalentryitem AS account
-*                           "
-*                           INNER JOIN ztax_t_mg AS mg1
-*                           ON  mg1~bukrs  EQ account~companycode
-**                           AND mg1~hkont  EQ account~racct
-*                           "
-*                           WHERE "account~rldnr       EQ acdoca~rldnr
-*                              account~companycode      EQ i_journalentryitem~companycode
-*                             AND account~accountingdocument       EQ i_journalentryitem~accountingdocument
-*
-*                             AND account~fiscalyear       EQ i_journalentryitem~fiscalyear
-**                             AND account~fiscyearper EQ I_JournalEntryItem~fiscyearper
-**                             AND ( ( account~xreversing EQ @space AND account~drcrk EQ 'H' ) OR ( account~xreversing EQ @abap_true AND account~drcrk  EQ 'S' ) )
-*                             AND EXISTS ( "
-*                                          SELECT *
-*                                            FROM i_journalentryitem AS gricd
-*                                            "
-*                                            INNER JOIN i_suppliercompany
-*                                            ON i_suppliercompany~companycode EQ gricd~companycode
-*                                            AND i_suppliercompany~supplier EQ gricd~customer
-*                                            "
+
+    SELECT i_journalentryitem~CompanyCode AS bukrs ,
+           i_journalentryitem~FiscalYear AS gjahr ,
+           i_journalentryitem~AccountingDocument AS belnr ,
+           i_journalentryitem~LedgerGLLineItem AS docln ,
+           i_journalentryitem~LedgerFiscalYear AS ryear ,
+           i_journalentryitem~FiscalYearPeriod AS fiscyearper ,
+           i_journalentryitem~AmountInCompanyCodeCurrency AS hsl ,
+           i_journalentryitem~AmountInTransactionCurrency AS wsl ,
+           i_journalentryitem~DebitCreditCode AS drcrk ,
+           i_journalentryitem~ReversalReferenceDocument AS awref_rev ,
+           i_journalentryitem~ReversalReferenceDocumentCntxt AS aworg_rev ,
+           i_journalentryitem~ReferenceDocumentType AS awtyp ,
+           i_journalentryitem~ReferenceDocument AS awref ,
+           i_journalentryitem~ReferenceDocumentContext AS aworg ,
+           i_journalentryitem~IsReversal AS xreversing ,
+           i_journalentryitem~IsReversed AS xreversed ,
+           i_journalentryitem~Supplier AS lifnr ,
+           i_journalentryitem~GLAccount AS racct ,
+           i_glaccounttext~GLAccountLongName AS txt50 ,
+           i_journalentryitem~DocumentItemText AS sgtxt ,
+           i_businesspartner~FirstName AS name1 ,
+           i_businesspartner~LastName  AS name2 ,
+           i_businesspartner~OrganizationBPName1 AS name_org1 ,
+           i_businesspartner~OrganizationBPName2 AS name_org2 ,
+           i_journalentryitem~TransactionCurrency AS rwcur ,
+           i_journalentryitem~AssignmentReference AS zuonr ,
+           i_companycode~CompanyCodeName AS butxt ,
+           i_journalentry~DocumentReferenceID AS xblnr ,
+           i_journalentryitem~PostingDate AS budat ,
+           i_supplier~StreetName AS stras ,
+*           I_SUPPLIER~ as mcod3
+           i_supplier~Region AS regio ,
+           i_supplier~Country AS land1 ,
+           i_supplier~TaxNumber2 AS stcd2 ,
+           i_journalentryitem~FinancialAccountType AS koart
+           "
+
+           FROM i_journalentryitem
+           "
+           INNER JOIN i_companycode
+           ON i_companycode~companycode EQ i_journalentryitem~companycode
+           "
+           INNER JOIN i_journalentry
+           ON i_journalentry~companycode  EQ i_journalentryitem~companycode
+           AND i_journalentry~accountingdocument EQ i_journalentryitem~accountingdocument
+           AND i_journalentry~fiscalyear EQ i_journalentryitem~fiscalyear
+           "
+           LEFT OUTER JOIN i_glaccounttext
+            ON i_glaccounttext~Language        EQ @sy-langu
+           AND i_glaccounttext~ChartOfAccounts EQ i_journalentryitem~ChartOfAccounts
+           AND i_glaccounttext~GLAccount       EQ i_journalentryitem~GLAccount
+           "
+           LEFT OUTER JOIN  i_businesspartner
+           ON i_businesspartner~businesspartner        EQ i_journalentryitem~customer
+           "
+           LEFT OUTER JOIN  i_supplier
+           ON  i_supplier~supplier           EQ i_journalentryitem~customer
+           "
+           WHERE i_journalentryitem~fiscalyear       EQ @p_gjahr
+             AND i_journalentryitem~companycode      EQ @p_bukrs
+  AND i_journalentryitem~FiscalYearPeriod IN @lr_fiscyearper
+             AND ( ( i_journalentryitem~IsReversal   IS INITIAL AND i_journalentryitem~DebitCreditCode EQ 'H' ) OR ( i_journalentryitem~IsReversal EQ @abap_true AND i_journalentryitem~DebitCreditCode  EQ 'S' ) )
+           AND i_journalentryitem~referencedocumenttype       NE 'RMRP'
+             AND i_journalentryitem~SourceLedger       EQ '0L'
+             AND EXISTS ( "
+                          SELECT *
+                           FROM i_journalentryitem AS account
+                           "
+                           INNER JOIN ztax_t_mg AS mg1
+                           ON  mg1~bukrs  EQ account~companycode
+                           AND mg1~hkont  EQ account~GLAccount
+                           "
+                           WHERE account~SourceLedger       EQ i_journalentryitem~SourceLedger
+                             AND account~companycode      EQ i_journalentryitem~companycode
+                             AND account~accountingdocument       EQ i_journalentryitem~accountingdocument
+                             AND account~fiscalyear       EQ i_journalentryitem~fiscalyear
+                             AND account~FiscalYearPeriod EQ I_JournalEntryItem~FiscalYearPeriod
+                             AND ( ( account~IsReversal EQ @space AND account~DebitCreditCode EQ 'H' ) OR ( account~DebitCreditCode EQ @abap_true AND account~DebitCreditCode  EQ 'S' ) )
+                             AND EXISTS ( "
+                                          SELECT *
+                                            FROM i_journalentryitem AS gricd
+                                            "
+                                            INNER JOIN i_suppliercompany
+                                            ON i_suppliercompany~companycode EQ gricd~companycode
+                                            AND i_suppliercompany~supplier EQ gricd~customer
+                                            "
 *                                            INNER JOIN ztax_t_mindk AS mindk
 *                                             ON  mindk~bukrs  EQ gricd~companycode
 *                                             AND mindk~lifnr  EQ i_suppliercompany~Supplier
-*
-*                                            INNER JOIN ztax_t_mg AS mg12
-*                                             ON  mg12~bukrs  EQ gricd~companycode
+
+                                            INNER JOIN ztax_t_mg AS mg12
+                                             ON  mg12~bukrs  EQ gricd~companycode
 *                                             AND mg12~mindk  EQ mindk~mindk
-*
-*                                             "
-*                                             WHERE" gricd~rldnr       EQ account~rldnr
-*                                                gricd~companycode      EQ account~companycode
-*                                               AND gricd~accountingdocument       EQ account~accountingdocument
-*                                               AND gricd~fiscalyear       EQ account~fiscalyear
-**                                               AND gricd~fiscyearper EQ account~fiscyearper
-**                                               AND mg12~hkont        EQ account~racct
-**                                               AND ( ( gricd~xreversing EQ @space AND gricd~drcrk EQ 'H' ) OR ( gricd~xreversing EQ @abap_true AND gricd~drcrk  EQ 'S' ) )
-*                                         )
-*                            )
-*                             INTO CORRESPONDING FIELDS OF TABLE @et_data.
-*
-*
-*
-*    SELECT i_journalentryitem~companycode AS bukrs,"skar = GLACCOUNTTEXT i_journalentry= bkpf but000 =  I_BUSINESSPARTNER rbkp = SupplierInvoiceAPI01 lfb1 = i_suppliercompany
-*               i_journalentryitem~fiscalyear AS gjahr,
-*               i_journalentryitem~accountingdocument AS belnr,
-**           i_journalentryitem~DocumentLine AS docln,
-**           I_JournalEntryItem~ as ryear,
-**           I_JournalEntryItem~FiscalYearPeriod,
-**           i_journalentryitem~debitcreditcode AS hsl,
-**           i_journalentryitem~debitcreditcode AS wsl, "?
-**           i_journalentryitem~debitcreditcode AS drcrk, "?
-**           I_JournalEntryItem~awref_rev,
-**           I_JournalEntryItem~aworg_rev,
-**           I_JournalEntryItem~awtyp,
-**           I_JournalEntryItem~awref,
-**           I_JournalEntryItem~aworg,
-**           I_JournalEntryItem~xreversing,
-**           I_JournalEntryItem~xreversed,
-**           rbkp~supplier AS lifnr,
-**           I_JournalEntryItem~racct,
-*                i_glaccounttext~glaccountlongname AS txt50,
-*               i_journalentryitem~documentitemtext AS sgtxt,
-*               i_businesspartner~firstname AS name1,
-*               i_businesspartner~lastname  AS name2,
-*               i_businesspartner~organizationbpname1 AS name_org1,
-*               i_businesspartner~organizationbpname2 AS name_org2,
-**           acdoca~rwcur,
-**           acdoca~zuonr,
-*               i_companycode~companycodename AS butxt,
-*               i_journalentry~documentreferenceid AS xblnr,
-*               i_journalentryitem~postingdate AS budat,
-*               i_supplier~streetname AS stras,
-*               i_supplier~cityname AS mcod3,
-*               i_supplier~region AS regio,
-*               i_supplier~country AS land1,
-*               i_supplier~taxnumber2 AS stcd2,
-*               i_journalentryitem~financialaccounttype AS koart
-*               "
-*
-*            "
-*            FROM i_journalentryitem
-*            INNER JOIN i_companycode
-*            ON i_companycode~companycode EQ i_journalentryitem~companycode
-*            "
-*            INNER JOIN i_supplierinvoiceapi01
-*            ON i_supplierinvoiceapi01~supplierinvoice EQ i_journalentryitem~accountassignment "AWREF bunu bul
-*            AND i_supplierinvoiceapi01~fiscalyear EQ i_journalentryitem~accountassignment     "aworg
-*            "
-*            INNER JOIN i_journalentry
-*            ON i_journalentry~companycode  EQ i_journalentryitem~companycode
-*            AND i_journalentry~accountingdocument EQ i_journalentryitem~accountingdocument
-*            AND i_journalentry~fiscalyear EQ i_journalentryitem~fiscalyear
-*            "
-*            LEFT OUTER JOIN i_glaccounttext
-*            ON i_glaccounttext~language            EQ @sy-langu
-**        AND skat~ktopl           EQ i_journalentryitem~ktopl
-**        AND skat~saknr           EQ i_journalentryitem~racct
-*            "
-*            LEFT OUTER JOIN i_businesspartner
-*            ON i_businesspartner~businesspartner        EQ i_journalentryitem~customer
-*            "
-*        LEFT OUTER JOIN I_Supplier
-*        ON I_Supplier~supplier   EQ I_SupplierInvoiceAPI01~CreatedByUser
-*            "
-*            WHERE i_journalentryitem~fiscalyear       EQ @p_gjahr
-*            AND i_journalentryitem~companycode      EQ @p_bukrs
-**        AND i_journalentryitem~fiscyearper IN @lr_fiscyearper
-**        AND ( ( acdoca~xreversing EQ @space AND acdoca~drcrk EQ 'H' ) OR ( acdoca~xreversing EQ abap_true AND acdoca~drcrk  EQ 'S' ) )
-*            AND i_journalentryitem~ReferenceDocumentType       EQ 'RMRP'
-**            AND acdoca~rldnr       EQ '0L'
-*            AND EXISTS ( "
-*            SELECT *
-*            FROM i_journalentryitem AS account
-*            "
-*            INNER JOIN ztax_t_mg AS mg1
-*            ON  mg1~bukrs  EQ account~companycode
-*            AND mg1~hkont  EQ account~GLAccount
-*            "
-*            WHERE "account~rldnr       EQ acdoca~rldnr
-*             account~companycode      EQ i_journalentryitem~companycode
-*            AND account~accountingdocument       EQ i_journalentryitem~accountingdocument
-*            AND account~fiscalyear       EQ i_journalentryitem~fiscalyear
-**        AND account~fiscyearper EQ i_journalentryitem~fiscyearper
-**        AND ( ( account~xreversing EQ space AND account~drcrk EQ 'H' ) OR ( account~xreversing EQ abap_true AND account~drcrk  EQ 'S' ) )
-*            AND EXISTS ( "
-*                         SELECT *
-*                           FROM i_journalentryitem AS gricd
-*                           "
-**                           INNER JOIN i_SupplierInvoiceAPI01
-*                           "on i_SupplierInvoiceAPI01~supplierinvoice EQ gricd~awref
-**                            and i_SupplierInvoiceAPI01~fiscalyear EQ gricd~aworg
-*                           "
-*                           INNER JOIN i_suppliercompany
-*                           ON i_suppliercompany~bukrs EQ i_SupplierInvoiceAPI01~bukrs
-*                           AND i_suppliercompany~lifnr EQ i_SupplierInvoiceAPI01~lifnr
-*                           "
-*                          INNER JOIN ztax_t_mindk AS mindk
-*                            ON  mindk~bukrs  EQ i_SupplierInvoiceAPI01~bukrs
-*                            AND mindk~lifnr  EQ i_SupplierInvoiceAPI01~lifnr
-*
-*                           INNER JOIN ztax_t_mg AS mg12
-*                            ON  mg12~bukrs  EQ gricd~rbukrs
-*                            AND mg12~mindk  EQ mindk~mindk
-*                            "
-*                            WHERE "gricd~rldnr       EQ account~rldnr
-*                               gricd~companycode      EQ account~companycode
-*                              AND gricd~accountingdocument       EQ account~accountingdocument
-*                              AND gricd~fiscalyear       EQ account~fiscalyear
-**                          AND gricd~fiscyearper EQ account~fiscyearper
-**                          AND mg12~hkont        EQ account~racct
-**                          AND ( ( gricd~xreversing EQ space AND gricd~drcrk EQ 'H' ) OR ( gricd~xreversing EQ abap_true AND gricd~drcrk  EQ 'S' ) )
-*                           )
-*            )
+
+                                             "
+
+                                             "
+                                             WHERE gricd~SourceLedger       EQ account~SourceLedger
+                                               AND gricd~CompanyCode        EQ account~CompanyCode
+                                               AND gricd~AccountingDocument EQ account~AccountingDocument
+                                               AND gricd~FiscalYear         EQ account~FiscalYear
+                                               AND gricd~FiscalYearPeriod   EQ account~FiscalYearPeriod
+                                               AND mg12~hkont               EQ account~GLAccount
+                                               AND ( ( gricd~IsReversal IS INITIAL AND gricd~DebitCreditCode EQ 'H' ) OR ( gricd~IsReversal EQ @abap_true AND gricd~DebitCreditCode  EQ 'S' ) )
+                                         )
+                            )
+                             INTO CORRESPONDING FIELDS OF TABLE @et_data.
 *
 *
-*            APPENDING CORRESPONDING FIELDS OF TABLE @et_data
+*
+    SELECT i_journalentryitem~CompanyCode AS bukrs ,
+           i_journalentryitem~FiscalYear AS gjahr ,
+           i_journalentryitem~AccountingDocument AS belnr ,
+           i_journalentryitem~LedgerGLLineItem AS docln ,
+           i_journalentryitem~LedgerFiscalYear AS ryear ,
+           i_journalentryitem~FiscalYearPeriod AS fiscyearper ,
+           i_journalentryitem~AmountInCompanyCodeCurrency AS hsl ,
+           i_journalentryitem~AmountInTransactionCurrency AS wsl ,
+           i_journalentryitem~DebitCreditCode AS drcrk ,
+           i_journalentryitem~ReversalReferenceDocument AS awref_rev ,
+           i_journalentryitem~ReversalReferenceDocumentCntxt AS aworg_rev ,
+           i_journalentryitem~ReferenceDocumentType AS awtyp ,
+           i_journalentryitem~ReferenceDocument AS awref ,
+           i_journalentryitem~ReferenceDocumentContext AS aworg ,
+           i_journalentryitem~IsReversal AS xreversing ,
+           i_journalentryitem~IsReversed AS xreversed ,
+           i_supplierinvoiceapi01~InvoicingParty AS lifnr ,
+           i_journalentryitem~GLAccount AS racct ,
+           i_glaccounttext~GLAccountLongName AS txt50 ,
+           i_journalentryitem~DocumentItemText AS sgtxt ,
+           i_businesspartner~FirstName AS name1 ,
+           i_businesspartner~LastName  AS name2 ,
+           i_businesspartner~OrganizationBPName1 AS name_org1 ,
+           i_businesspartner~OrganizationBPName2 AS name_org2 ,
+           i_journalentryitem~TransactionCurrency AS rwcur ,
+           i_journalentryitem~AssignmentReference AS zuonr ,
+           i_companycode~CompanyCodeName AS butxt ,
+           i_journalentry~DocumentReferenceID AS xblnr ,
+           i_journalentryitem~PostingDate AS budat ,
+           i_supplier~StreetName AS stras ,
+*           I_SUPPLIER~ as mcod3
+           i_supplier~Region AS regio ,
+           i_supplier~Country AS land1 ,
+           i_supplier~TaxNumber2 AS stcd2 ,
+           i_journalentryitem~FinancialAccountType AS koart
+           "
+           "
+           FROM i_journalentryitem
+           INNER JOIN i_companycode
+           ON i_companycode~CompanyCode EQ i_journalentryitem~CompanyCode
+           "
+           INNER JOIN i_supplierinvoiceapi01
+            ON i_supplierinvoiceapi01~SupplierInvoice EQ i_journalentryitem~ReferenceDocument
+           AND i_supplierinvoiceapi01~FiscalYear      EQ i_journalentryitem~ReferenceDocumentContext
+           "
+           INNER JOIN i_journalentry
+            ON i_journalentry~CompanyCode        EQ i_journalentryitem~CompanyCode
+           AND i_journalentry~AccountingDocument EQ i_journalentryitem~AccountingDocument
+           AND i_journalentry~FiscalYear         EQ i_journalentryitem~FiscalYear
+           "
+           LEFT OUTER JOIN i_glaccounttext
+            ON i_glaccounttext~Language        EQ @sy-langu
+           AND i_glaccounttext~ChartOfAccounts EQ i_journalentryitem~ChartOfAccounts
+           AND i_glaccounttext~GLAccount       EQ i_journalentryitem~GLAccount
+           "
+           LEFT OUTER JOIN i_businesspartner
+           ON i_businesspartner~BusinessPartner EQ i_journalentryitem~Supplier
+           "
+           LEFT OUTER JOIN i_supplier
+           ON i_supplier~Supplier           EQ i_supplierinvoiceapi01~InvoicingParty
+           "
+           WHERE i_journalentryitem~FiscalYear       EQ @p_gjahr
+             AND i_journalentryitem~CompanyCode      EQ @p_bukrs
+             AND i_journalentryitem~FiscalYearPeriod IN @lr_fiscyearper
+             AND ( ( i_journalentryitem~IsReversal   IS INITIAL AND i_journalentryitem~DebitCreditCode EQ 'H' ) OR ( i_journalentryitem~IsReversal EQ @abap_true AND i_journalentryitem~DebitCreditCode  EQ 'S' ) )
+             AND i_journalentryitem~ReferenceDocumentType EQ 'RMRP'
+             AND i_journalentryitem~SourceLedger          EQ '0L'
+             AND EXISTS ( "
+                          SELECT *
+                           FROM i_journalentryitem AS account
+                           "
+                           INNER JOIN ztax_t_mg AS mg1
+                           ON  mg1~bukrs  EQ account~CompanyCode
+                           AND mg1~hkont  EQ account~GLAccount
+                           "
+                           WHERE account~SourceLedger       EQ i_journalentryitem~SourceLedger
+                             AND account~CompanyCode        EQ i_journalentryitem~CompanyCode
+                             AND account~AccountingDocument EQ i_journalentryitem~AccountingDocument
+                             AND account~FiscalYear         EQ i_journalentryitem~FiscalYear
+                             AND account~FiscalYearPeriod   EQ i_journalentryitem~FiscalYearPeriod
+                             AND ( ( account~IsReversal IS INITIAL AND account~DebitCreditCode EQ 'H' ) OR ( account~IsReversal EQ @abap_true AND account~DebitCreditCode  EQ 'S' ) )
+                             AND EXISTS ( "
+                                          SELECT *
+                                            FROM i_journalentryitem AS gricd
+                                            "
+                                            INNER JOIN i_supplierinvoiceapi01
+                                             ON i_supplierinvoiceapi01~SupplierInvoice EQ gricd~ReferenceDocument
+                                            AND i_supplierinvoiceapi01~FiscalYear      EQ gricd~ReferenceDocumentContext
+                                            "
+                                            INNER JOIN i_suppliercompany
+                                             ON i_suppliercompany~CompanyCode EQ i_supplierinvoiceapi01~CompanyCode
+                                            AND i_suppliercompany~Supplier    EQ i_supplierinvoiceapi01~InvoicingParty
+                                            "
+                                           INNER JOIN ztax_t_mindk AS mindk
+                                             ON  mindk~bukrs  EQ i_supplierinvoiceapi01~CompanyCode
+                                             AND mindk~lifnr  EQ i_supplierinvoiceapi01~InvoicingParty
+
+                                            INNER JOIN ztax_t_mg AS mg12
+                                             ON  mg12~bukrs  EQ gricd~CompanyCode
+                                             AND mg12~mindk  EQ mindk~mindk
+                                             "
+                                             WHERE gricd~SourceLedger       EQ account~SourceLedger
+                                               AND gricd~CompanyCode        EQ account~CompanyCode
+                                               AND gricd~AccountingDocument EQ account~AccountingDocument
+                                               AND gricd~FiscalYear         EQ account~FiscalYear
+                                               AND gricd~FiscalYearPeriod   EQ account~FiscalYearPeriod
+                                               AND mg12~hkont               EQ account~GLAccount
+                                               AND ( ( gricd~IsReversal IS INITIAL AND gricd~DebitCreditCode EQ 'H' ) OR ( gricd~IsReversal EQ @abap_true AND gricd~DebitCreditCode  EQ 'S' ) )
+                                            )
+                            )
+                APPENDING TABLE @et_data.
 *    .
 *
 
@@ -334,37 +332,37 @@
                                                         gjahr
                                                         belnr.
 *
-*      SELECT rbukrs
-*             gjahr
-*             belnr
-*             docln
-*             ryear
-*             fiscyearper
-*             hsl
-*             wsl
-*             drcrk
-*             awref_rev
-*             aworg_rev
-*             awtyp
-*             awref
-*             aworg
-*             xreversing
-*             xreversed
-*             lifnr
-*             racct
-*             sgtxt
-*             rwcur
-*             zuonr
-*             budat
-*             koart
-*             INTO TABLE et_data_191
-*             FROM acdoca
-*             FOR ALL ENTRIES IN lt_data
-*             WHERE rldnr  EQ '0L'
-*               AND rbukrs EQ lt_data-bukrs
-*               AND gjahr  EQ lt_data-gjahr
-*               AND belnr  EQ lt_data-belnr
-*               AND racct  LIKE '191%'.
+      SELECT i_journalentryitem~CompanyCode AS bukrs ,
+             i_journalentryitem~FiscalYear AS gjahr ,
+             i_journalentryitem~AccountingDocument AS belnr ,
+             i_journalentryitem~LedgerGLLineItem AS docln ,
+             i_journalentryitem~LedgerFiscalYear AS ryear ,
+             i_journalentryitem~FiscalYearPeriod AS fiscyearper ,
+             i_journalentryitem~AmountInCompanyCodeCurrency AS hsl ,
+             i_journalentryitem~AmountInTransactionCurrency AS wsl ,
+             i_journalentryitem~DebitCreditCode AS drcrk ,
+             i_journalentryitem~ReversalReferenceDocument AS awref_rev ,
+             i_journalentryitem~ReversalReferenceDocumentCntxt AS aworg_rev ,
+             i_journalentryitem~ReferenceDocumentType AS awtyp ,
+             i_journalentryitem~ReferenceDocument AS awref ,
+             i_journalentryitem~ReferenceDocumentContext AS aworg ,
+             i_journalentryitem~IsReversal AS xreversing ,
+             i_journalentryitem~IsReversed AS xreversed ,
+             i_journalentryitem~Supplier AS lifnr ,
+             i_journalentryitem~GLAccount AS racct ,
+             i_journalentryitem~DocumentItemText AS sgtxt ,
+             i_journalentryitem~TransactionCurrency AS rwcur ,
+             i_journalentryitem~AssignmentReference AS zuonr ,
+             i_journalentryitem~PostingDate AS budat ,
+             i_journalentryitem~FinancialAccountType AS koart
+               FROM i_journalentryitem
+               FOR ALL ENTRIES IN @lt_data
+               WHERE SourceLedger  EQ '0L'
+                 AND CompanyCode   EQ @lt_data-bukrs
+                 AND FiscalYear    EQ @lt_data-gjahr
+                 AND AccountingDocument  EQ @lt_data-belnr
+                 AND GLAccount  LIKE '191%'
+                INTO TABLE @et_data_191.
 
     ENDIF.
 

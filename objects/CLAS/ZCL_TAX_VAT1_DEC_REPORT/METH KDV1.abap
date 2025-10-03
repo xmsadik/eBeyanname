@@ -94,6 +94,10 @@
     CLEAR me->ms_button_pushed.
     me->ms_button_pushed-kdv1 = abap_true.
 
+
+    fill_monat_range( ).
+    fill_det_kural_range( ).
+
     CLEAR mt_collect.
 *    CLEAR mt_detail.
 *    CLEAR mt_detail_alv.

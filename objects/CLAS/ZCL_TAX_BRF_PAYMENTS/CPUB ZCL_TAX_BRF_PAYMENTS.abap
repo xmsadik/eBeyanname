@@ -35,42 +35,41 @@ CLASS zcl_tax_brf_payments DEFINITION
 
 
     TYPES BEGIN OF mty_data.
-    TYPES:
-      bukrs       TYPE bukrs,          "Company Code
-      gjahr       TYPE gjahr,          "Fiscal Year
-      belnr       TYPE belnr_d,        "Accounting Document Number
-      docln       TYPE n LENGTH 10,         "Document Line Number (10 characters)
-      ryear       TYPE gjahr,          "Reference Year
-      fiscyearper TYPE n LENGTH 6,          "Fiscal Year Period (6 characters)
-      hsl         TYPE decfloat34,          "Local Currency Amount
-      wsl         TYPE decfloat34,          "Transaction Currency Amount
-      drcrk       TYPE c LENGTH 1,          "Debit/Credit Indicator
-      awref_rev   TYPE c LENGTH 12,         "Reversal Reference
-      aworg_rev   TYPE c LENGTH 4,          "Reversal Organization Key
-      awtyp       TYPE c LENGTH 4,          "Document Type
-      awref       TYPE c LENGTH 12,         "Document Reference
-      aworg       TYPE c LENGTH 4,          "Organization Key
-      xreversing  TYPE abap_bool,      "Reversing Indicator
-      xreversed   TYPE abap_bool,      "Reversed Indicator
-      lifnr       TYPE lifnr,          "Vendor Account Number
-      racct       TYPE c LENGTH 10,           "General Ledger Account
-      txt50       TYPE c LENGTH 50,         "Description (50 characters)
-      sgtxt       TYPE sgtxt,          "Document Item Text
-      name1       TYPE name1_gp,          "Name 1
-      name2       TYPE name2_gp,          "Name 2
-      name_org1   TYPE c LENGTH 40,         "Organization Name 1 (40 characters)
-      name_org2   TYPE c LENGTH 40,         "Organization Name 2 (40 characters)
-      rwcur       TYPE waers,          "Currency Key
-      zuonr       TYPE c LENGTH 18,          "Assignment Number
-      butxt       TYPE c LENGTH 25,         "Company Name (25 characters)
-      xblnr       TYPE xblnr,          "Reference Document Number
-      budat       TYPE datum,           "Posting Date
-      stras       TYPE c LENGTH 60,         "Street Address
-      mcod3       TYPE c LENGTH 25,         "Search Term
-      regio       TYPE regio,          "Region (State, Province, County)
-      land1       TYPE land1,          "Country Key
-      stcd2       TYPE c LENGTH 20,         "Tax Number 2
-      koart       TYPE koart.          "Account Type
+    TYPES bukrs       TYPE i_glaccountlineitemrawdata-CompanyCode.
+    TYPES gjahr       TYPE i_glaccountlineitemrawdata-FiscalYear.
+    TYPES belnr       TYPE i_glaccountlineitemrawdata-AccountingDocument.
+    TYPES docln       TYPE i_glaccountlineitemrawdata-LedgerGLLineItem.
+    TYPES ryear       TYPE i_glaccountlineitemrawdata-LedgerFiscalYear.
+    TYPES fiscyearper TYPE i_glaccountlineitemrawdata-FiscalYearPeriod.
+    TYPES hsl         TYPE i_glaccountlineitemrawdata-AmountInCompanyCodeCurrency.
+    TYPES wsl         TYPE i_glaccountlineitemrawdata-AmountInTransactionCurrency.
+    TYPES drcrk       TYPE i_glaccountlineitemrawdata-DebitCreditCode.
+    TYPES awref_rev   TYPE i_glaccountlineitemrawdata-ReversalReferenceDocument.
+    TYPES aworg_rev   TYPE i_glaccountlineitemrawdata-ReversalReferenceDocumentCntxt.
+    TYPES awtyp       TYPE i_glaccountlineitemrawdata-ReferenceDocumentType.
+    TYPES awref       TYPE i_glaccountlineitemrawdata-ReferenceDocument.
+    TYPES aworg       TYPE i_glaccountlineitemrawdata-ReferenceDocumentContext.
+    TYPES xreversing  TYPE i_glaccountlineitemrawdata-IsReversal.
+    TYPES xreversed   TYPE i_glaccountlineitemrawdata-IsReversed.
+    TYPES lifnr       TYPE i_glaccountlineitemrawdata-Supplier.
+    TYPES racct       TYPE i_glaccountlineitemrawdata-GLAccount.
+    TYPES txt50       TYPE i_glaccounttext-GLAccountLongName.
+    TYPES sgtxt       TYPE i_glaccountlineitemrawdata-DocumentItemText.
+    TYPES name1       TYPE i_supplier-OrganizationBPName1.
+    TYPES name2       TYPE i_supplier-OrganizationBPName2.
+    TYPES name_org1   TYPE i_businesspartner-OrganizationBPName1.
+    TYPES name_org2   TYPE i_businesspartner-OrganizationBPName2.
+    TYPES rwcur       TYPE i_glaccountlineitemrawdata-TransactionCurrency.
+    TYPES zuonr       TYPE i_glaccountlineitemrawdata-AssignmentReference.
+    TYPES butxt       TYPE i_companycode-CompanyCodeName.
+    TYPES xblnr       TYPE i_journalentry-DocumentReferenceID.
+    TYPES budat       TYPE i_glaccountlineitemrawdata-PostingDate.
+    TYPES stras       TYPE i_supplier-StreetName.
+*    TYPES mcod3       TYPE c LENGTH 25."I_SUPPLIER-mcod3.
+    TYPES regio       TYPE i_supplier-Region.
+    TYPES land1       TYPE i_supplier-Country.
+    TYPES stcd2       TYPE i_supplier-TaxNumber2.
+    TYPES koart       TYPE i_glaccountlineitemrawdata-FinancialAccountType.
     TYPES END OF mty_data.
 
     TYPES BEGIN OF mty_ode_smpl.
@@ -93,7 +92,7 @@ CLASS zcl_tax_brf_payments DEFINITION
     TYPES sosg   TYPE ztax_ddl_i_brf_payments-sosg.
 *    TYPES row_color TYPE /itetr/tax_s_muh_ode-row_color.
     TYPES END OF mty_ode_smpl.
-
+  DATA mt_ode         TYPE mtty_ode.
 
     TYPES BEGIN OF mty_data_191.
     TYPES rbukrs      TYPE bukrs.
@@ -102,8 +101,8 @@ CLASS zcl_tax_brf_payments DEFINITION
     TYPES docln       TYPE c LENGTH 6.
     TYPES ryear       TYPE n LENGTH 4.
     TYPES fiscyearper TYPE n LENGTH 7.
-    TYPES hsl         TYPE p LENGTH 16 DECIMALS 2.
-    TYPES wsl         TYPE p LENGTH 16 DECIMALS 2.
+    TYPES hsl         TYPE i_glaccountlineitemrawdata-AmountInCompanyCodeCurrency. "hsl.
+    TYPES wsl         TYPE i_glaccountlineitemrawdata-AmountInTransactionCurrency. "wsl.
     TYPES drcrk       TYPE c LENGTH 1.         "Debit/Credit Indicator
     TYPES awref_rev   TYPE c LENGTH 12.        "Reversal Reference
     TYPES aworg_rev   TYPE c LENGTH 4.         "Reversal Organization Key
@@ -137,3 +136,26 @@ CLASS zcl_tax_brf_payments DEFINITION
     CONSTANTS low    TYPE c LENGTH 3 VALUE 'LOW'.
     CONSTANTS high   TYPE c LENGTH 4 VALUE 'HIGH'.
     CONSTANTS END OF mc_range_att.
+
+    METHODS:
+
+      get_payments IMPORTING iv_bukrs  TYPE bukrs OPTIONAL
+                             iv_gjahr  TYPE gjahr OPTIONAL
+                             iv_monat  TYPE monat OPTIONAL
+                             iv_donemb TYPE ztax_e_donemb OPTIONAL
+                             iv_beyant TYPE ztax_e_beyant OPTIONAL
+                   EXPORTING et_ode    TYPE mtty_ode,
+
+      get_item_data EXPORTING et_mg       TYPE mtty_mg
+                              et_data     TYPE mtty_data
+                              et_data_191 TYPE mtty_data_191
+                              et_lfb1     TYPE mtty_lfb1,
+
+      fill_period IMPORTING ir_monat       TYPE ANY TABLE
+                  EXPORTING er_fiscyearper TYPE ANY TABLE,
+
+      fill_range IMPORTING iv_sign   TYPE string  DEFAULT 'I'
+                           iv_option TYPE string DEFAULT 'EQ'
+                           iv_low    TYPE clike DEFAULT space
+                           iv_high   TYPE clike DEFAULT space
+                 EXPORTING et_range  TYPE STANDARD TABLE.

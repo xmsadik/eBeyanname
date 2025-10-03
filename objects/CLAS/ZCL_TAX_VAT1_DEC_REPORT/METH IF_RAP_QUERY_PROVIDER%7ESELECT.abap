@@ -38,8 +38,7 @@
         p_donemb = 01."Sadece aylık kullanıldığı için
         p_beyant = 02.
 
-        fill_monat_range( ).
-        fill_det_kural_range( ).
+
 *        kdv1( ).
 
         CALL METHOD kdv1

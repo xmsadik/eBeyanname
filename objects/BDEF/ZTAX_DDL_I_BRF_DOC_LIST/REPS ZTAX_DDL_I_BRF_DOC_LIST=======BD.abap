@@ -5,12 +5,14 @@ define behavior for ZTAX_DDL_I_BRF_DOC_LIST //alias <alias_name>
 //late numbering
 lock master
 authorization master ( instance )
+
 //etag master <field_name>
 {
-//  create;
-//  update;
-//  delete;
+  //  create;
+  //  update;
+  //  delete;
   field ( readonly ) bukrs, gjahr, monat, lineitem;
 
-     action ( features : instance ) CreateXml result [1] $self;
+
+   action ( features : instance ) CreateXml result [1] $self;
 }
