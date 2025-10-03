@@ -46,6 +46,21 @@
 *    CLEAR mv_mod.
 *    ms_button_pushed-ode = abap_true.
 
+
+    IF iv_bukrs IS NOT INITIAL.
+      p_bukrs = iv_bukrs.
+    ENDIF.
+
+    IF iv_gjahr IS NOT INITIAL.
+      p_gjahr = iv_gjahr.
+    ENDIF.
+    IF iv_monat IS NOT INITIAL.
+      p_monat = iv_monat.
+    ENDIF.
+    IF iv_donemb IS NOT INITIAL.
+      P_donemb = iv_donemb.
+    ENDIF.
+
     get_item_data( IMPORTING et_mg       = lt_mg
                              et_data     = lt_data
                              et_data_191 = lt_data_191
@@ -347,8 +362,8 @@
              WHERE Supplier EQ @lt_mmt_lifnr-lifnr
                INTO TABLE @lt_lfa1.
 
-      SELECT supplier as lifnr,
-             companycode as bukrs
+      SELECT supplier AS lifnr,
+             companycode AS bukrs
 *             gricd
              FROM i_suppliercompany
              FOR ALL ENTRIES IN @lt_mmt_lifnr

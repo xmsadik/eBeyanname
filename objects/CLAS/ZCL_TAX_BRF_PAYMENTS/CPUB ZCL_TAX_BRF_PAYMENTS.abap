@@ -92,7 +92,7 @@ CLASS zcl_tax_brf_payments DEFINITION
     TYPES sosg   TYPE ztax_ddl_i_brf_payments-sosg.
 *    TYPES row_color TYPE /itetr/tax_s_muh_ode-row_color.
     TYPES END OF mty_ode_smpl.
-  DATA mt_ode         TYPE mtty_ode.
+    DATA mt_ode         TYPE mtty_ode.
 
     TYPES BEGIN OF mty_data_191.
     TYPES rbukrs      TYPE bukrs.
