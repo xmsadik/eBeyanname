@@ -1,7 +1,12 @@
   PROTECTED SECTION.
 
     METHODS:
-      get_documents,
+      get_documents IMPORTING iv_bukrs   TYPE bukrs OPTIONAL
+                              iv_gjahr   TYPE gjahr OPTIONAL
+                              iv_monat   TYPE monat OPTIONAL
+                              iv_donemb  TYPE ztax_e_donemb OPTIONAL
+                              iv_beyant  TYPE ztax_e_beyant OPTIONAL
+                    EXPORTING et_collect TYPE mtty_collect,
       get_item_data EXPORTING et_mg       TYPE mtty_mg
                               et_data     TYPE mtty_data
                               et_data_191 TYPE mtty_data_191

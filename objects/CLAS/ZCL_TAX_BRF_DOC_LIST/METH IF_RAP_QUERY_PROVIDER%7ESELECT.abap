@@ -10,6 +10,9 @@
               lt_donemb_range TYPE RANGE OF ztax_e_donemb,
               lt_output       TYPE TABLE OF ztax_ddl_i_vat2_kes_report,
               ls_output       TYPE ztax_ddl_i_vat2_kes_report.
+
+        DATA : lt_collect TYPE TABLE OF ztax_ddl_i_brf_doc_list.
+
         DATA(lt_paging) = io_request->get_paging( ).
 *
         LOOP AT lt_filter INTO DATA(ls_filter).
@@ -31,7 +34,22 @@
 *        p_donemb = VALUE #( lt_donemb_range[ 1 ]-low OPTIONAL ).
         p_donemb = 01."Sadece aylık kullanıldığı için
 
-        get_documents(  ).
+
+        CALL METHOD get_documents
+          EXPORTING
+            iv_bukrs   = p_bukrs
+            iv_gjahr   = p_gjahr
+            iv_monat   = p_monat
+            iv_donemb  = p_donemb
+          IMPORTING
+            et_collect = lt_collect.
+
+
+        IF io_request->is_total_numb_of_rec_requested(  ).
+          io_response->set_total_number_of_records( iv_total_number_of_records = lines( lt_collect ) ).
+        ENDIF.
+        io_response->set_data( it_data = lt_collect ).
+
       CATCH cx_rap_query_filter_no_range.
     ENDTRY.
   ENDMETHOD.

@@ -134,3 +134,5 @@ CLASS zcl_tax_brf_doc_list DEFINITION
     CONSTANTS low    TYPE c LENGTH 4 VALUE 'LOW'.
     CONSTANTS high   TYPE c LENGTH 4 VALUE 'HIGH'.
     CONSTANTS END OF mc_range_att.
+
+    TYPES mtty_collect TYPE TABLE OF ztax_ddl_i_brf_doc_list..

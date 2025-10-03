@@ -34,6 +34,22 @@
     CLEAR mt_detail.
     CLEAR me->ms_button_pushed.
 
+    IF iv_bukrs IS NOT INITIAL.
+      p_bukrs = iv_bukrs.
+    ENDIF.
+
+    IF iv_gjahr IS NOT INITIAL.
+      p_gjahr = iv_gjahr.
+    ENDIF.
+
+    IF iv_monat IS NOT INITIAL.
+      p_monat = iv_monat.
+    ENDIF.
+
+    IF iv_donemb IS NOT INITIAL.
+      p_donemb = iv_donemb.
+    ENDIF.
+
     me->ms_button_pushed-bel = abap_true.
 
     me->get_item_data( IMPORTING et_mg       = lt_mg
@@ -294,5 +310,6 @@
       <fs_detail>-kst  = abs( <fs_detail>-kst  ).
     ENDLOOP.
 
+    et_collect = mt_collect.
 
   ENDMETHOD.
