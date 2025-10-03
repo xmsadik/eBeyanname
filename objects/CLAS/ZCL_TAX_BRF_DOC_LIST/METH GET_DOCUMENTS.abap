@@ -310,6 +310,11 @@
       <fs_detail>-kst  = abs( <fs_detail>-kst  ).
     ENDLOOP.
 
-    et_collect = mt_collect.
+
+    LOOP AT mt_collect INTO DATA(ls_col).
+      APPEND INITIAL LINE TO et_collect ASSIGNING FIELD-SYMBOL(<fs_col>).
+      MOVE-CORRESPONDING ls_col TO <fs_col>.
+      <fs_col>-lineitem = <fs_col>-lineitem + 1.
+    ENDLOOP.
 
   ENDMETHOD.
