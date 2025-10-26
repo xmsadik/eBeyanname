@@ -314,6 +314,12 @@
           APPEND <fs_line> TO <fs_out_tev>.
         ENDLOOP.
 
+        lt_output =  <fs_out_tev> .
+
+        IF io_request->is_total_numb_of_rec_requested(  ).
+          io_response->set_total_number_of_records( iv_total_number_of_records = lines( lt_output ) ).
+        ENDIF.
+        io_response->set_data( it_data = lt_output ).
 
       CATCH cx_rap_query_filter_no_range.
     ENDTRY.

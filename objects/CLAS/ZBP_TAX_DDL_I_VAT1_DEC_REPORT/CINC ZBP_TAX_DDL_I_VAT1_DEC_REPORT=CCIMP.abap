@@ -7,7 +7,7 @@ CLASS lhc_ZTAX_DDL_I_VAT1_DEC_REPORT DEFINITION INHERITING FROM cl_abap_behavior
     TYPES acklm1    TYPE ztax_t_k2k1-acklm.
     TYPES kiril2    TYPE ztax_t_kdv2g-kiril2.
     TYPES acklm2    TYPE ztax_t_k2k2-acklm.
-    TYPES KIRIL3    TYPE ztax_t_k2k2-acklm.
+    TYPES kiril3    TYPE ztax_t_k2k2-acklm.
     TYPES matrah    TYPE ztax_e_matrah.
     TYPES oran      TYPE ztax_e_vergi_oran.
     TYPES tevkifat  TYPE ztax_e_tevkifat.
@@ -71,7 +71,7 @@ CLASS lhc_ZTAX_DDL_I_VAT1_DEC_REPORT IMPLEMENTATION.
 
   METHOD CreateXml.
 
-"""YiğitcanÖzdemir"""
+    """YiğitcanÖzdemir"""
 
     DATA: lo_vat1_report TYPE REF TO zcl_tax_vat1_dec_report.
     CREATE OBJECT lo_vat1_report.
@@ -100,7 +100,7 @@ CLASS lhc_ZTAX_DDL_I_VAT1_DEC_REPORT IMPLEMENTATION.
           er_monat   = mr_monat.
 
     ENDIF.
-   """YiğitcanÖzdemir"""
+    """YiğitcanÖzdemir"""
 
     TYPES BEGIN OF lty_bxmls.
     TYPES kiril1   TYPE ztax_t_k1k1s-kiril1.
@@ -236,48 +236,48 @@ CLASS lhc_ZTAX_DDL_I_VAT1_DEC_REPORT IMPLEMENTATION.
 
     CASE p_donemb.
       WHEN '01'.
-        lv_donem_txt = TEXT-d01.
+        lv_donem_txt = 'aylik'.
       WHEN '02'.
-        lv_donem_txt = TEXT-d02.
+        lv_donem_txt = '3 Aylık'.
     ENDCASE.
-      SELECT SINGLE
-             bukrs,
-             vdkod,
-             mvkno,
-             mtckn,
-             msoyad,
-             mad,
-             memail,
-             malkod,
-             mtelno,
-             hsvvkn,
-             hsv,
-             hsvtckn,
-             hsvemail,
-             hsvakod,
-             hsvtelno,
-             dvkno,
-             dtckn,
-             dsoyad,
-             dad,
-             demail,
-             dalkod,
-             dtelno
+    SELECT SINGLE
+           bukrs,
+           vdkod,
+           mvkno,
+           mtckn,
+           msoyad,
+           mad,
+           memail,
+           malkod,
+           mtelno,
+           hsvvkn,
+           hsv,
+           hsvtckn,
+           hsvemail,
+           hsvakod,
+           hsvtelno,
+           dvkno,
+           dtckn,
+           dsoyad,
+           dad,
+           demail,
+           dalkod,
+           dtelno
 
-             FROM ztax_t_beyg
-             WHERE bukrs EQ @p_bukrs
-             INTO @ls_beyg.
+           FROM ztax_t_beyg
+           WHERE bukrs EQ @p_bukrs
+           INTO @ls_beyg.
 
-      SELECT SINGLE beyanv
-             FROM ztax_t_beyv
-             WHERE beyant EQ '01'
-             INTO @lv_beyanv.
+    SELECT SINGLE beyanv
+           FROM ztax_t_beyv
+           WHERE beyant EQ '01'
+           INTO @lv_beyanv.
 
-      SELECT SINGLE dyolu
-             FROM ztax_t_beydy
-             WHERE bukrs EQ @p_bukrs
-               AND beyant EQ '01'
-               INTO @lv_dyolu.
+    SELECT SINGLE dyolu
+           FROM ztax_t_beydy
+           WHERE bukrs EQ @p_bukrs
+             AND beyant EQ '01'
+             INTO @lv_dyolu.
 
 
     SELECT ztax_t_k1k1s~kiril1,
@@ -389,20 +389,22 @@ CLASS lhc_ZTAX_DDL_I_VAT1_DEC_REPORT IMPLEMENTATION.
                 INTO lv_yil.
 
     CONCATENATE '<ay>'
-                lv_monat
+                p_monat
                 '</ay>'
-*                INTO lv_ay.
-                 into p_monat.
+                INTO lv_ay.
+*                 INTO p_monat.
 
     CONCATENATE '<vergiNo>'
                  ls_beyg-mvkno
                  '</vergiNo>'
                 INTO lv_mvergino.
 
-    CONCATENATE '<tcKimlikNo>'
-                ls_beyg-mtckn
-                '</tcKimlikNo>'
-                INTO lv_mtckimlikno.
+    IF ls_beyg-mtckn IS NOT INITIAL.
+      CONCATENATE '<tcKimlikNo>'
+                  ls_beyg-mtckn
+                  '</tcKimlikNo>'
+                  INTO lv_mtckimlikno.
+    ENDIF.
 
     CONCATENATE '<soyadi>'
                 ls_beyg-msoyad
@@ -431,7 +433,13 @@ CLASS lhc_ZTAX_DDL_I_VAT1_DEC_REPORT IMPLEMENTATION.
 
 *    CLEAR ls_hsv_val.
 *    READ TABLE lt_hsv_val INTO ls_hsv_val WITH KEY domvalue_l = ls_beyg-hsv.
+    DATA : lv_sifat TYPE string.
 
+    IF ls_beyg-hsv EQ 1.
+      lv_sifat = 'Temsilci'.
+    ELSEIF ls_beyg-hsv  EQ 2.
+      lv_sifat = 'Kendisi'.
+    ENDIF.
     CONCATENATE '<hsv sifat="'
 *                ls_hsv_val-ddtext
                 '">'
@@ -477,10 +485,12 @@ CLASS lhc_ZTAX_DDL_I_VAT1_DEC_REPORT IMPLEMENTATION.
                 '</vergiNo>'
                 INTO lv_dvergino.
 
-    CONCATENATE '<tcKimlikNo>'
-                ls_beyg-dtckn
-                '</tcKimlikNo>'
-                INTO lv_dtckimlikno.
+    IF ls_beyg-dtckn IS NOT INITIAL.
+      CONCATENATE '<tcKimlikNo>'
+                  ls_beyg-dtckn
+                  '</tcKimlikNo>'
+                  INTO lv_dtckimlikno.
+    ENDIF.
 
     CONCATENATE '<soyadi>'
                 ls_beyg-dsoyad
@@ -641,7 +651,7 @@ CLASS lhc_ZTAX_DDL_I_VAT1_DEC_REPORT IMPLEMENTATION.
                     CONTINUE.
                   ENDIF.
                 ENDIF.
-FIELD-SYMBOLS <fs_out_tev> TYPE STANDARD TABLE.        "YiğitcanÖzdemir
+                FIELD-SYMBOLS <fs_out_tev> TYPE STANDARD TABLE.        "YiğitcanÖzdemir
                 READ TABLE lt_bxmls_desc INTO ls_bxmls_desc WITH KEY kiril1 = ls_kiril1-kiril1.
                 IF sy-subrc IS INITIAL.
                   CLEAR lv_xml.

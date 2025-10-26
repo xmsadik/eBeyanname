@@ -13,5 +13,5 @@ authorization master ( instance )
   field ( readonly ) bukrs, gjahr, monat, lineitem;
 
 
-   action ( features : instance ) CreateXml result [1] $self;
+   static action CreateXml result [1] $self;
 }
