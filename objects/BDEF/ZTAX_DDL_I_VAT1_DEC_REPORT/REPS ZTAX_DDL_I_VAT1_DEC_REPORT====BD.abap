@@ -5,6 +5,7 @@ define behavior for ZTAX_DDL_I_VAT1_DEC_REPORT //alias <alias_name>
 //late numbering
 lock master
 authorization master ( instance )
+
 //etag master <field_name>
 {
 //  create;
@@ -13,5 +14,5 @@ authorization master ( instance )
   field ( readonly ) bukrs, gjahr, monat, lineitem;
 
 
-   static action CreateXml result [1] $self;
+   action CreateXml result [1] $self;
 }

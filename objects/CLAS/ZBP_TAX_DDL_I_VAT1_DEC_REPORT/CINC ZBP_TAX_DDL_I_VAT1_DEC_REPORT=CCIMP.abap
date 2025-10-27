@@ -37,9 +37,9 @@ CLASS lhc_ZTAX_DDL_I_VAT1_DEC_REPORT DEFINITION INHERITING FROM cl_abap_behavior
     DATA mr_monat TYPE RANGE OF monat.
 
   PRIVATE SECTION.
-
-    METHODS get_instance_features FOR INSTANCE FEATURES
-      IMPORTING keys REQUEST requested_features FOR ztax_ddl_i_vat1_dec_report RESULT result.
+*
+*    METHODS get_instance_features FOR INSTANCE FEATURES
+*      IMPORTING keys REQUEST requested_features FOR ztax_ddl_i_vat1_dec_report RESULT result.
 
     METHODS get_instance_authorizations FOR INSTANCE AUTHORIZATION
       IMPORTING keys REQUEST requested_authorizations FOR ztax_ddl_i_vat1_dec_report RESULT result.
@@ -57,8 +57,8 @@ ENDCLASS.
 
 CLASS lhc_ZTAX_DDL_I_VAT1_DEC_REPORT IMPLEMENTATION.
 
-  METHOD get_instance_features.
-  ENDMETHOD.
+*  METHOD get_instance_features.
+*  ENDMETHOD.
 
   METHOD get_instance_authorizations.
   ENDMETHOD.
@@ -81,7 +81,6 @@ CLASS lhc_ZTAX_DDL_I_VAT1_DEC_REPORT IMPLEMENTATION.
     READ TABLE lt_keys INTO DATA(ls_keys) INDEX 1.
     IF sy-subrc EQ 0.
 
-*
       DATA(p_bukrs) = ls_keys-bukrs.
       DATA(p_gjahr) = ls_keys-gjahr.
       DATA(p_monat) = ls_keys-monat.
