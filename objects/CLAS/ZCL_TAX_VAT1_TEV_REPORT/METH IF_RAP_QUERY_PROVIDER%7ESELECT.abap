@@ -1,6 +1,6 @@
   METHOD if_rap_query_provider~select.
 
-    FIELD-SYMBOLS <fs_out_tev>   TYPE STANDARD TABLE.
+*    FIELD-SYMBOLS <fs_out_tev>   TYPE STANDARD TABLE.
 *    FIELD-SYMBOLS <fs_line>      TYPE any.
     FIELD-SYMBOLS <fs_value>     TYPE any.
     FIELD-SYMBOLS <fs_value_dyn> TYPE any.
@@ -66,14 +66,19 @@
 
 *DATA lt_out TYPE STANDARD TABLE OF ty_output_line.
 *DATA ls_out TYPE ty_output_line.
+        FIELD-SYMBOLS: <fs_line>    TYPE ty_output_line,
+                       <fs_out_tev> TYPE STANDARD TABLE.  " SAP Cloud uyumlu
 
-        FIELD-SYMBOLS : <fs_line> TYPE  ty_output_line.
+        DATA lt_temp TYPE STANDARD TABLE OF ty_output_line WITH EMPTY KEY.
+
+        ASSIGN lt_temp TO <fs_out_tev>.
+
         DATA(lo_data_line) = NEW ty_output_line( ).
         ASSIGN lo_data_line->* TO <fs_line>.
 
-        DATA(lo_data) = NEW ty_output_line( ).   " bir satır örnek için
-        DATA lt_temp TYPE STANDARD TABLE OF ty_output_line.
-        ASSIGN lt_temp TO <fs_out_tev>.          " Artık <fs_out_tev> tabloya bağlandı
+*        DATA(lo_data) = NEW ty_output_line( ).   " bir satır örnek için
+*        DATA lt_temp TYPE STANDARD TABLE OF ty_output_line.
+*        ASSIGN lt_temp TO <fs_out_tev>.          " Artık <fs_out_tev> tabloya bağlandı
 
         CLEAR ls_read_tab.
         ls_read_tab-bset = abap_true.
