@@ -139,7 +139,7 @@ FIELD-SYMBOLS : <fs_line> type  ty_output_line.
               INTO @ls_tax_voran.
 
           CLEAR ls_tevkifat.
-          CLEAR <fs_line>.
+*          CLEAR <fs_line>.
           CLEAR ls_bkpf.
           CLEAR lt_split.
           CLEAR ls_split.
