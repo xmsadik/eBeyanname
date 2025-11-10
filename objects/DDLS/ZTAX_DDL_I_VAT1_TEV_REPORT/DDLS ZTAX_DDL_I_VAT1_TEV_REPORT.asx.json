@@ -9,10 +9,10 @@
     "AS4USER":"SAP_CUSTOMER",
     "AS4DATE":"0000-00-00",
     "AS4TIME":"00:00:00",
-    "SOURCE":"@EndUserText.label: 'KDV1 - Tevkifatlı İşlemler Raporu'\r\n@ObjectModel.query.implementedBy:'ABAP:ZCL_TAX_VAT1_TEV_REPORT'\r\n@UI:{\r\nheaderInfo:{\r\n                typeNamePlural: 'KDV1 - Tevkifatlı İşlemler Raporu',\r\n                typeName: 'KDV1 - Tevkifatlı İşlemler Raporu',\r\n                title:{ type: #STANDARD, label: 'KDV1 - Tevkifatlı İşlemler Raporu', value: 'monat' }\r\n           }\r\n}\r\n\r\ndefine root custom entity ZTAX_DDL_I_VAT1_TEV_REPORT\r\n{\r\n    \r\n      @UI      : { lineItem:       [ { position: 1, importance: #HIGH },\r\n                 { type: #FOR_ACTION, dataAction: 'AddRecord', label: 'Ekle' },\r\n                 { type: #FOR_ACTION, dataAction: 'DeleteRecord', label: 'Sil' },\r\n                 { type: #FOR_ACTION, dataAction: 'UpdateRecord', label: 'Düzenle' },\r\n                 { type: #FOR_ACTION, dataAction: 'CreateXML', label: 'XML Oluştur' } ],\r\n                 selectionField: [ { position: 1 } ] }\r\n\r\n\r\n      @Consumption.valueHelpDefinition: [ { entity: { name: 'I_CompanyCodeVH', element: 'CompanyCode' }}]\r\n  key bukrs    : bukrs;\r\n      @UI      : {\r\n      lineItem :       [ { position: 2 } ],\r\n      selectionField:  [ { position: 2 } ] }\r\n      gjahr    : gjahr;\r\n      @UI      :\r\n                 { lineItem:       [ { position: 3 } ],\r\n      selectionField: [ { position: 3 } ] }\r\n      //       @UI.hidden: true\r\n      donemb   : ztax_e_donemb;\r\n      @UI      : { lineItem:       [ { position: 4 } ],\r\n      selectionField: [ { position: 4 } ] }\r\n      monat    : monat;\r\n      @UI      : { lineItem:       [ { position: 5 } ] }\r\n      BUTXT    : butxt;\r\n      @UI      : { lineItem:       [ { position: 6 } ] }\r\n      KIRIL1   : ztax_e_kiril1;\r\n      @UI      : { lineItem:       [ { position: 7 } ] }\r\n      ACKLM1   : ztax_e_acklm;\r\n      @UI      : { lineItem:       [ { position: 8 } ] }\r\n      KIRIL2   : ztax_e_kiril2;\r\n      @UI      : { lineItem:       [ { position: 9 } ] }\r\n      ACKLM2   : ztax_e_acklm;\r\n      @UI      : { lineItem:       [ { position: 10 } ] }\r\n      BELNR    : belnr_d;\r\n      @UI      : { lineItem:       [ { position: 11 } ] }\r\n      BUZEI    : abap.numc(6);\r\n      @UI      : { lineItem:       [ { position: 12 } ] }\r\n      MWSKZ    : abap.char(2);\r\n      @UI      : { lineItem:       [ { position: 13 } ] }\r\n      KSCHL    : kschl;\r\n      @UI      : { lineItem:       [ { position: 14 } ] }\r\n      HKONT    : hkont;\r\n      @UI      : { lineItem:       [ { position: 15 } ] }\r\n      @Semantics.amount.currencyCode: 'currency'\r\n      MATRAH   : abap.curr(15,2);\r\n      @UI      : { lineItem:       [ { position: 16 } ] }\r\n      @Semantics.amount.currencyCode: 'currency'\r\n      VERGI    : abap.curr(15,2);\r\n      @UI      : { lineItem:       [ { position: 17 } ] }\r\n      @Semantics.amount.currencyCode: 'currency'\r\n      TEVKT    : abap.curr(15,2);\r\n      @UI      : { lineItem:       [ { position: 18 } ] }\r\n      SHKZG    : shkzg;\r\n      @UI      : { lineItem:       [ { position: 19 } ] }\r\n      ZUONR    : dzuonr;\r\n      currency : waers;\r\n}\r\n/*+[internal] {\n\"BASEINFO\":\n{\n\"FROM\":\n[],\n\"ASSOCIATED\":\n[],\n\"BASE\":\n[],\n\"ANNO_REF\":\n[],\n\"SCALAR_FUNCTION\":\n[],\n\"VERSION\":0,\n\"ANNOREF_EVALUATION_ERROR\":\"\"\n}\n}*/",
+    "SOURCE":"@EndUserText.label: 'KDV1 - Tevkifatlı İşlemler Raporu'\r\n@ObjectModel.query.implementedBy: 'ABAP:ZCL_TAX_VAT1_TEV_REPORT'\r\n@UI: {\r\n    headerInfo: {\r\n        typeNamePlural: 'KDV1 - Tevkifatlı İşlemler Raporu',\r\n        typeName: 'KDV1 - Tevkifatlı İşlemler Raporu',\r\n        title: { type: #STANDARD, label: 'KDV1 - Tevkifatlı İşlemler Raporu', value: 'monat' }\r\n    }\r\n}\r\ndefine root custom entity ZTAX_DDL_I_VAT1_TEV_REPORT\r\n{\r\n\r\n      @UI       : {\r\n          lineItem: [\r\n              { position: 1, importance: #HIGH },\r\n              { type: #FOR_ACTION, dataAction: 'AddRecord', label: 'Ekle' },\r\n              { type: #FOR_ACTION, dataAction: 'DeleteRecord', label: 'Sil' },\r\n              { type: #FOR_ACTION, dataAction: 'UpdateRecord', label: 'Düzenle' },\r\n              { type: #FOR_ACTION, dataAction: 'CreateXML', label: 'XML Oluştur' }\r\n          ],\r\n          selectionField: [ { position: 1 } ]\r\n      }\r\n      @Consumption.valueHelpDefinition: [ { entity: { name: 'I_CompanyCodeVH', element: 'CompanyCode' } } ]\r\n  key bukrs     : bukrs;\r\n\r\n      @UI       : {\r\n          lineItem: [ { position: 2 } ],\r\n          selectionField: [ { position: 2 } ]\r\n      }\r\n      gjahr     : gjahr;\r\n\r\n      @UI       : {\r\n          lineItem: [ { position: 3 } ],\r\n          selectionField: [ { position: 3 } ]\r\n      }\r\n      donemb    : ztax_e_donemb;\r\n\r\n      @UI       : {\r\n          lineItem: [ { position: 4 } ],\r\n          selectionField: [ { position: 4 } ]\r\n      }\r\n      monat     : monat;\r\n\r\n      @UI       : { lineItem: [ { position: 5 } ] }\r\n      currency  : waers;\r\n      @UI       : { lineItem: [ { position: 6 } ] }\r\n      belnr     : belnr_d;\r\n\r\n      @UI       : { lineItem: [ { position: 7 } ] }\r\n      bldat     : bldat;\r\n\r\n      @UI       : { lineItem: [ { position: 8 } ] }\r\n      serino    : abap.string;\r\n\r\n      @UI       : { lineItem: [ { position: 9 } ] }\r\n      sirano    : abap.string;\r\n\r\n      @UI       : { lineItem: [ { position: 10 } ] }\r\n      stcd2     : abap.string;\r\n\r\n      @UI       : { lineItem: [ { position: 11 } ] }\r\n      name1     : abap.string;\r\n\r\n      @UI       : { lineItem: [ { position: 12 } ] }\r\n      name2     : abap.string;\r\n\r\n      @UI       : { lineItem: [ { position: 13 } ] }\r\n      @Semantics.amount.currencyCode: 'currency'\r\n      matrah    : wrbtr;\r\n\r\n      @UI       : { lineItem: [ { position: 14 } ] }\r\n      @Semantics.amount.currencyCode: 'currency'\r\n      heskdv    : wrbtr;\r\n\r\n      @UI       : { lineItem: [ { position: 15 } ] }\r\n      @Semantics.amount.currencyCode: 'currency'\r\n      vergi     : wrbtr;\r\n\r\n      @UI       : { lineItem: [ { position: 16 } ] }\r\n      @Semantics.amount.currencyCode: 'currency'\r\n      kbetr     : wrbtr;\r\n\r\n      @UI       : { lineItem: [ { position: 17 } ] }\r\n      mwskz     : mwskz;\r\n\r\n      @UI       : { lineItem: [ { position: 18 } ] }\r\n      tevkifato : abap.string;\r\n}\r\n/*+[internal] {\n\"BASEINFO\":\n{\n\"FROM\":\n[],\n\"ASSOCIATED\":\n[],\n\"BASE\":\n[],\n\"ANNO_REF\":\n[],\n\"SCALAR_FUNCTION\":\n[],\n\"VERSION\":0,\n\"ANNOREF_EVALUATION_ERROR\":\"\"\n}\n}*/",
     "PARENTNAME":"",
     "ACTFLAG":"",
-    "CHGFLAG":"",
+    "CHGFLAG":"35476",
     "SOURCE_TYPE":"Q",
     "SOURCE_ORIGIN":"0",
     "ABAP_LANGUAGE_VERSION":"5"
@@ -50,45 +50,31 @@
   [
    {
     "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
-    "LFIELDNAME":"ACKLM1",
+    "LFIELDNAME":"BELNR",
+    "NAME":"UI",
+    "POSITION":32,
+    "VALUE":""
+   },
+   {
+    "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
+    "LFIELDNAME":"BELNR",
+    "NAME":"UI.LINEITEM$1$.POSITION",
+    "POSITION":33,
+    "VALUE":"6"
+   },
+   {
+    "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
+    "LFIELDNAME":"BLDAT",
     "NAME":"UI",
     "POSITION":34,
     "VALUE":""
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
-    "LFIELDNAME":"ACKLM1",
+    "LFIELDNAME":"BLDAT",
     "NAME":"UI.LINEITEM$1$.POSITION",
     "POSITION":35,
     "VALUE":"7"
-   },
-   {
-    "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
-    "LFIELDNAME":"ACKLM2",
-    "NAME":"UI",
-    "POSITION":38,
-    "VALUE":""
-   },
-   {
-    "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
-    "LFIELDNAME":"ACKLM2",
-    "NAME":"UI.LINEITEM$1$.POSITION",
-    "POSITION":39,
-    "VALUE":"9"
-   },
-   {
-    "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
-    "LFIELDNAME":"BELNR",
-    "NAME":"UI",
-    "POSITION":40,
-    "VALUE":""
-   },
-   {
-    "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
-    "LFIELDNAME":"BELNR",
-    "NAME":"UI.LINEITEM$1$.POSITION",
-    "POSITION":41,
-    "VALUE":"10"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
@@ -232,31 +218,17 @@
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
-    "LFIELDNAME":"BUTXT",
+    "LFIELDNAME":"CURRENCY",
     "NAME":"UI",
     "POSITION":30,
     "VALUE":""
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
-    "LFIELDNAME":"BUTXT",
+    "LFIELDNAME":"CURRENCY",
     "NAME":"UI.LINEITEM$1$.POSITION",
     "POSITION":31,
     "VALUE":"5"
-   },
-   {
-    "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
-    "LFIELDNAME":"BUZEI",
-    "NAME":"UI",
-    "POSITION":42,
-    "VALUE":""
-   },
-   {
-    "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
-    "LFIELDNAME":"BUZEI",
-    "NAME":"UI.LINEITEM$1$.POSITION",
-    "POSITION":43,
-    "VALUE":"11"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
@@ -302,87 +274,87 @@
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
-    "LFIELDNAME":"HKONT",
-    "NAME":"UI",
-    "POSITION":48,
-    "VALUE":""
-   },
-   {
-    "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
-    "LFIELDNAME":"HKONT",
-    "NAME":"UI.LINEITEM$1$.POSITION",
-    "POSITION":49,
-    "VALUE":"14"
-   },
-   {
-    "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
-    "LFIELDNAME":"KIRIL1",
-    "NAME":"UI",
-    "POSITION":32,
-    "VALUE":""
-   },
-   {
-    "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
-    "LFIELDNAME":"KIRIL1",
-    "NAME":"UI.LINEITEM$1$.POSITION",
-    "POSITION":33,
-    "VALUE":"6"
-   },
-   {
-    "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
-    "LFIELDNAME":"KIRIL2",
-    "NAME":"UI",
-    "POSITION":36,
-    "VALUE":""
-   },
-   {
-    "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
-    "LFIELDNAME":"KIRIL2",
-    "NAME":"UI.LINEITEM$1$.POSITION",
-    "POSITION":37,
-    "VALUE":"8"
-   },
-   {
-    "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
-    "LFIELDNAME":"KSCHL",
-    "NAME":"UI",
-    "POSITION":46,
-    "VALUE":""
-   },
-   {
-    "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
-    "LFIELDNAME":"KSCHL",
-    "NAME":"UI.LINEITEM$1$.POSITION",
-    "POSITION":47,
-    "VALUE":"13"
-   },
-   {
-    "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
-    "LFIELDNAME":"MATRAH",
+    "LFIELDNAME":"HESKDV",
     "NAME":"SEMANTICS",
     "POSITION":52,
     "VALUE":""
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
-    "LFIELDNAME":"MATRAH",
+    "LFIELDNAME":"HESKDV",
     "NAME":"SEMANTICS.AMOUNT.CURRENCYCODE",
     "POSITION":53,
     "VALUE":"'currency'"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
-    "LFIELDNAME":"MATRAH",
+    "LFIELDNAME":"HESKDV",
     "NAME":"UI",
     "POSITION":50,
     "VALUE":""
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
-    "LFIELDNAME":"MATRAH",
+    "LFIELDNAME":"HESKDV",
     "NAME":"UI.LINEITEM$1$.POSITION",
     "POSITION":51,
-    "VALUE":"15"
+    "VALUE":"14"
+   },
+   {
+    "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
+    "LFIELDNAME":"KBETR",
+    "NAME":"SEMANTICS",
+    "POSITION":60,
+    "VALUE":""
+   },
+   {
+    "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
+    "LFIELDNAME":"KBETR",
+    "NAME":"SEMANTICS.AMOUNT.CURRENCYCODE",
+    "POSITION":61,
+    "VALUE":"'currency'"
+   },
+   {
+    "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
+    "LFIELDNAME":"KBETR",
+    "NAME":"UI",
+    "POSITION":58,
+    "VALUE":""
+   },
+   {
+    "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
+    "LFIELDNAME":"KBETR",
+    "NAME":"UI.LINEITEM$1$.POSITION",
+    "POSITION":59,
+    "VALUE":"16"
+   },
+   {
+    "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
+    "LFIELDNAME":"MATRAH",
+    "NAME":"SEMANTICS",
+    "POSITION":48,
+    "VALUE":""
+   },
+   {
+    "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
+    "LFIELDNAME":"MATRAH",
+    "NAME":"SEMANTICS.AMOUNT.CURRENCYCODE",
+    "POSITION":49,
+    "VALUE":"'currency'"
+   },
+   {
+    "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
+    "LFIELDNAME":"MATRAH",
+    "NAME":"UI",
+    "POSITION":46,
+    "VALUE":""
+   },
+   {
+    "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
+    "LFIELDNAME":"MATRAH",
+    "NAME":"UI.LINEITEM$1$.POSITION",
+    "POSITION":47,
+    "VALUE":"13"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
@@ -409,57 +381,99 @@
     "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
     "LFIELDNAME":"MWSKZ",
     "NAME":"UI",
-    "POSITION":44,
+    "POSITION":62,
     "VALUE":""
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
     "LFIELDNAME":"MWSKZ",
     "NAME":"UI.LINEITEM$1$.POSITION",
+    "POSITION":63,
+    "VALUE":"17"
+   },
+   {
+    "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
+    "LFIELDNAME":"NAME1",
+    "NAME":"UI",
+    "POSITION":42,
+    "VALUE":""
+   },
+   {
+    "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
+    "LFIELDNAME":"NAME1",
+    "NAME":"UI.LINEITEM$1$.POSITION",
+    "POSITION":43,
+    "VALUE":"11"
+   },
+   {
+    "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
+    "LFIELDNAME":"NAME2",
+    "NAME":"UI",
+    "POSITION":44,
+    "VALUE":""
+   },
+   {
+    "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
+    "LFIELDNAME":"NAME2",
+    "NAME":"UI.LINEITEM$1$.POSITION",
     "POSITION":45,
     "VALUE":"12"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
-    "LFIELDNAME":"SHKZG",
+    "LFIELDNAME":"SERINO",
     "NAME":"UI",
-    "POSITION":62,
+    "POSITION":36,
     "VALUE":""
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
-    "LFIELDNAME":"SHKZG",
+    "LFIELDNAME":"SERINO",
     "NAME":"UI.LINEITEM$1$.POSITION",
-    "POSITION":63,
+    "POSITION":37,
+    "VALUE":"8"
+   },
+   {
+    "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
+    "LFIELDNAME":"SIRANO",
+    "NAME":"UI",
+    "POSITION":38,
+    "VALUE":""
+   },
+   {
+    "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
+    "LFIELDNAME":"SIRANO",
+    "NAME":"UI.LINEITEM$1$.POSITION",
+    "POSITION":39,
+    "VALUE":"9"
+   },
+   {
+    "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
+    "LFIELDNAME":"STCD2",
+    "NAME":"UI",
+    "POSITION":40,
+    "VALUE":""
+   },
+   {
+    "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
+    "LFIELDNAME":"STCD2",
+    "NAME":"UI.LINEITEM$1$.POSITION",
+    "POSITION":41,
+    "VALUE":"10"
+   },
+   {
+    "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
+    "LFIELDNAME":"TEVKIFATO",
+    "NAME":"UI",
+    "POSITION":64,
+    "VALUE":""
+   },
+   {
+    "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
+    "LFIELDNAME":"TEVKIFATO",
+    "NAME":"UI.LINEITEM$1$.POSITION",
+    "POSITION":65,
     "VALUE":"18"
-   },
-   {
-    "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
-    "LFIELDNAME":"TEVKT",
-    "NAME":"SEMANTICS",
-    "POSITION":60,
-    "VALUE":""
-   },
-   {
-    "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
-    "LFIELDNAME":"TEVKT",
-    "NAME":"SEMANTICS.AMOUNT.CURRENCYCODE",
-    "POSITION":61,
-    "VALUE":"'currency'"
-   },
-   {
-    "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
-    "LFIELDNAME":"TEVKT",
-    "NAME":"UI",
-    "POSITION":58,
-    "VALUE":""
-   },
-   {
-    "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
-    "LFIELDNAME":"TEVKT",
-    "NAME":"UI.LINEITEM$1$.POSITION",
-    "POSITION":59,
-    "VALUE":"17"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
@@ -487,21 +501,7 @@
     "LFIELDNAME":"VERGI",
     "NAME":"UI.LINEITEM$1$.POSITION",
     "POSITION":55,
-    "VALUE":"16"
-   },
-   {
-    "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
-    "LFIELDNAME":"ZUONR",
-    "NAME":"UI",
-    "POSITION":64,
-    "VALUE":""
-   },
-   {
-    "STRUCOBJN":"ZTAX_DDL_I_VAT1_TEV_REPORT",
-    "LFIELDNAME":"ZUONR",
-    "NAME":"UI.LINEITEM$1$.POSITION",
-    "POSITION":65,
-    "VALUE":"19"
+    "VALUE":"15"
    }
   ]
  },
