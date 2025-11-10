@@ -94,15 +94,7 @@
     CLEAR me->ms_button_pushed.
     me->ms_button_pushed-kdv1 = abap_true.
 
-
-    fill_monat_range( ).
-    fill_det_kural_range( ).
-
-    CLEAR mt_collect.
-*    CLEAR mt_detail.
-*    CLEAR mt_detail_alv.
-
-    IF iv_bukrs IS NOT INITIAL.
+        IF iv_bukrs IS NOT INITIAL.
       p_bukrs = iv_bukrs.
     ENDIF.
 
@@ -121,6 +113,15 @@
     IF iv_donemb IS NOT INITIAL.
       p_donemb = iv_donemb.
     ENDIF.
+
+
+    fill_monat_range( ).
+    fill_det_kural_range( ).
+
+    CLEAR mt_collect.
+*    CLEAR mt_detail.
+*    CLEAR mt_detail_alv.
+
 
     me->get_condition_type( IMPORTING et_kostr = lt_kostr ).
     me->get_map_tab( IMPORTING et_map = lt_map ).
