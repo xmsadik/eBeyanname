@@ -28,6 +28,11 @@ CLASS lhc_ZTAX_DDL_I_VAT1_DEC_REPORT DEFINITION INHERITING FROM cl_abap_behavior
     TYPES vergi     TYPE ztax_s_hier_kdv1-vergi.
     TYPES END OF mty_other_collect.
 
+    DATA p_monat TYPE monat.
+    DATA p_gjahr TYPE gjahr.
+    DATA p_bukrs TYPE bukrs.
+    DATA p_donemb TYPE ztax_e_donemb.
+    DATA p_beyant TYPE ztax_e_beyant.
 
     TYPES mty_x(256)       TYPE x.
     TYPES mtty_x           TYPE TABLE OF mty_x.
@@ -81,10 +86,10 @@ CLASS lhc_ZTAX_DDL_I_VAT1_DEC_REPORT IMPLEMENTATION.
     READ TABLE lt_keys INTO DATA(ls_keys) INDEX 1.
     IF sy-subrc EQ 0.
 
-      DATA(p_bukrs) = ls_keys-bukrs.
-      DATA(p_gjahr) = ls_keys-gjahr.
-      DATA(p_monat) = ls_keys-monat.
-      DATA(p_donemb) = 01.
+      p_bukrs = ls_keys-bukrs.
+      p_gjahr = ls_keys-gjahr.
+      p_monat = ls_keys-monat.
+      p_donemb = 01.
 *
 *
       CALL METHOD lo_vat1_report->kdv1
