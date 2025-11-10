@@ -6,7 +6,7 @@ CLASS zcl_reco_form DEFINITION
   PUBLIC SECTION.
     INTERFACES if_rap_query_provider .
 
-
+    "
 
     DATA : p_runty  TYPE c LENGTH 1 VALUE '1', "Önyüz de çalışacak sadece "YiğitcanÖzdemir
            r_mform  TYPE c LENGTH 1 VALUE 'X', "Cari Mutabakat Formu için çalışacak sadece Ba / Bs formu (r_bform) yok "YiğitcanÖzdemir
@@ -51,7 +51,9 @@ CLASS zcl_reco_form DEFINITION
            s_sgli   TYPE RANGE OF zreco_account_type,
            s_og     TYPE RANGE OF zreco_umskz,
            p_novl   TYPE abap_boolean,
-           p_nolc   TYPE abap_boolean.
+           p_nolc   TYPE abap_boolean,
+           p_salma  TYPE c LENGTH 4,
+           p_smkod  TYPE c LENGTH 20.
 
     DATA: gv_b_belnr   TYPE abap_boolean, "B formunu belge bazında özetle
           gv_b_xblnr   TYPE abap_boolean, "B formunda aynı referansları birleştir
@@ -435,8 +437,8 @@ CLASS zcl_reco_form DEFINITION
              rec_type TYPE char03,
            END OF ty_receivers.
 
-    DATA : gt_receivers TYPE TABLE OF ty_receivers,
-           gs_receivers TYPE ty_receivers.
+    DATA : gt_receivers TYPE TABLE OF zreco_somlreci1,
+           gs_receivers TYPE zreco_somlreci1.
 
     DATA : gt_mail_list TYPE SORTED TABLE OF zreco_tmpe
                   WITH NON-UNIQUE KEY kunnr lifnr receiver,

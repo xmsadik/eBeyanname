@@ -7,9 +7,12 @@ lock master
 authorization master ( instance )
 //etag master <field_name>
 {
-  create;
-  update;
-  delete;
-  field ( readonly : update ) bukrs , akont;
+  //  create;
+  //  update;
+  //  delete;
+  field ( readonly : update ) bukrs, akont, uuid, gjahr, period, waers;
+
+  action send result [1] $self;
+  action print result [1] zreco_s_result;
 
 }

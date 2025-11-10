@@ -407,10 +407,10 @@
               AND monat GE @p_period
               AND mtype IN ( 'X', @gv_mtype ).
     IF sy-subrc EQ 0.
-      AUTHORITY-CHECK OBJECT '/ITETR/DEL' "TODO
-        ID 'BUKRS' FIELD gs_adrs-bukrs
-        ID 'ACTVT' FIELD '70'
-        ID 'KOART' FIELD '*'.
+*      AUTHORITY-CHECK OBJECT '/ITETR/DEL' "TODO
+*        ID 'BUKRS' FIELD gs_adrs-bukrs
+*        ID 'ACTVT' FIELD '70'
+*        ID 'KOART' FIELD '*'.
       IF sy-subrc NE 0.
 *        MESSAGE s110 DISPLAY LIKE 'E'. "YiğitcanÖzdemir
 *        LEAVE LIST-PROCESSING.
@@ -1520,7 +1520,7 @@
 *            e_auth      = lv_auth.
       ENDIF.
 
-      IF lv_auth IS INITIAL. "YETKI YOK
+*      IF lv_auth IS INITIAL. "YETKI YOK
 *        CALL METHOD go_log->bal_log_msg_add   "YiğitcanÖzdemir
 *          EXPORTING
 *            i_type       = /itetr/reco_if_common_types=>mc_msg_e
@@ -1533,17 +1533,17 @@
 *            i_log_handle = gv_log_handle
 *          EXCEPTIONS
 *            OTHERS       = 1.
-        CONTINUE.
-      ELSE.
+*        CONTINUE.
+*      ELSE.
 
 *GÖNDERIM KONTROLÜ
-        control_send( EXPORTING iv_kunnr    = ''
-                                iv_lifnr    = ls_lfa1_tax_srt-lifnr
-                                iv_vkn_tckn = ls_lfa1_tax_srt-vkn_tckn
-                      CHANGING  c_send      = gv_send
-                                c_mnumber   = gv_mnumber ).
+      control_send( EXPORTING iv_kunnr    = ''
+                              iv_lifnr    = ls_lfa1_tax_srt-lifnr
+                              iv_vkn_tckn = ls_lfa1_tax_srt-vkn_tckn
+                    CHANGING  c_send      = gv_send
+                              c_mnumber   = gv_mnumber ).
 
-        IF gv_send IS NOT INITIAL. "DAHA ÖNCE GÖNDERILMIŞ
+      IF gv_send IS NOT INITIAL. "DAHA ÖNCE GÖNDERILMIŞ
 *          CALL METHOD go_log->bal_log_msg_add                      "YiğitcanÖzdemir
 *            EXPORTING
 *              i_type       = /itetr/reco_if_common_types=>mc_msg_w
@@ -1556,20 +1556,20 @@
 *              i_log_handle = gv_log_handle
 *            EXCEPTIONS
 *              OTHERS       = 1.
-          CONTINUE.
-        ELSE.
-          MOVE-CORRESPONDING ls_lfa1_tax_srt TO gs_lfa1_tax.
-          READ TABLE gt_taxm INTO ls_taxm WITH KEY lifnr = ls_lfa1_tax_srt-lifnr.
-          IF sy-subrc EQ 0.
-            IF p_all IS NOT INITIAL.
-              gs_lfa1_tax-merge = zreco_if_common_types=>mc_select_yes.
-            ENDIF.
-          ELSE.
-            CLEAR gs_lfa1_tax-merge.
+        CONTINUE.
+      ELSE.
+        MOVE-CORRESPONDING ls_lfa1_tax_srt TO gs_lfa1_tax.
+        READ TABLE gt_taxm INTO ls_taxm WITH KEY lifnr = ls_lfa1_tax_srt-lifnr.
+        IF sy-subrc EQ 0.
+          IF p_all IS NOT INITIAL.
+            gs_lfa1_tax-merge = zreco_if_common_types=>mc_select_yes.
           ENDIF.
-          INSERT gs_lfa1_tax INTO TABLE gt_lfa1_tax. CLEAR gs_lfa1_tax.
+        ELSE.
+          CLEAR gs_lfa1_tax-merge.
         ENDIF.
+        INSERT gs_lfa1_tax INTO TABLE gt_lfa1_tax. CLEAR gs_lfa1_tax.
       ENDIF.
+*      ENDIF.
     ENDLOOP.
 
     DELETE gt_kna1_tax WHERE kunnr IS INITIAL.
@@ -1603,5 +1603,30 @@
       ENDLOOP.
 
     ENDLOOP.
+
+    """YiğitcanÖzdemir "SmKodu&Satınalma grubu geliştirmesi
+
+    IF p_salma IS NOT INITIAL.
+      SELECT businesspartner FROM i_businesspartner
+      WHERE BusinessPartnerGrouping = @p_salma
+      INTO TABLE @DATA(lt_businesspartner).
+
+      LOOP AT gt_lfa1_tax ASSIGNING FIELD-SYMBOL(<ls_tax>).
+        READ TABLE lt_businesspartner WITH KEY businesspartner = <ls_tax>-lifnr TRANSPORTING NO FIELDS.
+        IF sy-subrc <> 0.
+          DELETE gt_lfa1_tax INDEX sy-tabix.
+        ENDIF.
+      ENDLOOP.
+
+      LOOP AT gt_kna1_tax ASSIGNING FIELD-SYMBOL(<ls_kna1>).
+        READ TABLE lt_businesspartner WITH KEY businesspartner = <ls_kna1>-kunnr TRANSPORTING NO FIELDS.
+        IF sy-subrc <> 0.
+          DELETE gt_kna1_tax INDEX sy-tabix.
+        ENDIF.
+      ENDLOOP.
+    ENDIF.
+
+    """YiğitcanÖzdemir "SmKodu&Satınalma grubu geliştirmesi
+
 
   ENDMETHOD.
