@@ -68,6 +68,8 @@ TYPES: BEGIN OF ty_output_line,
 *DATA ls_out TYPE ty_output_line.
 
 FIELD-SYMBOLS : <fs_line> type  ty_output_line.
+DATA(lo_data_line) = NEW ty_output_line( ).
+ASSIGN lo_data_line->* TO <fs_line>.
 
         CLEAR ls_read_tab.
         ls_read_tab-bset = abap_true.
