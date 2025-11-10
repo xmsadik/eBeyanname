@@ -139,7 +139,7 @@ CLASS zcl_tax_vat1_tev_report DEFINITION
     DATA ls_lfa1              TYPE lty_lfa1.
     DATA lt_lfa1              TYPE SORTED TABLE OF lty_lfa1 WITH UNIQUE KEY lifnr.
     DATA ls_tevkifat          TYPE ztax_ddl_i_vat1_tev_report.
-    DATA lo_data              TYPE REF TO data.
+*    DATA lo_data              TYPE REF TO data.
     DATA lo_data_line         TYPE REF TO data.
     DATA lt_split             TYPE TABLE OF lty_split.
     DATA ls_split             TYPE lty_split.

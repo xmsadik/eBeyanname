@@ -41,35 +41,39 @@
 
         me->get_fieldname( IMPORTING et_tevita = mt_tevita ).
 
-        ASSIGN lo_data->* TO <fs_out_tev>.
+*        ASSIGN lo_data->* TO <fs_out_tev>.
 *        CREATE DATA lo_data_line LIKE LINE OF <fs_out_tev>.
 *        DATA : lo_data_line LIKE LINE OF <fs_out_tev>.
 *        ASSIGN lo_data_line->* TO <fs_line>.
 
-TYPES: BEGIN OF ty_output_line,
-         belnr     TYPE belnr_d,
-         bukrs     TYPE bukrs,
-         gjahr     TYPE gjahr,
-         bldat     TYPE bldat,
-         serino    TYPE string,
-         sirano    TYPE string,
-         stcd2     TYPE string,
-         name1     TYPE string,
-         name2     TYPE string,
-         matrah    TYPE wrbtr,
-         heskdv    TYPE wrbtr,
-         vergi     TYPE wrbtr,
-         kbetr     TYPE wrbtr,
-         mwskz     TYPE mwskz,
-         tevkifato TYPE string,
-       END OF ty_output_line.
+        TYPES: BEGIN OF ty_output_line,
+                 belnr     TYPE belnr_d,
+                 bukrs     TYPE bukrs,
+                 gjahr     TYPE gjahr,
+                 bldat     TYPE bldat,
+                 serino    TYPE string,
+                 sirano    TYPE string,
+                 stcd2     TYPE string,
+                 name1     TYPE string,
+                 name2     TYPE string,
+                 matrah    TYPE wrbtr,
+                 heskdv    TYPE wrbtr,
+                 vergi     TYPE wrbtr,
+                 kbetr     TYPE wrbtr,
+                 mwskz     TYPE mwskz,
+                 tevkifato TYPE string,
+               END OF ty_output_line.
 
 *DATA lt_out TYPE STANDARD TABLE OF ty_output_line.
 *DATA ls_out TYPE ty_output_line.
 
-FIELD-SYMBOLS : <fs_line> type  ty_output_line.
-DATA(lo_data_line) = NEW ty_output_line( ).
-ASSIGN lo_data_line->* TO <fs_line>.
+        FIELD-SYMBOLS : <fs_line> TYPE  ty_output_line.
+        DATA(lo_data_line) = NEW ty_output_line( ).
+        ASSIGN lo_data_line->* TO <fs_line>.
+
+        DATA(lo_data) = NEW ty_output_line( ).   " bir satır örnek için
+        DATA lt_temp TYPE STANDARD TABLE OF ty_output_line.
+        ASSIGN lt_temp TO <fs_out_tev>.          " Artık <fs_out_tev> tabloya bağlandı
 
         CLEAR ls_read_tab.
         ls_read_tab-bset = abap_true.
