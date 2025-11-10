@@ -349,7 +349,12 @@
           APPEND <fs_line> TO <fs_out_tev>.
         ENDLOOP.
 
-        lt_output =  <fs_out_tev> .
+*        lt_output =  <fs_out_tev> .
+
+        LOOP AT <fs_out_tev> ASSIGNING <fs_line>.
+          APPEND INITIAL LINE TO lt_output ASSIGNING FIELD-SYMBOL(<fs_new>).
+          MOVE-CORRESPONDING <fs_line> TO <fs_new>.
+        ENDLOOP.
 
         IF io_request->is_total_numb_of_rec_requested(  ).
           io_response->set_total_number_of_records( iv_total_number_of_records = lines( lt_output ) ).
