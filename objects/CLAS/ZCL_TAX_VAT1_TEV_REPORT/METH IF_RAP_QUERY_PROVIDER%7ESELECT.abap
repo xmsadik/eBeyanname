@@ -1,7 +1,7 @@
   METHOD if_rap_query_provider~select.
 
     FIELD-SYMBOLS <fs_out_tev>   TYPE STANDARD TABLE.
-    FIELD-SYMBOLS <fs_line>      TYPE any.
+*    FIELD-SYMBOLS <fs_line>      TYPE any.
     FIELD-SYMBOLS <fs_value>     TYPE any.
     FIELD-SYMBOLS <fs_value_dyn> TYPE any.
 
@@ -25,7 +25,7 @@
             WHEN 'MONAT'.
               lt_monat_range = CORRESPONDING #( ls_filter-range ).
             WHEN 'DONEMB'.
-              lt_monat_range = CORRESPONDING #( ls_filter-range ).
+              lt_donemb_range = CORRESPONDING #( ls_filter-range ).
           ENDCASE.
         ENDLOOP.
 
@@ -42,8 +42,32 @@
         me->get_fieldname( IMPORTING et_tevita = mt_tevita ).
 
         ASSIGN lo_data->* TO <fs_out_tev>.
-        CREATE DATA lo_data_line LIKE LINE OF <fs_out_tev>.
-        ASSIGN lo_data_line->* TO <fs_line>.
+*        CREATE DATA lo_data_line LIKE LINE OF <fs_out_tev>.
+*        DATA : lo_data_line LIKE LINE OF <fs_out_tev>.
+*        ASSIGN lo_data_line->* TO <fs_line>.
+
+TYPES: BEGIN OF ty_output_line,
+         belnr     TYPE belnr_d,
+         bukrs     TYPE bukrs,
+         gjahr     TYPE gjahr,
+         bldat     TYPE bldat,
+         serino    TYPE string,
+         sirano    TYPE string,
+         stcd2     TYPE string,
+         name1     TYPE string,
+         name2     TYPE string,
+         matrah    TYPE wrbtr,
+         heskdv    TYPE wrbtr,
+         vergi     TYPE wrbtr,
+         kbetr     TYPE wrbtr,
+         mwskz     TYPE mwskz,
+         tevkifato TYPE string,
+       END OF ty_output_line.
+
+*DATA lt_out TYPE STANDARD TABLE OF ty_output_line.
+*DATA ls_out TYPE ty_output_line.
+
+FIELD-SYMBOLS : <fs_line> type  ty_output_line.
 
         CLEAR ls_read_tab.
         ls_read_tab-bset = abap_true.
