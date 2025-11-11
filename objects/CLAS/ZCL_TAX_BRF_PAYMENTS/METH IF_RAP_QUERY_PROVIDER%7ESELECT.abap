@@ -33,7 +33,12 @@
         p_monat  = VALUE #( lt_monat_range[ 1 ]-low OPTIONAL ).
         p_donemb = VALUE #( lt_donemb_range[ 1 ]-low OPTIONAL ).
 
-        get_payments( IMPORTING et_ode = lt_data ).
+        get_payments(  EXPORTING iv_bukrs = p_bukrs
+                                 iv_gjahr = p_gjahr
+                                 iv_monat = p_monat
+                                 iv_donemb =  p_donemb
+
+                        IMPORTING et_ode = lt_data ).
 
         LOOP AT lt_data INTO DATA(ls_data) .
           MOVE-CORRESPONDING ls_data TO ls_output.

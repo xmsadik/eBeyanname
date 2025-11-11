@@ -61,6 +61,10 @@
       P_donemb = iv_donemb.
     ENDIF.
 
+    me->fill_range( EXPORTING iv_low   = p_monat
+                IMPORTING et_range = mr_monat ).
+
+
     get_item_data( IMPORTING et_mg       = lt_mg
                              et_data     = lt_data
                              et_data_191 = lt_data_191
