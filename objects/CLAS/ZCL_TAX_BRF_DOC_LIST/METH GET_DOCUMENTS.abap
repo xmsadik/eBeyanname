@@ -88,30 +88,52 @@
                     gjahr
                     belnr.
 
+
+
+
     LOOP AT lt_data INTO ls_data.
       CLEAR ls_collect.
       CLEAR ls_detail.
       CLEAR lv_amount_191.
       CLEAR lv_amount_k.
 
-      CASE ls_data-lifnr.
-        WHEN space.
+      "07.07.2025 - Azınlık kırılım düzenlemesi - eğer satıcıya dair azınlık tanımlanmadıysa lt_mgden oku
+      "eğer satıcıya dair azınlık tanımlıysa, o değer alınmalı
+***      CASE ls_data-lifnr.
+***        WHEN space.
+***          READ TABLE lt_mg INTO ls_mg WITH KEY bukrs = ls_data-bukrs
+***                                               hkont = ls_data-racct
+***                                               BINARY SEARCH.
+***        WHEN OTHERS.
+***          READ TABLE lt_lfb1 INTO ls_lfb1 WITH KEY bukrs = ls_data-bukrs
+***                                                   lifnr = ls_data-lifnr
+***                                                   BINARY SEARCH.
+***
+***          READ TABLE lt_mg INTO ls_mg WITH KEY bukrs = ls_data-bukrs
+***                                               mindk = ls_lfb1-mindk
+***                                               BINARY SEARCH.
+***      ENDCASE.
+      READ TABLE lt_data_k ASSIGNING <fs_data> WITH KEY bukrs = ls_data-bukrs
+                                                        gjahr = ls_data-gjahr
+                                                        belnr = ls_data-belnr
+                                                        BINARY SEARCH.
+      IF sy-subrc EQ 0.
+        "önce satıcı kodu ile ara
+        READ TABLE lt_lfb1 INTO ls_lfb1 WITH KEY bukrs = ls_data-bukrs
+                                                 lifnr = <fs_data>-lifnr
+                                                 BINARY SEARCH.
+        "satıcıda yoksa, hesaptan genel azınlığa bak
+        IF sy-subrc NE 0.
           READ TABLE lt_mg INTO ls_mg WITH KEY bukrs = ls_data-bukrs
                                                hkont = ls_data-racct
                                                BINARY SEARCH.
-        WHEN OTHERS.
-          READ TABLE lt_lfb1 INTO ls_lfb1 WITH KEY bukrs = ls_data-bukrs
-                                                   lifnr = ls_data-lifnr
-                                                   BINARY SEARCH.
-          IF sy-subrc EQ 0.  "YiğitcanÖzdemir Sonradan eklendi
-            READ TABLE lt_mg INTO ls_mg WITH KEY bukrs = ls_data-bukrs
-                                                 mindk = ls_lfb1-mindk.
-*                                                 BINARY SEARCH.
-          ENDIF.
-      ENDCASE.
+        ELSE.
+          READ TABLE lt_mg INTO ls_mg WITH KEY bukrs = ls_data-bukrs
+                                               mindk = ls_lfb1-mindk.
+        ENDIF.
+      ENDIF.
 
-*      CHECK sy-subrc IS INITIAL.  "YiğitcanÖzdemir Sonradan eklendi
-      CHECK ls_mg IS NOT INITIAL. "YiğitcanÖzdemir Sonradan eklendi
+      CHECK sy-subrc IS INITIAL.
 
       READ TABLE lt_data_191 TRANSPORTING NO FIELDS WITH KEY rbukrs = ls_data-bukrs
                                                              gjahr  = ls_data-gjahr
@@ -213,102 +235,6 @@
       <fs_collect>-kst  = abs( <fs_collect>-kst  ).
     ENDLOOP.
 
-    "manuel
-    IF lines( lt_mg ) GT 0.
-
-      SELECT *
-          FROM ztax_t_mmt
-          FOR ALL ENTRIES IN @lt_mg
-          WHERE bukrs EQ @p_bukrs
-            AND gjahr EQ @p_gjahr
-            AND monat EQ @mv_monat
-            AND mindk EQ @lt_mg-mindk
-           INTO TABLE @lt_mmt.
-
-    ENDIF.
-
-    SELECT SINGLE CompanyCodeName AS butxt
-       FROM i_companycode
-       WHERE CompanyCode EQ @p_bukrs
-        INTO @lv_butxt.
-
-    IF lines( lt_mmt ) GT 0.
-
-      SELECT Supplier AS lifnr,
-             OrganizationBPName1 AS name1,
-             OrganizationBPName2 AS name2
-             FROM i_supplier
-             FOR ALL ENTRIES IN @lt_mmt
-             WHERE i_supplier~Supplier EQ @lt_mmt-lifnr
-              INTO TABLE @lt_lfa1.
-
-    ENDIF.
-
-    SORT lt_mg BY mindk.
-    SORT lt_lfa1 BY lifnr.
-
-    LOOP AT lt_mmt INTO ls_mmt.
-      CLEAR ls_mg.
-      READ TABLE lt_mg INTO ls_mg WITH KEY mindk = ls_mmt-mindk BINARY SEARCH.
-      CHECK sy-subrc IS INITIAL.
-
-      CLEAR ls_lfa1.
-      CLEAR ls_detail.
-      CLEAR ls_collect.
-      "ilk tutarlar
-      ls_collect-kst    = ls_mmt-kst.
-      ls_collect-gyst   = ls_mmt-gyst.
-
-      "kiril1
-      ls_collect-kiril1 = ls_mg-kiril1.
-      ls_collect-acklm1 = ls_mg-acklm1.
-      COLLECT ls_collect INTO mt_collect.
-
-      "kiril2
-      ls_collect-kiril2 = ls_mg-kiril2.
-      ls_collect-acklm2 = ls_mg-acklm2.
-      COLLECT ls_collect INTO mt_collect.
-
-      CONCATENATE ls_mg-mindk
-                  '-'
-                  TEXT-t12
-                  '/('
-                  ls_mg-mtext
-                  ')'
-                  INTO ls_collect-kiril3.
-
-      COLLECT ls_collect INTO mt_collect.
-
-
-      ls_detail-kiril1 = ls_mg-kiril1.
-      ls_detail-acklm1 = ls_mg-acklm1.
-      ls_detail-kiril2 = ls_mg-kiril2.
-      ls_detail-acklm2 = ls_mg-acklm2.
-      ls_detail-bukrs  = p_bukrs.
-*      ls_detail-belnr  = mc_new_line.
-      ls_detail-butxt  = lv_butxt.
-      ls_detail-gjahr  = p_gjahr.
-      ls_detail-lifnr  = ls_mmt-lifnr.
-      READ TABLE lt_lfa1 INTO ls_lfa1 WITH KEY lifnr = ls_mmt-lifnr BINARY SEARCH.
-      IF sy-subrc IS INITIAL.
-        ls_detail-name1  = ls_lfa1-name1.
-        ls_detail-name2  = ls_lfa1-name2.
-      ELSE.
-        ls_detail-name1  = ls_mmt-name1.
-        ls_detail-name2  = ls_mmt-name2.
-      ENDIF.
-      ls_detail-mindk     = ls_mg-mindk.
-      ls_detail-mtext      = ls_mg-mtext.
-      ls_detail-hsl       = 0.
-      ls_detail-wsl       = 0.
-      ls_detail-rwcur     = 'TRY'.
-      ls_detail-sgtxt     = TEXT-t12.
-      ls_detail-gyst      = ls_mmt-gyst.
-      ls_detail-kst       = ls_mmt-kst.
-*      ls_detail-row_color = mc_new_line_color.
-      COLLECT ls_detail INTO mt_detail.
-
-    ENDLOOP.
 
     LOOP AT mt_detail ASSIGNING <fs_detail>.
       <fs_detail>-gyst = abs( <fs_detail>-gyst ).
