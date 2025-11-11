@@ -184,7 +184,7 @@
     ENDIF.
 
     IF is_read_tab-bseg EQ abap_true.
-*      IF lines( et_bset ) GT 0.
+      IF lines( et_bset ) GT 0.
 *        SELECT *
 *               INTO TABLE et_bseg
 *               FROM bseg
@@ -192,7 +192,24 @@
 *               WHERE bseg~bukrs EQ et_bset-bukrs
 *                 AND bseg~belnr EQ et_bset-belnr
 *                 AND bseg~gjahr EQ et_bset-gjahr.
-*      ELSEIF lines( et_bkpf ) GT 0.
+
+   SELECT CompanyCode AS bukrs,
+               AccountingDocument AS belnr,
+               fiscalyear AS gjahr ,
+               FinancialAccountType AS koart ,
+               supplier AS lifnr ,
+               AccountingDocumentItemType AS buzid,
+               TaxCode AS mwskz
+               FROM i_operationalacctgdocitem AS bseg
+               FOR ALL ENTRIES IN @et_bset
+               WHERE bseg~CompanyCode EQ @et_bset-bukrs
+                 AND bseg~AccountingDocument EQ @et_bset-belnr
+                 AND bseg~fiscalyear EQ @et_bset-gjahr
+                  INTO TABLE @et_bseg.
+
+
+
+      ELSEIF lines( et_bkpf ) GT 0.
 *        SELECT *
 *               INTO TABLE et_bseg
 *               FROM bseg
@@ -200,7 +217,22 @@
 *               WHERE bseg~bukrs EQ et_bkpf-bukrs
 *                 AND bseg~belnr EQ et_bkpf-belnr
 *                 AND bseg~gjahr EQ et_bkpf-gjahr.
-*      ENDIF.
+
+  SELECT CompanyCode AS bukrs,
+               AccountingDocument AS belnr,
+               fiscalyear AS gjahr ,
+               FinancialAccountType AS koart ,
+               supplier AS lifnr ,
+               AccountingDocumentItemType AS buzid,
+               TaxCode AS mwskz
+               FROM i_operationalacctgdocitem AS bseg
+               FOR ALL ENTRIES IN @et_bkpf
+               WHERE bseg~CompanyCode EQ @et_bkpf-bukrs
+                 AND bseg~AccountingDocument EQ @et_bkpf-belnr
+                 AND bseg~fiscalyear EQ @et_bkpf-gjahr
+                  INTO TABLE @et_bseg.
+
+      ENDIF.
     ENDIF.
 
 
