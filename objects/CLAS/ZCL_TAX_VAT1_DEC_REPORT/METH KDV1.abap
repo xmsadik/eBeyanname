@@ -77,7 +77,7 @@
     DATA lv_thlog_wrbtr TYPE ztax_t_thlog-wrbtr.
 
     DATA ls_read_tab TYPE mty_read_tab.
-    DATA lt_bseg TYPE SORTED TABLE OF mty_bseg WITH UNIQUE KEY CompanyCode AccountingDocument FiscalYear AccountingDocumentItem.
+    DATA lt_bseg TYPE SORTED TABLE OF mty_bseg WITH UNIQUE KEY bukrs belnr gjahr koart.
     DATA ls_bseg TYPE mty_bseg.
     DATA lr_saknr TYPE RANGE OF I_OperationalAcctgDocItem-OperationalGLAccount.
     FIELD-SYMBOLS <fs_range>   TYPE any.
@@ -94,7 +94,7 @@
     CLEAR me->ms_button_pushed.
     me->ms_button_pushed-kdv1 = abap_true.
 
-        IF iv_bukrs IS NOT INITIAL.
+    IF iv_bukrs IS NOT INITIAL.
       p_bukrs = iv_bukrs.
     ENDIF.
 
@@ -897,9 +897,9 @@
           ENDIF.
           CLEAR lv_tabix.
           CLEAR ls_bseg.
-          LOOP AT lt_bseg INTO ls_bseg WHERE GLAccount EQ ls_map-saknr
-                                        AND  CompanyCode = p_bukrs
-                                        AND  FiscalYear = p_gjahr.
+          LOOP AT lt_bseg INTO ls_bseg WHERE hkont EQ ls_map-saknr
+                                        AND  bukrs = p_bukrs
+                                        AND  gjahr = p_gjahr.
 
 *            APPEND INITIAL LINE TO mt_detail ASSIGNING <fs_detail>.
 *            IF <fs_detail> IS ASSIGNED.
@@ -1002,11 +1002,11 @@
         WHEN '010'.
           CLEAR lv_tabix.
           CLEAR ls_bseg.
-          DELETE ADJACENT DUPLICATES FROM lt_bseg COMPARING CompanyCode GLAccount FiscalYear TaxCode.
-          LOOP AT lt_bseg INTO ls_bseg WHERE  GLAccount = ls_map-saknr
-                                         AND  TaxCode = ls_map-mwskz
-                                         AND  CompanyCode = p_bukrs
-                                         AND  FiscalYear = p_gjahr.
+          DELETE ADJACENT DUPLICATES FROM lt_bseg ."COMPARING bukrs hkont gjahr mwskz.
+          LOOP AT lt_bseg INTO ls_bseg WHERE  hkont = ls_map-saknr
+                                         AND  mwskz = ls_map-mwskz
+                                         AND  bukrs = p_bukrs
+                                         AND  gjahr = p_gjahr.
 
 
 

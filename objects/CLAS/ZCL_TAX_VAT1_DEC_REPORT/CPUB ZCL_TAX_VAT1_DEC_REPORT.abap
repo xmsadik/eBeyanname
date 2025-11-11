@@ -105,10 +105,18 @@ CLASS zcl_tax_vat1_dec_report DEFINITION
     TYPES mtty_kostr TYPE TABLE OF mty_kostr.
 
     TYPES BEGIN OF mty_bseg.
-    INCLUDE TYPE i_operationalacctgdocitem.
+    TYPES bukrs TYPE bukrs.
+    TYPES belnr TYPE belnr_d.
+    TYPES gjahr TYPE gjahr.
+    TYPES koart  TYPE koart .
+    TYPES lifnr  TYPE lifnr .
+    TYPES buzid  TYPE c LENGTH 1 .
+    TYPES mwskz  TYPE mwskz .
+    TYPES hkont  TYPE hkont .
+    TYPES xref3 TYPE  c length 20.
     TYPES END OF mty_bseg.
 
-    TYPES mtty_bseg TYPE SORTED TABLE OF mty_bseg WITH UNIQUE KEY CompanyCode AccountingDocument FiscalYear AccountingDocumentItem .
+    TYPES mtty_bseg TYPE SORTED TABLE OF mty_bseg WITH UNIQUE KEY bukrs belnr gjahr koart .
 
     TYPES BEGIN OF mty_bkpf_rev_cont.
     TYPES bukrs TYPE i_journalentry-CompanyCode.
