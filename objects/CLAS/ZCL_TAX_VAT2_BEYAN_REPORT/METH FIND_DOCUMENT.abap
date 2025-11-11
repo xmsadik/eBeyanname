@@ -153,27 +153,33 @@
 **                 AND bset~kschl IN @ir_kschl
 *INTO TABLE @et_bset.
 
-SELECT
-    bset~companycode         AS bukrs,
-    bset~Accountingdocument  AS belnr,
-    bset~fiscalyear          AS gjahr,
-    bset~taxitem             AS buzei,
-    bset~taxcode             AS mwskz,
-    bset~debitcreditcode     AS shkzg,
-    bset~TaxBaseAmountInCoCodeCrcy AS hwbas,
-    bset~TaxAmountInCoCodeCrcy     AS hwste,
-    cond~kbetr as kbetr ,
-      cond~kschl as kschl
+        SELECT
+            bset~companycode         AS bukrs,
+            bset~Accountingdocument  AS belnr,
+            bset~fiscalyear          AS gjahr,
+            bset~taxitem             AS buzei,
+            bset~taxcode             AS mwskz,
+            bset~debitcreditcode     AS shkzg,
+            bset~TaxBaseAmountInCoCodeCrcy AS hwbas,
+            bset~TaxAmountInCoCodeCrcy     AS hwste,
+                    taxratio~conditionrateratio AS kbetr ,
+                    taxratio~vatconditiontype AS kschl
 
-  FROM i_operationalAcctgDocTaxItem AS bset
-  LEFT JOIN ztax_t_taxcond AS cond on
-   cond~bukrs = bset~companycode
+                  FROM i_operationalAcctgDocTaxItem AS bset
+                          INNER JOIN i_companycode AS t001
+                          ON t001~companycode = bset~companycode
 
-  FOR ALL ENTRIES IN @et_bkpf
-  WHERE bset~companycode        = @et_bkpf-bukrs
-    AND bset~Accountingdocument = @et_bkpf-belnr
-    AND bset~fiscalyear         = @et_bkpf-gjahr
-INTO TABLE @et_bset.
+                          LEFT JOIN i_taxcoderate AS taxratio
+                          ON  taxratio~taxcode = bset~taxcode
+                          AND  taxratio~AccountKeyForGLAccount = bset~TransactionTypeDetermination
+                          AND taxratio~Country = t001~Country
+                          AND taxratio~cndnrecordvalidityenddate = '99991231'
+
+          FOR ALL ENTRIES IN @et_bkpf
+          WHERE bset~companycode        = @et_bkpf-bukrs
+            AND bset~Accountingdocument = @et_bkpf-belnr
+            AND bset~fiscalyear         = @et_bkpf-gjahr
+        INTO TABLE @et_bset.
       ENDIF.
     ENDIF.
 
