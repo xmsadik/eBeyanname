@@ -261,6 +261,13 @@
                 EXIT.
               ENDIF.
             ENDLOOP.
+          ELSEIF lines( lt_ist ) GT 0.
+            CLEAR ls_ist.
+            READ TABLE lt_ist INTO ls_ist WITH KEY mwskz  = ls_map-mwskz.
+            IF sy-subrc EQ 0.
+              COLLECT ls_kschl_mwskz INTO lt_kschl_mwskz.
+              CLEAR ls_kschl_mwskz.
+            ENDIF.
           ENDIF.
 *          IF lv_kiril2_control EQ abap_true.
 *            APPEND INITIAL LINE TO mt_detail ASSIGNING <fs_detail>.
