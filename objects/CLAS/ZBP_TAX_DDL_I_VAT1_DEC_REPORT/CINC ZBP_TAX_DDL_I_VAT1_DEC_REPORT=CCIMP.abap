@@ -1228,9 +1228,14 @@ CLASS lhc_ZTAX_DDL_I_VAT1_DEC_REPORT IMPLEMENTATION.
       TRY.
           DATA(lo_mail) = cl_bcs_mail_message=>create_instance( ).
 
+          data(lv_username) = cl_abap_context_info=>get_user_technical_name(  ).
 
-          lo_mail->set_sender( iv_address    = CONV #( 'deneme@nttdata.com' ) ).
-          lo_mail->add_recipient( iv_address = CONV #( 'yigitcan.ozdemir@nttdata.com' ) ).
+              SELECT SINGLE defaultemailaddress
+       FROM i_businessuservh WHERE userid = @lv_username
+       INTO @data(lv_email).
+
+          lo_mail->set_sender( iv_address    = CONV #( lv_email ) ).
+          lo_mail->add_recipient( iv_address = CONV #( lv_email ) ).
 
 
           DATA(lv_subject) = |Beyanname;|.
