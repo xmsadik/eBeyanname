@@ -252,7 +252,8 @@
               ls_collect-kiril3 = ls_map-mwskz.
 
               CLEAR lv_oran_int.
-              lv_oran_int = abs( ls_bset-kbetr ) / 10.
+*              lv_oran_int = abs( ls_bset-kbetr ) / 10.
+              lv_oran_int = abs( ls_bset-kbetr ).
               ls_collect-oran = lv_oran_int.
               SHIFT ls_collect-oran LEFT DELETING LEADING space.
               IF ls_bset-shkzg EQ 'H'.
@@ -354,7 +355,8 @@
               ls_collect-kiril3 = ls_map-mwskz.
 
               CLEAR lv_oran_int.
-              lv_oran_int = abs( ls_bset-kbetr ) / 10.
+*              lv_oran_int = abs( ls_bset-kbetr ) / 10.
+              lv_oran_int = abs( ls_bset-kbetr ) .
               ls_collect-oran = lv_oran_int.
               SHIFT ls_collect-oran LEFT DELETING LEADING space.
               IF ls_bset-shkzg EQ 'H'.
@@ -1079,7 +1081,8 @@
             ls_collect-kiril3 = ls_map-mwskz.
 
             CLEAR lv_oran_int.
-            lv_oran_int = abs( ls_bset-kbetr ) / 10.
+*            lv_oran_int = abs( ls_bset-kbetr ) / 10.
+            lv_oran_int = abs( ls_bset-kbetr ) .
             ls_collect-oran = lv_oran_int.
             SHIFT ls_collect-oran LEFT DELETING LEADING space.
             IF ls_bset-shkzg EQ 'H'.
