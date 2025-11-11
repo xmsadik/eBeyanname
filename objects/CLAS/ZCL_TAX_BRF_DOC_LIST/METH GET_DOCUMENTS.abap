@@ -57,6 +57,8 @@
                                  et_data_191 = lt_data_191
                                  et_lfb1     = lt_lfb1 ).
 
+    DELETE ADJACENT DUPLICATES FROM lt_data COMPARING bukrs gjahr belnr docln. "YiğitcanÖzdemir Sonradan eklendi
+
     lt_data_k = lt_data.
 
     CLEAR lt_mg_range[].
@@ -100,13 +102,15 @@
           READ TABLE lt_lfb1 INTO ls_lfb1 WITH KEY bukrs = ls_data-bukrs
                                                    lifnr = ls_data-lifnr
                                                    BINARY SEARCH.
-
-          READ TABLE lt_mg INTO ls_mg WITH KEY bukrs = ls_data-bukrs
-                                               mindk = ls_lfb1-mindk
-                                               BINARY SEARCH.
+          IF sy-subrc EQ 0.  "YiğitcanÖzdemir Sonradan eklendi
+            READ TABLE lt_mg INTO ls_mg WITH KEY bukrs = ls_data-bukrs
+                                                 mindk = ls_lfb1-mindk
+                                                 BINARY SEARCH.
+          ENDIF.
       ENDCASE.
 
-      CHECK sy-subrc IS INITIAL.
+*      CHECK sy-subrc IS INITIAL.  "YiğitcanÖzdemir Sonradan eklendi
+      CHECK ls_mg IS NOT INITIAL. "YiğitcanÖzdemir Sonradan eklendi
 
       READ TABLE lt_data_191 TRANSPORTING NO FIELDS WITH KEY rbukrs = ls_data-bukrs
                                                              gjahr  = ls_data-gjahr

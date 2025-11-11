@@ -172,7 +172,16 @@
                                              AND gjahr = ls_data-gjahr
                                              AND belnr = ls_data-belnr
                                              AND ( name1 IS NOT INITIAL OR name_org1 IS NOT INITIAL ).
-              MOVE-CORRESPONDING ls_lifnr TO ls_data.
+*              MOVE-CORRESPONDING ls_lifnr TO ls_data.
+              ls_data-lifnr = ls_lifnr-lifnr.
+              ls_data-name1 = ls_lifnr-name1.
+              ls_data-name2 = ls_lifnr-name2.
+              ls_data-stras = ls_lifnr-stras.
+*              ls_data-mcod3 = ls_lifnr-mcod3.
+              ls_data-land1 = ls_lifnr-land1.
+              ls_data-stcd2 = ls_lifnr-stcd2.
+*              ls_data-stcd3 = ls_lifnr-stcd3.
+              ls_data-regio = ls_lifnr-regio.
               EXIT.
             ENDLOOP.
           ENDIF.
