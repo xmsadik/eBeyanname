@@ -57,6 +57,7 @@
                                  et_data_191 = lt_data_191
                                  et_lfb1     = lt_lfb1 ).
 
+    SORT lt_data BY bukrs gjahr belnr docln.
     DELETE ADJACENT DUPLICATES FROM lt_data COMPARING bukrs gjahr belnr docln. "YiğitcanÖzdemir Sonradan eklendi
 
     lt_data_k = lt_data.
@@ -104,8 +105,8 @@
                                                    BINARY SEARCH.
           IF sy-subrc EQ 0.  "YiğitcanÖzdemir Sonradan eklendi
             READ TABLE lt_mg INTO ls_mg WITH KEY bukrs = ls_data-bukrs
-                                                 mindk = ls_lfb1-mindk
-                                                 BINARY SEARCH.
+                                                 mindk = ls_lfb1-mindk.
+*                                                 BINARY SEARCH.
           ENDIF.
       ENDCASE.
 
