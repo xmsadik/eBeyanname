@@ -9,10 +9,10 @@
     "AS4USER":"SAP_CUSTOMER",
     "AS4DATE":"0000-00-00",
     "AS4TIME":"00:00:00",
-    "SOURCE":"@EndUserText.label: 'Muhtasar - Ödemeler'\r\n@ObjectModel.query.implementedBy:'ABAP:ZCL_TAX_BRF_PAYMENTS'\r\n@UI:{\r\nheaderInfo:{\r\n                typeNamePlural: 'Muhtasar - Ödemeler',\r\n                typeName: 'Muhtasar - Ödemeler',\r\n                title:{ type: #STANDARD, label: 'Muhtasar - Ödemeler', value: 'monat' }\r\n           }\r\n}\r\n\r\ndefine root custom entity ztax_ddl_i_brf_payments\r\n{\r\n\r\n      @UI      : { lineItem:       [ { position: 1, importance: #HIGH } ],\r\n                 selectionField: [ { position: 1 } ] }\r\n      @Consumption.valueHelpDefinition: [ { entity: { name: 'I_CompanyCodeVH', element: 'CompanyCode' }}]\r\n      @UI.hidden: true\r\n  key bukrs    : bukrs;\r\n\r\n      @UI      : { lineItem:       [ { position: 6 } ] }\r\n  key BELNR    : belnr_d;\r\n\r\n      @UI      : {\r\n      lineItem :       [ { position: 2 } ],\r\n             selectionField: [ { position: 2 } ] }\r\n//                    @UI.hidden: true\r\n      gjahr    : gjahr;\r\n      @UI      :\r\n                 { lineItem:       [ { position: 3 } ],\r\n      selectionField: [ { position: 3 } ] }\r\n             @UI.hidden: true\r\n      donemb   : ztax_e_donemb;\r\n      @UI      : { lineItem:       [ { position: 4 } ],\r\n      selectionField: [ { position: 4 } ] }\r\n      @UI.hidden: true\r\n      monat    : monat;\r\n\r\n\r\n      @UI      : { lineItem:       [ { position: 5 } ] }\r\n      @UI.hidden:true\r\n      BUTXT    : butxt;\r\n\r\n      @UI      : { lineItem:       [ { position: 7 ,label : 'Satıcı' } ] }\r\n      LIFNR    : lifnr;\r\n      @UI      : { lineItem:       [ { position: 8 ,label : 'Soyad' } ] }\r\n      NAME1    : name1_gp;\r\n      @UI      : { lineItem:       [ { position: 9 ,label : 'Ad' } ] }\r\n      NAME2    : name2_gp;\r\n      @UI      : { lineItem:       [ { position: 10 ,label : 'Adres' } ] }\r\n      ADRES    : ztax_e_adres;\r\n      @UI      : { lineItem:       [ { position: 11 ,label : 'TCKN' } ] }\r\n      TCKN     : abap.char(11);\r\n      @UI      : { lineItem:       [ { position: 12 ,label : 'Vergi Kimlik' } ] }\r\n      VKN      : abap.char(11);\r\n      @UI      : { lineItem:       [ { position: 13,label : 'Azınlık Gs.'  } ] }\r\n      MINDK    : ztax_e_mindk;\r\n      @UI      : { lineItem:       [ { position: 14 ,label : 'Metin' } ] }\r\n      MTEXT    : abap.char(30);\r\n      @UI      : { lineItem:       [ { position: 15,label : 'Kayıt Tarihi'  } ] }\r\n      BUDAT    : budat;\r\n      @UI      : { lineItem:       [ { position: 16 ,label : 'Referans' } ] }\r\n      XBLNR    : xblnr1;\r\n      @UI      : { lineItem:       [ { position: 17,label : 'Belge Türü'  } ] }\r\n      BELTR    : ztax_e_muh_beltr;\r\n//      @UI      : { lineItem:       [ { position: 18 ,label : 'Açıklama' } ] }\r\n//      ACKLM2   : ztax_e_acklm;\r\n      @UI      : { lineItem:       [ { position: 19,label : ''  } ] }\r\n      BELTRX   : ztax_e_acklm;\r\n      @UI      : { lineItem:       [ { position: 20,label : 'Gayri Safi Tutar'  } ] }\r\n      @Semantics.amount.currencyCode: 'currency'\r\n      GYST     : ztax_e_gyst;\r\n      @UI      : { lineItem:       [ { position: 21,label : 'Kesinti Tutarı'  } ] }\r\n      @Semantics.amount.currencyCode: 'currency'\r\n      KST      : ztax_e_kst;\r\n      @UI      : { lineItem:       [ { position: 22,label : 'Sistemde Olmayan Satıcı Girişi'  } ] }\r\n      SOSG     : abap.char(1);\r\n      currency : waers;\r\n\r\n\r\n}\r\n/*+[internal] {\n\"BASEINFO\":\n{\n\"FROM\":\n[],\n\"ASSOCIATED\":\n[],\n\"BASE\":\n[],\n\"ANNO_REF\":\n[],\n\"SCALAR_FUNCTION\":\n[],\n\"VERSION\":0,\n\"ANNOREF_EVALUATION_ERROR\":\"\"\n}\n}*/",
+    "SOURCE":"@EndUserText.label: 'Muhtasar - Ödemeler'\r\n@ObjectModel.query.implementedBy:'ABAP:ZCL_TAX_BRF_PAYMENTS'\r\n@UI:{\r\nheaderInfo:{\r\n                typeNamePlural: 'Muhtasar - Ödemeler',\r\n                typeName: 'Muhtasar - Ödemeler',\r\n                title:{ type: #STANDARD, label: 'Muhtasar - Ödemeler', value: 'monat' }\r\n           }\r\n}\r\n\r\ndefine root custom entity ztax_ddl_i_brf_payments\r\n{\r\n\r\n      @UI      : {\r\n                 selectionField: [ { position: 1 } ] }\r\n      @Consumption.valueHelpDefinition: [ { entity: { name: 'I_CompanyCodeVH', element: 'CompanyCode' }}]\r\n      //      @UI.hidden: true\r\n  key bukrs    : bukrs;\r\n\r\n      @UI      : { lineItem:       [ { position: 6 } ] }\r\n  key BELNR    : belnr_d;\r\n\r\n      @UI      : {\r\n      lineItem :       [ { position: 2 } ],\r\n             selectionField: [ { position: 2 } ] }\r\n      //                    @UI.hidden: true\r\n      gjahr    : gjahr;\r\n      @UI      :\r\n                 {\r\n      selectionField: [ { position: 3 } ] }\r\n      //             @UI.hidden: true\r\n      donemb   : ztax_e_donemb;\r\n      @UI      : {\r\n      selectionField: [ { position: 4 } ] }\r\n      //      @UI.hidden: true\r\n      monat    : monat;\r\n\r\n\r\n      @UI      : { lineItem:       [ { position: 5 } ] }\r\n      @UI.hidden:true\r\n      BUTXT    : butxt;\r\n\r\n      @UI      : { lineItem:       [ { position: 7 ,label : 'Satıcı' } ] }\r\n      LIFNR    : lifnr;\r\n      @UI      : { lineItem:       [ { position: 8 ,label : 'Soyad' } ] }\r\n      NAME1    : name1_gp;\r\n      @UI      : { lineItem:       [ { position: 9 ,label : 'Ad' } ] }\r\n      NAME2    : name2_gp;\r\n      @UI      : { lineItem:       [ { position: 10 ,label : 'Adres' } ] }\r\n      ADRES    : ztax_e_adres;\r\n      @UI      : { lineItem:       [ { position: 11 ,label : 'TCKN' } ] }\r\n      TCKN     : abap.char(11);\r\n      @UI      : { lineItem:       [ { position: 12 ,label : 'Vergi Kimlik' } ] }\r\n      VKN      : abap.char(11);\r\n      @UI      : { lineItem:       [ { position: 13,label : 'Azınlık Gs.'  } ] }\r\n      MINDK    : ztax_e_mindk;\r\n      @UI      : { lineItem:       [ { position: 14 ,label : 'Metin' } ] }\r\n      MTEXT    : abap.char(30);\r\n      @UI      : { lineItem:       [ { position: 15,label : 'Kayıt Tarihi'  } ] }\r\n      BUDAT    : budat;\r\n      @UI      : { lineItem:       [ { position: 16 ,label : 'Referans' } ] }\r\n      XBLNR    : xblnr1;\r\n      @UI      : { lineItem:       [ { position: 17,label : 'Belge Türü'  } ] }\r\n      BELTR    : ztax_e_muh_beltr;\r\n      //      @UI      : { lineItem:       [ { position: 18 ,label : 'Açıklama' } ] }\r\n      //      ACKLM2   : ztax_e_acklm;\r\n      @UI      : { lineItem:       [ { position: 19,label : ''  } ] }\r\n      BELTRX   : ztax_e_acklm;\r\n      @UI      : { lineItem:       [ { position: 20,label : 'Gayri Safi Tutar'  } ] }\r\n      @Semantics.amount.currencyCode: 'currency'\r\n      GYST     : ztax_e_gyst;\r\n      @UI      : { lineItem:       [ { position: 21,label : 'Kesinti Tutarı'  } ] }\r\n      @Semantics.amount.currencyCode: 'currency'\r\n      KST      : ztax_e_kst;\r\n      @UI      : { lineItem:       [ { position: 22,label : 'Sistemde Olmayan Satıcı Girişi'  } ] }\r\n      SOSG     : abap.char(1);\r\n      currency : waers;\r\n\r\n\r\n}\r\n/*+[internal] {\n\"BASEINFO\":\n{\n\"FROM\":\n[],\n\"ASSOCIATED\":\n[],\n\"BASE\":\n[],\n\"ANNO_REF\":\n[],\n\"SCALAR_FUNCTION\":\n[],\n\"VERSION\":0,\n\"ANNOREF_EVALUATION_ERROR\":\"\"\n}\n}*/",
     "PARENTNAME":"",
     "ACTFLAG":"",
-    "CHGFLAG":"34",
+    "CHGFLAG":"",
     "SOURCE_TYPE":"Q",
     "SOURCE_ORIGIN":"0",
     "ABAP_LANGUAGE_VERSION":"5"
@@ -52,126 +52,126 @@
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"ADRES",
     "NAME":"UI",
-    "POSITION":39,
+    "POSITION":29,
     "VALUE":""
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"ADRES",
     "NAME":"UI.LINEITEM$1$.LABEL",
-    "POSITION":41,
+    "POSITION":31,
     "VALUE":"'Adres'"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"ADRES",
     "NAME":"UI.LINEITEM$1$.POSITION",
-    "POSITION":40,
+    "POSITION":30,
     "VALUE":"10"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"BELNR",
     "NAME":"UI",
-    "POSITION":11,
+    "POSITION":7,
     "VALUE":""
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"BELNR",
     "NAME":"UI.LINEITEM$1$.POSITION",
-    "POSITION":12,
+    "POSITION":8,
     "VALUE":"6"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"BELTR",
     "NAME":"UI",
-    "POSITION":60,
+    "POSITION":50,
     "VALUE":""
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"BELTR",
     "NAME":"UI.LINEITEM$1$.LABEL",
-    "POSITION":62,
+    "POSITION":52,
     "VALUE":"'Belge Türü'"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"BELTR",
     "NAME":"UI.LINEITEM$1$.POSITION",
-    "POSITION":61,
+    "POSITION":51,
     "VALUE":"17"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"BELTRX",
     "NAME":"UI",
-    "POSITION":63,
+    "POSITION":53,
     "VALUE":""
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"BELTRX",
     "NAME":"UI.LINEITEM$1$.LABEL",
-    "POSITION":65,
+    "POSITION":55,
     "VALUE":"''"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"BELTRX",
     "NAME":"UI.LINEITEM$1$.POSITION",
-    "POSITION":64,
+    "POSITION":54,
     "VALUE":"19"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"BUDAT",
     "NAME":"UI",
-    "POSITION":54,
+    "POSITION":44,
     "VALUE":""
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"BUDAT",
     "NAME":"UI.LINEITEM$1$.LABEL",
-    "POSITION":56,
+    "POSITION":46,
     "VALUE":"'Kayıt Tarihi'"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"BUDAT",
     "NAME":"UI.LINEITEM$1$.POSITION",
-    "POSITION":55,
+    "POSITION":45,
     "VALUE":"15"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"BUKRS",
     "NAME":"CONSUMPTION",
-    "POSITION":5,
+    "POSITION":3,
     "VALUE":""
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"BUKRS",
     "NAME":"CONSUMPTION.VALUEHELPDEFINITION$1$.ENTITY",
-    "POSITION":6,
+    "POSITION":4,
     "VALUE":""
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"BUKRS",
     "NAME":"CONSUMPTION.VALUEHELPDEFINITION$1$.ENTITY.ELEMENT",
-    "POSITION":8,
+    "POSITION":6,
     "VALUE":"'CompanyCode'"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"BUKRS",
     "NAME":"CONSUMPTION.VALUEHELPDEFINITION$1$.ENTITY.NAME",
-    "POSITION":7,
+    "POSITION":5,
     "VALUE":"'I_CompanyCodeVH'"
    },
    {
@@ -184,414 +184,344 @@
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"BUKRS",
-    "NAME":"UI",
-    "POSITION":9,
-    "VALUE":""
-   },
-   {
-    "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
-    "LFIELDNAME":"BUKRS",
-    "NAME":"UI.HIDDEN",
-    "POSITION":10,
-    "VALUE":"true"
-   },
-   {
-    "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
-    "LFIELDNAME":"BUKRS",
-    "NAME":"UI.LINEITEM$1$.IMPORTANCE",
-    "POSITION":3,
-    "VALUE":"#HIGH"
-   },
-   {
-    "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
-    "LFIELDNAME":"BUKRS",
-    "NAME":"UI.LINEITEM$1$.POSITION",
+    "NAME":"UI.SELECTIONFIELD$1$.POSITION",
     "POSITION":2,
     "VALUE":"1"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
-    "LFIELDNAME":"BUKRS",
-    "NAME":"UI.SELECTIONFIELD$1$.POSITION",
-    "POSITION":4,
-    "VALUE":"1"
-   },
-   {
-    "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"BUTXT",
-    "NAME":"UI",
-    "POSITION":26,
-    "VALUE":""
-   },
-   {
-    "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
-    "LFIELDNAME":"BUTXT",
-    "NAME":"UI",
-    "POSITION":28,
-    "VALUE":""
-   },
-   {
-    "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
-    "LFIELDNAME":"BUTXT",
-    "NAME":"UI.HIDDEN",
-    "POSITION":29,
-    "VALUE":"true"
-   },
-   {
-    "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
-    "LFIELDNAME":"BUTXT",
-    "NAME":"UI.LINEITEM$1$.POSITION",
-    "POSITION":27,
-    "VALUE":"5"
-   },
-   {
-    "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
-    "LFIELDNAME":"DONEMB",
     "NAME":"UI",
     "POSITION":16,
     "VALUE":""
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
-    "LFIELDNAME":"DONEMB",
+    "LFIELDNAME":"BUTXT",
     "NAME":"UI",
-    "POSITION":19,
+    "POSITION":18,
     "VALUE":""
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
-    "LFIELDNAME":"DONEMB",
+    "LFIELDNAME":"BUTXT",
     "NAME":"UI.HIDDEN",
-    "POSITION":20,
+    "POSITION":19,
     "VALUE":"true"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
-    "LFIELDNAME":"DONEMB",
+    "LFIELDNAME":"BUTXT",
     "NAME":"UI.LINEITEM$1$.POSITION",
     "POSITION":17,
-    "VALUE":"3"
+    "VALUE":"5"
+   },
+   {
+    "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
+    "LFIELDNAME":"DONEMB",
+    "NAME":"UI",
+    "POSITION":12,
+    "VALUE":""
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"DONEMB",
     "NAME":"UI.SELECTIONFIELD$1$.POSITION",
-    "POSITION":18,
+    "POSITION":13,
     "VALUE":"3"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"GJAHR",
     "NAME":"UI",
-    "POSITION":13,
+    "POSITION":9,
     "VALUE":""
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"GJAHR",
     "NAME":"UI.LINEITEM$1$.POSITION",
-    "POSITION":14,
+    "POSITION":10,
     "VALUE":"2"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"GJAHR",
     "NAME":"UI.SELECTIONFIELD$1$.POSITION",
-    "POSITION":15,
+    "POSITION":11,
     "VALUE":"2"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"GYST",
     "NAME":"SEMANTICS",
-    "POSITION":69,
+    "POSITION":59,
     "VALUE":""
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"GYST",
     "NAME":"SEMANTICS.AMOUNT.CURRENCYCODE",
-    "POSITION":70,
+    "POSITION":60,
     "VALUE":"'currency'"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"GYST",
     "NAME":"UI",
-    "POSITION":66,
+    "POSITION":56,
     "VALUE":""
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"GYST",
     "NAME":"UI.LINEITEM$1$.LABEL",
-    "POSITION":68,
+    "POSITION":58,
     "VALUE":"'Gayri Safi Tutar'"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"GYST",
     "NAME":"UI.LINEITEM$1$.POSITION",
-    "POSITION":67,
+    "POSITION":57,
     "VALUE":"20"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"KST",
     "NAME":"SEMANTICS",
-    "POSITION":74,
+    "POSITION":64,
     "VALUE":""
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"KST",
     "NAME":"SEMANTICS.AMOUNT.CURRENCYCODE",
-    "POSITION":75,
+    "POSITION":65,
     "VALUE":"'currency'"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"KST",
     "NAME":"UI",
-    "POSITION":71,
+    "POSITION":61,
     "VALUE":""
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"KST",
     "NAME":"UI.LINEITEM$1$.LABEL",
-    "POSITION":73,
+    "POSITION":63,
     "VALUE":"'Kesinti Tutarı'"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"KST",
     "NAME":"UI.LINEITEM$1$.POSITION",
-    "POSITION":72,
+    "POSITION":62,
     "VALUE":"21"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"LIFNR",
     "NAME":"UI",
-    "POSITION":30,
+    "POSITION":20,
     "VALUE":""
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"LIFNR",
     "NAME":"UI.LINEITEM$1$.LABEL",
-    "POSITION":32,
+    "POSITION":22,
     "VALUE":"'Satıcı'"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"LIFNR",
     "NAME":"UI.LINEITEM$1$.POSITION",
-    "POSITION":31,
+    "POSITION":21,
     "VALUE":"7"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"MINDK",
     "NAME":"UI",
-    "POSITION":48,
+    "POSITION":38,
     "VALUE":""
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"MINDK",
     "NAME":"UI.LINEITEM$1$.LABEL",
-    "POSITION":50,
+    "POSITION":40,
     "VALUE":"'Azınlık Gs.'"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"MINDK",
     "NAME":"UI.LINEITEM$1$.POSITION",
-    "POSITION":49,
+    "POSITION":39,
     "VALUE":"13"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"MONAT",
     "NAME":"UI",
-    "POSITION":21,
+    "POSITION":14,
     "VALUE":""
-   },
-   {
-    "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
-    "LFIELDNAME":"MONAT",
-    "NAME":"UI",
-    "POSITION":24,
-    "VALUE":""
-   },
-   {
-    "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
-    "LFIELDNAME":"MONAT",
-    "NAME":"UI.HIDDEN",
-    "POSITION":25,
-    "VALUE":"true"
-   },
-   {
-    "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
-    "LFIELDNAME":"MONAT",
-    "NAME":"UI.LINEITEM$1$.POSITION",
-    "POSITION":22,
-    "VALUE":"4"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"MONAT",
     "NAME":"UI.SELECTIONFIELD$1$.POSITION",
-    "POSITION":23,
+    "POSITION":15,
     "VALUE":"4"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"MTEXT",
     "NAME":"UI",
-    "POSITION":51,
+    "POSITION":41,
     "VALUE":""
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"MTEXT",
     "NAME":"UI.LINEITEM$1$.LABEL",
-    "POSITION":53,
+    "POSITION":43,
     "VALUE":"'Metin'"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"MTEXT",
     "NAME":"UI.LINEITEM$1$.POSITION",
-    "POSITION":52,
+    "POSITION":42,
     "VALUE":"14"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"NAME1",
     "NAME":"UI",
-    "POSITION":33,
+    "POSITION":23,
     "VALUE":""
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"NAME1",
     "NAME":"UI.LINEITEM$1$.LABEL",
-    "POSITION":35,
+    "POSITION":25,
     "VALUE":"'Soyad'"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"NAME1",
     "NAME":"UI.LINEITEM$1$.POSITION",
-    "POSITION":34,
+    "POSITION":24,
     "VALUE":"8"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"NAME2",
     "NAME":"UI",
-    "POSITION":36,
+    "POSITION":26,
     "VALUE":""
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"NAME2",
     "NAME":"UI.LINEITEM$1$.LABEL",
-    "POSITION":38,
+    "POSITION":28,
     "VALUE":"'Ad'"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"NAME2",
     "NAME":"UI.LINEITEM$1$.POSITION",
-    "POSITION":37,
+    "POSITION":27,
     "VALUE":"9"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"SOSG",
     "NAME":"UI",
-    "POSITION":76,
+    "POSITION":66,
     "VALUE":""
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"SOSG",
     "NAME":"UI.LINEITEM$1$.LABEL",
-    "POSITION":78,
+    "POSITION":68,
     "VALUE":"'Sistemde Olmayan Satıcı Girişi'"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"SOSG",
     "NAME":"UI.LINEITEM$1$.POSITION",
-    "POSITION":77,
+    "POSITION":67,
     "VALUE":"22"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"TCKN",
     "NAME":"UI",
-    "POSITION":42,
+    "POSITION":32,
     "VALUE":""
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"TCKN",
     "NAME":"UI.LINEITEM$1$.LABEL",
-    "POSITION":44,
+    "POSITION":34,
     "VALUE":"'TCKN'"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"TCKN",
     "NAME":"UI.LINEITEM$1$.POSITION",
-    "POSITION":43,
+    "POSITION":33,
     "VALUE":"11"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"VKN",
     "NAME":"UI",
-    "POSITION":45,
+    "POSITION":35,
     "VALUE":""
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"VKN",
     "NAME":"UI.LINEITEM$1$.LABEL",
-    "POSITION":47,
+    "POSITION":37,
     "VALUE":"'Vergi Kimlik'"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"VKN",
     "NAME":"UI.LINEITEM$1$.POSITION",
-    "POSITION":46,
+    "POSITION":36,
     "VALUE":"12"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"XBLNR",
     "NAME":"UI",
-    "POSITION":57,
+    "POSITION":47,
     "VALUE":""
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"XBLNR",
     "NAME":"UI.LINEITEM$1$.LABEL",
-    "POSITION":59,
+    "POSITION":49,
     "VALUE":"'Referans'"
    },
    {
     "STRUCOBJN":"ZTAX_DDL_I_BRF_PAYMENTS",
     "LFIELDNAME":"XBLNR",
     "NAME":"UI.LINEITEM$1$.POSITION",
-    "POSITION":58,
+    "POSITION":48,
     "VALUE":"16"
    }
   ]
