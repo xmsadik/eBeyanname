@@ -118,7 +118,8 @@ CLASS zcl_tax_vat1_dec_report DEFINITION
     TYPES xref3 TYPE  c LENGTH 20.
     TYPES END OF mty_bseg.
 
-    TYPES mtty_bseg TYPE SORTED TABLE OF mty_bseg WITH UNIQUE KEY bukrs belnr gjahr koart .
+*    TYPES mtty_bseg TYPE SORTED TABLE OF mty_bseg WITH UNIQUE KEY bukrs belnr gjahr koart .
+    TYPES mtty_bseg TYPE TABLE OF mty_bseg.
 
     TYPES BEGIN OF mty_bkpf_rev_cont.
     TYPES bukrs TYPE i_journalentry-CompanyCode.

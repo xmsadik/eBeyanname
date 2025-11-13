@@ -78,7 +78,8 @@
     DATA lv_thlog_wrbtr TYPE ztax_t_thlog-wrbtr.
 
     DATA ls_read_tab TYPE mty_read_tab.
-    DATA lt_bseg TYPE SORTED TABLE OF mty_bseg WITH UNIQUE KEY bukrs belnr gjahr koart.
+*    DATA lt_bseg TYPE SORTED TABLE OF mty_bseg WITH UNIQUE KEY bukrs belnr gjahr koart. "YiğitcanÖzdemir
+    DATA lt_bseg TYPE  TABLE OF mty_bseg .
     DATA ls_bseg TYPE mty_bseg.
     DATA lr_saknr TYPE RANGE OF I_OperationalAcctgDocItem-OperationalGLAccount.
     FIELD-SYMBOLS <fs_range>   TYPE any.
