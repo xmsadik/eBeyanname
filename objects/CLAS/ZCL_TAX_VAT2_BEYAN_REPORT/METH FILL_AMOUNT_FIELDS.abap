@@ -106,11 +106,11 @@
       FIELD-SYMBOLS <fs_ztra> TYPE any.
 
       READ TABLE lt_par INTO DATA(ls_parr) WITH KEY name = 'IV_MWVS'.
-      IF sy-subrc = 0 AND ls_par-value IS BOUND.
+      IF sy-subrc = 0 AND ls_parr-value IS BOUND.
         ASSIGN ls_parr-value->* TO <fs_mws>.
       ENDIF.
       READ TABLE lt_par INTO ls_parr WITH KEY name = 'IV_ZTRA'.
-      IF sy-subrc = 0 AND ls_par-value IS BOUND.
+      IF sy-subrc = 0 AND ls_parr-value IS BOUND.
         ASSIGN ls_parr-value->* TO <fs_ztra>.
       ENDIF.
 
