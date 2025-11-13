@@ -38,7 +38,7 @@ CLASS zcl_tax_vat1_dec_report DEFINITION
     TYPES END OF mty_bkpf.
 
 *    TYPES mtty_bkpf TYPE SORTED TABLE OF mty_bkpf WITH UNIQUE KEY bukrs belnr gjahr.
-    TYPES mtty_bkpf TYPE SORTED TABLE OF mty_bkpf WITH non-UNIQUE KEY bukrs belnr gjahr.  "YiğitcanÖzdemir nonunique eklendd,
+    TYPES mtty_bkpf TYPE TABLE OF mty_bkpf.
 
     TYPES BEGIN OF mty_bset.
     TYPES bukrs TYPE bukrs.
@@ -56,7 +56,7 @@ CLASS zcl_tax_vat1_dec_report DEFINITION
 
     TYPES END OF mty_bset.
 *    TYPES mtty_bset TYPE SORTED TABLE OF mty_bset WITH UNIQUE KEY bukrs belnr gjahr buzei.
-    TYPES mtty_bset TYPE SORTED TABLE OF mty_bset WITH NON-UNIQUE KEY bukrs belnr gjahr buzei. "YiğitcanÖzdemir nonunique eklendd,
+    TYPES mtty_bset TYPE TABLE OF mty_bset .
 
     TYPES mtty_saknr_range TYPE RANGE OF saknr.
     TYPES mtty_mwskz_range TYPE RANGE OF mwskz.
@@ -115,7 +115,7 @@ CLASS zcl_tax_vat1_dec_report DEFINITION
     TYPES buzid  TYPE c LENGTH 1 .
     TYPES mwskz  TYPE mwskz .
     TYPES hkont  TYPE hkont .
-    TYPES xref3 TYPE  c length 20.
+    TYPES xref3 TYPE  c LENGTH 20.
     TYPES END OF mty_bseg.
 
     TYPES mtty_bseg TYPE SORTED TABLE OF mty_bseg WITH UNIQUE KEY bukrs belnr gjahr koart .

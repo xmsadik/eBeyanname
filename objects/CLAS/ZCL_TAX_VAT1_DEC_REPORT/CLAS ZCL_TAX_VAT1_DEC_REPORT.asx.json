@@ -1625,7 +1625,7 @@
     "SRCROW1":41,
     "SRCCOLUMN1":10,
     "SRCROW2":41,
-    "SRCCOLUMN2":86,
+    "SRCCOLUMN2":41,
     "REFCLSNAME":"",
     "REFINTNAME":"",
     "REFCMPNAME":"",
@@ -1635,8 +1635,8 @@
     "BCMTDCOM":"",
     "BCMTDSYN":0,
     "BCEVTCAT":0,
-    "TYPESRC_LENG":79,
-    "TYPESRC":"mtty_bkpf TYPE SORTED TABLE OF mty_bkpf WITH non-UNIQUE KEY bukrs belnr gjahr\r\n"
+    "TYPESRC_LENG":34,
+    "TYPESRC":"mtty_bkpf TYPE TABLE OF mty_bkpf\r\n"
    },
    {
     "CLSNAME":"ZCL_TAX_VAT1_DEC_REPORT",
@@ -1743,7 +1743,7 @@
     "SRCROW1":59,
     "SRCCOLUMN1":10,
     "SRCROW2":59,
-    "SRCCOLUMN2":92,
+    "SRCCOLUMN2":41,
     "REFCLSNAME":"",
     "REFINTNAME":"",
     "REFCMPNAME":"",
@@ -1753,8 +1753,8 @@
     "BCMTDCOM":"",
     "BCMTDSYN":0,
     "BCEVTCAT":0,
-    "TYPESRC_LENG":85,
-    "TYPESRC":"mtty_bset TYPE SORTED TABLE OF mty_bset WITH NON-UNIQUE KEY bukrs belnr gjahr buzei\r\n"
+    "TYPESRC_LENG":34,
+    "TYPESRC":"mtty_bset TYPE TABLE OF mty_bset\r\n"
    },
    {
     "CLSNAME":"ZCL_TAX_VAT1_DEC_REPORT",
@@ -2403,7 +2403,7 @@
     "BCMTDSYN":0,
     "BCEVTCAT":0,
     "TYPESRC_LENG":332,
-    "TYPESRC":"BEGIN OF mty_bseg.\r\n    TYPES bukrs TYPE bukrs.\r\n    TYPES belnr TYPE belnr_d.\r\n    TYPES gjahr TYPE gjahr.\r\n    TYPES koart  TYPE koart .\r\n    TYPES lifnr  TYPE lifnr .\r\n    TYPES buzid  TYPE c LENGTH 1 .\r\n    TYPES mwskz  TYPE mwskz .\r\n    TYPES hkont  TYPE hkont .\r\n    TYPES xref3 TYPE  c length 20.\r\n    TYPES END OF mty_bseg\r\n"
+    "TYPESRC":"BEGIN OF mty_bseg.\r\n    TYPES bukrs TYPE bukrs.\r\n    TYPES belnr TYPE belnr_d.\r\n    TYPES gjahr TYPE gjahr.\r\n    TYPES koart  TYPE koart .\r\n    TYPES lifnr  TYPE lifnr .\r\n    TYPES buzid  TYPE c LENGTH 1 .\r\n    TYPES mwskz  TYPE mwskz .\r\n    TYPES hkont  TYPE hkont .\r\n    TYPES xref3 TYPE  c LENGTH 20.\r\n    TYPES END OF mty_bseg\r\n"
    },
    {
     "CLSNAME":"ZCL_TAX_VAT1_DEC_REPORT",

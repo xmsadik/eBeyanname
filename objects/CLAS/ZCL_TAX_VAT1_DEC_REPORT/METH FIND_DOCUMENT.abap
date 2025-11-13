@@ -178,7 +178,7 @@
                AccountingDocumentItemType AS buzid,
                TaxCode AS mwskz,
                GLAccount AS hkont,
-               Reference3IDByBusinessPartner as xref3
+               Reference3IDByBusinessPartner AS xref3
                FROM i_operationalacctgdocitem AS bseg
                FOR ALL ENTRIES IN @et_bset
                WHERE bseg~CompanyCode EQ @et_bset-bukrs
@@ -203,7 +203,7 @@
                AccountingDocumentItemType AS buzid,
                TaxCode AS mwskz,
                GLAccount AS hkont,
-               Reference3IDByBusinessPartner as xref3
+               Reference3IDByBusinessPartner AS xref3
                FROM i_operationalacctgdocitem AS bseg
                FOR ALL ENTRIES IN @et_bkpf
                WHERE bseg~CompanyCode EQ @et_bkpf-bukrs
