@@ -131,24 +131,41 @@
 
     IF is_read_tab-bset EQ abap_true.
       IF lines( et_bkpf ) GT 0.
-        SELECT i_operationalacctgdoctaxitem~companycode AS bukrs,
-               i_operationalacctgdoctaxitem~accountingdocument AS belnr,
-               i_operationalacctgdoctaxitem~fiscalyear AS gjahr,
-               i_operationalacctgdoctaxitem~taxitem AS buzei,
-               i_operationalacctgdoctaxitem~taxcode AS mwskz,
-               i_operationalacctgdoctaxitem~debitcreditcode AS shkzg,
-               i_operationalacctgdoctaxitem~taxbaseamountincocodecrcy AS hwbas,
-               i_operationalacctgdoctaxitem~taxamountincocodecrcy AS hwste
-*               I_operationalAcctgDocTaxItem~kbetr,
-*               I_operationalAcctgDocTaxItem~kschl,
-*               I_operationalAcctgDocTaxItem~hkont
-               FROM i_operationalacctgdoctaxitem
+        SELECT bset~companycode AS bukrs,
+               bset~accountingdocument AS belnr,
+               bset~fiscalyear AS gjahr,
+               bset~taxitem AS buzei,
+               bset~taxcode AS mwskz,
+               bset~debitcreditcode AS shkzg,
+               bset~taxbaseamountincocodecrcy AS hwbas,
+               bset~taxamountincocodecrcy AS hwste,
+            taxratio~conditionrateratio AS kbetr ,
+            taxratio~vatconditiontype AS kschl,
+            docitem~GLAccount AS hkont
+          FROM i_operationalAcctgDocTaxItem AS bset
+
+          INNER JOIN i_companycode AS t001
+          ON t001~companycode = bset~companycode
+
+          LEFT JOIN i_taxcoderate AS taxratio
+          ON  taxratio~taxcode = bset~taxcode
+          AND  taxratio~AccountKeyForGLAccount = bset~TransactionTypeDetermination
+          AND taxratio~Country = t001~Country
+          AND taxratio~cndnrecordvalidityenddate = '99991231'
+
+
+                    LEFT JOIN i_operationalacctgdocitem AS docitem ON
+           docitem~CompanyCode        = bset~companycode AND
+           docitem~AccountingDocument = bset~Accountingdocument AND
+           docitem~fiscalyear         = bset~fiscalyear AND
+           docitem~AccountingDocumentItem = bset~TaxItem
+
                FOR ALL ENTRIES IN @et_bkpf
-               WHERE i_operationalacctgdoctaxitem~companycode EQ @et_bkpf-bukrs
-                 AND i_operationalacctgdoctaxitem~accountingdocument EQ @et_bkpf-belnr
-                 AND i_operationalacctgdoctaxitem~fiscalyear EQ @et_bkpf-gjahr
-                 AND i_operationalacctgdoctaxitem~taxcode IN @ir_mwskz
-*                 AND I_operationalAcctgDocTaxItem~kschl IN @ir_kschl
+               WHERE bset~companycode EQ @et_bkpf-bukrs
+                 AND bset~accountingdocument EQ @et_bkpf-belnr
+                 AND bset~fiscalyear EQ @et_bkpf-gjahr
+                 AND bset~taxcode IN @ir_mwskz
+                 AND taxratio~vatconditiontype IN @ir_kschl "Yiğitcan Emin değilim
                   INTO TABLE @et_bset.
       ENDIF.
     ENDIF.

@@ -192,5 +192,5 @@ CLASS zcl_tax_vat2_kes_report DEFINITION
 
 
       kesinti IMPORTING iv_bukrs   TYPE bukrs OPTIONAL
-                     iv_gjahr   TYPE gjahr OPTIONAL
-                EXPORTING     et_kesinti type  mtty_kesinti.
+                        iv_gjahr   TYPE gjahr OPTIONAL
+              EXPORTING et_kesinti TYPE  mtty_kesinti.
