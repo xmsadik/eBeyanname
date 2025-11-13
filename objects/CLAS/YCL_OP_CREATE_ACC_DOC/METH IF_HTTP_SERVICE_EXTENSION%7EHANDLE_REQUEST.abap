@@ -21,6 +21,7 @@
               reference2idbybusinesspartner TYPE xref2,
               reference3idbybusinesspartner TYPE xref3,
               costcenter                    TYPE kostl,
+              ProfitCenter                  TYPE prctr,
               orderid                       TYPE aufnr,
               documentitemtext              TYPE sgtxt,
               specialglcode                 TYPE yeho_e_umskz,
@@ -49,6 +50,7 @@
             <fs_je>-%cid = to_upper( cl_uuid_factory=>create_system_uuid( )->create_uuid_x16( ) ).
             APPEND VALUE #( glaccountlineitem             = |001|
                             glaccount                     = ls_bankacc-bankhs
+                            ProfitCenter                  = ls_bankacc-profit
                             documentitemtext              = | { <ls_header>-workplaceno } && Pos Tahsilatı|
                             _currencyamount = VALUE #( ( currencyrole = '00'
                                                          journalentryitemamount = ( <ls_header>-grossamount * -1 )
@@ -56,7 +58,8 @@
 
             APPEND VALUE #( glaccountlineitem             = |002|
                             glaccount                     = ls_bankacc-poshs
-                             documentitemtext              = | { <ls_header>-workplaceno } && Pos Tahsilatı|
+                            ProfitCenter                  =  ls_bankacc-profit
+                             documentitemtext             = | { <ls_header>-workplaceno } && Pos Tahsilatı|
                              _currencyamount = VALUE #( ( currencyrole = '00'
                                                           journalentryitemamount = <ls_header>-netamount
                                                            currency = <ls_header>-currencycode  ) )          ) TO lt_glitem.
@@ -64,6 +67,7 @@
             APPEND VALUE #( glaccountlineitem             = |003|
                             glaccount                     = ls_bankacc-finhs
                             costcenter                    = ls_bankacc-fincs
+                            ProfitCenter                  = ls_bankacc-profit
                             documentitemtext              = | { <ls_header>-workplaceno } && Pos Tahsilatı|
                             _currencyamount = VALUE #( ( currencyrole = '00'
                                                          journalentryitemamount = <ls_header>-commissionamount
@@ -87,7 +91,7 @@
              REPORTED DATA(ls_reported)
              MAPPED DATA(ls_mapped).
             IF ls_failed IS NOT INITIAL.
-            ms_response-messages = VALUE #( base ms_response-messages FOR wa IN ls_reported-journalentry ( message = wa-%msg->if_message~get_text( ) ) ).
+              ms_response-messages = VALUE #( BASE ms_response-messages FOR wa IN ls_reported-journalentry ( message = wa-%msg->if_message~get_text( ) ) ).
             ELSE.
               COMMIT ENTITIES BEGIN
                RESPONSE OF i_journalentrytp
@@ -135,12 +139,12 @@
 
 
               ELSE.
-              ms_response-messages = VALUE #( base ms_response-messages FOR wa_commit IN ls_commit_reported-journalentry ( message = wa_commit-%msg->if_message~get_text( )  ) ).
+                ms_response-messages = VALUE #( BASE ms_response-messages FOR wa_commit IN ls_commit_reported-journalentry ( message = wa_commit-%msg->if_message~get_text( )  ) ).
               ENDIF.
             ENDIF.
             CLEAR : lt_je, lt_glitem , ls_failed , ls_reported , ls_commit_failed , ls_commit_reported.
           CATCH cx_uuid_error INTO DATA(lx_error).
-          APPEND VALUE #( message = lx_error->get_longtext(  ) ) TO ms_response-messages.
+            APPEND VALUE #( message = lx_error->get_longtext(  ) ) TO ms_response-messages.
         ENDTRY.
 
       ELSE.

@@ -15,7 +15,6 @@
                                                                        bank_no = @ls_header-bankno AND
                                                                        workplace_no = @ls_header-workplaceno AND
                                                                        transaction_date = @ls_header-transactiondate AND
-                                                                       value_date = @ls_header-valuedate AND
                                                                        process_type = @ls_header-processtype AND
                                                                        waers = @ls_header-currencycode .
     IF sy-subrc EQ 0.

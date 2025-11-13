@@ -20,5 +20,6 @@ authorization master ( instance )
       Poshs       = poshs;
       Finhs       = finhs;
       fincs       = fincs;
+      profit      = profit;
     }
 }

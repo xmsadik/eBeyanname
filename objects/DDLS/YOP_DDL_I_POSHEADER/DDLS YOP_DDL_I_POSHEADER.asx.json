@@ -9,10 +9,10 @@
     "AS4USER":"SAP_CUSTOMER",
     "AS4DATE":"0000-00-00",
     "AS4TIME":"00:00:00",
-    "SOURCE":"@AccessControl.authorizationCheck: #NOT_REQUIRED\r\n@EndUserText.label: 'Online Pos Başlık Verileri'\r\n@Metadata.ignorePropagatedAnnotations: true\r\ndefine root view entity YOP_DDL_I_POSHEADER\r\n  as select distinct from YOP_DDL_I_POSDATA as PosHeader\r\n{\r\n  key Bukrs,\r\n  key BankNo,\r\n  key BankName,\r\n  key WorkplaceNo,\r\n      //  key TerminalNo,\r\n  key TransactionDate, \r\n  key ValueDate,\r\n  key ProcessType,\r\n      //  key FileName,\r\n      //  key CreateDate,\r\n      //  key CreateTime,\r\n      //  key CreateUser,\r\n      //  key AccBelnr,\r\n      //  key AccCreateDate,\r\n      //  key AccCreateTime,\r\n      //  key AccCreateUser,\r\n  key CurrencyCode,\r\n      WorkplaceDesc,\r\n      AccDocument,\r\n      OrgRefDoc,\r\n      RevDoc,\r\n      gjahr,\r\n      @Semantics.amount.currencyCode : 'CurrencyCode'\r\n      sum( GrossAmount )      as GrossAmount,\r\n      @Semantics.amount.currencyCode : 'CurrencyCode'\r\n      sum( NetAmount )        as NetAmount,\r\n      @Semantics.amount.currencyCode : 'CurrencyCode'\r\n      sum( CommissionAmount ) as CommissionAmount,\r\n      @Semantics.amount.currencyCode : 'CurrencyCode'\r\n      sum( InterruptAmount )  as InterruptAmount,\r\n      //cast(\r\n      //  case\r\n      //    when cast( sum( NetAmount ) as abap.dec( 23, 2 ) ) = 0\r\n      //    then 0\r\n      //    else ( cast( sum( CommissionAmount ) as abap.dec( 23, 2 ) )\r\n      //           / cast( sum( GrossAmount ) as abap.dec( 23, 2 ) ) )\r\n      //         * cast( 100 as abap.dec( 23, 2 ) )\r\n      //  end\r\n      //  as abap.dec( 23, 2 )\r\n      //) as CommissionRate\r\n      //\r\n\r\n      cast(\r\n        case\r\n          when cast( sum( GrossAmount ) as abap.dec( 23, 2 ) ) = 0\r\n          then 0\r\n          else ( cast( sum( CommissionAmount ) as abap.dec( 23, 2 ) )\r\n                 / cast( sum( GrossAmount ) as abap.dec( 23, 2 ) ) )\r\n               * cast( 100 as abap.dec( 23, 2 ) )\r\n        end\r\n        as abap.dec( 23, 2 )\r\n      )                       as CommissionRate\r\n}\r\ngroup by\r\n  Bukrs,\r\n  BankNo,\r\n  BankName,\r\n  WorkplaceNo,\r\n  //  TerminalNo,\r\n  TransactionDate,\r\n  ValueDate,\r\n  ProcessType,\r\n  WorkplaceDesc,\r\n  AccDocument,\r\n  OrgRefDoc,\r\n  RevDoc,\r\n  gjahr,\r\n  //  FileName,\r\n  //  CreateDate,\r\n  //  CreateTime,\r\n  //  CreateUser,\r\n  //  AccBelnr,\r\n  //  AccCreateDate,\r\n  //  AccCreateTime,\r\n  //  AccCreateUser,\r\n  CurrencyCode\r\n/*+[internal] {\n\"BASEINFO\":\n{\n\"FROM\":\n[\n\"YOP_DDL_I_POSDATA\"\n],\n\"ASSOCIATED\":\n[],\n\"BASE\":\n[],\n\"ANNO_REF\":\n[],\n\"SCALAR_FUNCTION\":\n[],\n\"VERSION\":0,\n\"ANNOREF_EVALUATION_ERROR\":\"\"\n}\n}*/",
+    "SOURCE":"@AccessControl.authorizationCheck: #NOT_REQUIRED\r\n@EndUserText.label: 'Online Pos Başlık Verileri'\r\n@Metadata.ignorePropagatedAnnotations: true\r\ndefine root view entity YOP_DDL_I_POSHEADER\r\n  as select distinct from YOP_DDL_I_POSDATA as PosHeader\r\n//  composition [1..1] of YOP_DDL_I_POSTOTAL as _postotal\r\n{ \r\n  key Bukrs,\r\n  key BankNo,\r\n  key BankName,\r\n  key WorkplaceNo,\r\n  key TransactionDate,\r\n  key ValueDate,\r\n  key ProcessType,\r\n  key CurrencyCode,\r\n  WorkplaceDesc,\r\n  AccDocument,\r\n  OrgRefDoc,\r\n  RevDoc,\r\n  gjahr,\r\n      @Semantics.amount.currencyCode : 'CurrencyCode'\r\n      sum( GrossAmount )      as GrossAmount,\r\n      @Semantics.amount.currencyCode : 'CurrencyCode'\r\n      sum( NetAmount )        as NetAmount,\r\n      @Semantics.amount.currencyCode : 'CurrencyCode'\r\n      sum( CommissionAmount ) as CommissionAmount,\r\n      @Semantics.amount.currencyCode : 'CurrencyCode'\r\n      sum( InterruptAmount )  as InterruptAmount,\r\n\r\n      cast(\r\n        case\r\n          when cast( sum( GrossAmount ) as abap.dec( 23, 2 ) ) = 0\r\n          then 0\r\n          else ( cast( sum( CommissionAmount ) as abap.dec( 23, 2 ) )\r\n                 / cast( sum( GrossAmount ) as abap.dec( 23, 2 ) ) )\r\n               * cast( 100 as abap.dec( 23, 2 ) )\r\n        end\r\n        as abap.dec( 23, 2 )\r\n      )                       as CommissionRate\r\n\r\n//      _postotal\r\n}\r\ngroup by\r\n  Bukrs,\r\n  BankNo,\r\n  BankName,\r\n  WorkplaceNo,\r\n  TransactionDate,\r\n  ValueDate,\r\n  ProcessType,\r\n  WorkplaceDesc,\r\n  AccDocument,\r\n  OrgRefDoc,\r\n  RevDoc,\r\n  gjahr,\r\n  CurrencyCode\r\n/*+[internal] {\n\"BASEINFO\":\n{\n\"FROM\":\n[\n\"YOP_DDL_I_POSDATA\"\n],\n\"ASSOCIATED\":\n[],\n\"BASE\":\n[],\n\"ANNO_REF\":\n[],\n\"SCALAR_FUNCTION\":\n[],\n\"VERSION\":0,\n\"ANNOREF_EVALUATION_ERROR\":\"\"\n}\n}*/",
     "PARENTNAME":"",
     "ACTFLAG":"",
-    "CHGFLAG":"53",
+    "CHGFLAG":"",
     "SOURCE_TYPE":"W",
     "SOURCE_ORIGIN":"0",
     "ABAP_LANGUAGE_VERSION":"5"
@@ -36,6 +36,12 @@
   "table":"DDDDLSRCT",
   "data":
   [
+   {
+    "DDLNAME":"YOP_DDL_I_POSHEADER",
+    "DDLANGUAGE":"E",
+    "AS4LOCAL":"N",
+    "DDTEXT":""
+   },
    {
     "DDLNAME":"YOP_DDL_I_POSHEADER",
     "DDLANGUAGE":"T",

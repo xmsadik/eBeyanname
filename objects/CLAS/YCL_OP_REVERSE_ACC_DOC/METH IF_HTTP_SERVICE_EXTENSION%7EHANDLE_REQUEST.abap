@@ -33,7 +33,7 @@
       <jr>-companycode        = ls_header-bukrs.
       <jr>-fiscalyear         = ls_header-gjahr.
       <jr>-accountingdocument = lv_accdoc.
-      <jr>-%param             = VALUE #( postingdate    = sy-datlo
+      <jr>-%param             = VALUE #( postingdate    = ls_header-valuedate
                                          reversalreason = '01'
                                          createdbyuser  = sy-uname
 
@@ -67,14 +67,11 @@
             lv_revdoc = lv_acc+8(lv_sub_len). "substring al
           ENDIF.
 
-
           MESSAGE ID ycl_eho_utils=>mc_message_class
           TYPE ycl_eho_utils=>mc_success
           NUMBER 016
           WITH  lv_revdoc
           INTO DATA(lv_message).
-
-
 
           IF lv_revdoc IS NOT INITIAL.
 
@@ -91,28 +88,31 @@
               COMMIT WORK.
             ENDIF.
 
-
           ENDIF.
 
-        IF lv_message IS NOT INITIAL.
+          IF lv_message IS NOT INITIAL.
 
-          APPEND INITIAL LINE TO ms_response-messages ASSIGNING <fs_messages>.
-          <fs_messages>-message = lv_message.
-          <fs_messages>-message_v1 = lv_message.
+            APPEND INITIAL LINE TO ms_response-messages ASSIGNING <fs_messages>.
+            <fs_messages>-message = lv_message.
+            <fs_messages>-message_v1 = lv_message.
 
-          DATA(lv_response_body) = /ui2/cl_json=>serialize( EXPORTING data = ms_response ).
-          response->set_text( lv_response_body ).
-          response->set_header_field( i_name = mc_header_content i_value = mc_content_type ).
-        ENDIF.
-
+          ENDIF.
           EXIT.
         ENDLOOP.
         COMMIT ENTITIES END.
 
-
       ELSE.
-
-
+        LOOP AT lt_commit_reported-journalentry ASSIGNING FIELD-SYMBOL(<ls_reported>).
+          lv_message = <ls_reported>-%msg->if_message~get_text( ).
+          APPEND INITIAL LINE TO ms_response-messages ASSIGNING <fs_messages>.
+          <fs_messages>-message = lv_message.
+          <fs_messages>-message_v1 = lv_message.
+        ENDLOOP.
       ENDIF.
     ENDIF.
+
+    DATA(lv_response_body) = /ui2/cl_json=>serialize( EXPORTING data = ms_response ).
+    response->set_text( lv_response_body ).
+    response->set_header_field( i_name = mc_header_content i_value = mc_content_type ).
+
   ENDMETHOD.

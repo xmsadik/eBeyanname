@@ -4,4 +4,4 @@ CLASS ycl_op_delete_garanti DEFINITION
   CREATE PUBLIC .
 
   PUBLIC SECTION.
-   INTERFACES if_oo_adt_classrun .
+    INTERFACES if_oo_adt_classrun .
