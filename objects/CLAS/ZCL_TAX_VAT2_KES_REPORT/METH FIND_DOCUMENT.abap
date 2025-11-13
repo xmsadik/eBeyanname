@@ -185,14 +185,14 @@
                WHERE i_journalentryitem~companycode EQ @et_bset-bukrs
                  AND i_journalentryitem~accountingdocument EQ @et_bset-belnr
                  AND i_journalentryitem~fiscalyear EQ @et_bset-gjahr
-                 INTO TABLE @et_bseg.
+                 INTO CORRESPONDING FIELDS OF TABLE @et_bseg.
       ELSEIF lines( et_bkpf ) GT 0.
         SELECT i_journalentryitem~companycode AS bukrs,
                i_journalentryitem~accountingdocument AS belnr,
                i_journalentryitem~fiscalyear AS gjahr,
                i_journalentryitem~financialaccounttype AS koart,
                i_journalentryitem~supplier AS lifnr,
-*               i_journalentryitem~AccountingDocumentItemType as buzid,
+**               i_journalentryitem~AccountingDocumentItemType as buzid,
                i_journalentryitem~taxcode AS mwskz
 
                FROM i_journalentryitem
@@ -200,7 +200,7 @@
                WHERE i_journalentryitem~companycode EQ @et_bkpf-bukrs
                  AND i_journalentryitem~accountingdocument EQ @et_bkpf-belnr
                  AND i_journalentryitem~fiscalyear EQ @et_bkpf-gjahr
-                      INTO TABLE @et_bseg.
+                   INTO CORRESPONDING FIELDS OF TABLE @et_bseg.
       ENDIF.
     ENDIF.
 
