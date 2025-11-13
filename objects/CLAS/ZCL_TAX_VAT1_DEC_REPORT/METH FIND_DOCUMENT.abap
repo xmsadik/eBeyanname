@@ -170,7 +170,7 @@
 *                 AND bseg~belnr EQ et_bset-belnr
 *                 AND bseg~gjahr EQ et_bset-gjahr.
 
-        SELECT CompanyCode AS bukrs,
+        SELECT DISTINCT CompanyCode AS bukrs, "YiğitcanÖzdemir Distint ekledim
                AccountingDocument AS belnr,
                fiscalyear AS gjahr ,
                FinancialAccountType AS koart ,
@@ -195,7 +195,7 @@
 *                 AND bseg~belnr EQ et_bkpf-belnr
 *                 AND bseg~gjahr EQ et_bkpf-gjahr.
 
-        SELECT CompanyCode AS bukrs,
+        SELECT DISTINCT CompanyCode AS bukrs, "YiğitcanÖzdemir Distint ekledim
                AccountingDocument AS belnr,
                fiscalyear AS gjahr ,
                FinancialAccountType AS koart ,
