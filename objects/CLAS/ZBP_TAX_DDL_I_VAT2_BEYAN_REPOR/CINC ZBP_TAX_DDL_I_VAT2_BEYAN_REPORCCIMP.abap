@@ -692,8 +692,8 @@ CLASS lhc_ztax_ddl_i_vat2_beyan_repo IMPLEMENTATION.
           DATA(lv_username) = cl_abap_context_info=>get_user_technical_name(  ).
 
           SELECT SINGLE defaultemailaddress
-   FROM i_businessuservh WHERE userid = @lv_username
-   INTO @DATA(lv_email).
+            FROM i_businessuservh WHERE userid = @lv_username
+            INTO @DATA(lv_email).
 
           lo_mail->set_sender( iv_address    = CONV #( lv_email ) ).
           lo_mail->add_recipient( iv_address = CONV #( lv_email ) ).
