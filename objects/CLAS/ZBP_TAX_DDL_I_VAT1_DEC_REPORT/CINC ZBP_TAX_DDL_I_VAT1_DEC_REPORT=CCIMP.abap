@@ -1247,28 +1247,30 @@ CLASS lhc_ZTAX_DDL_I_VAT1_DEC_REPORT IMPLEMENTATION.
                                                                     iv_filename     = 'beyanname.txt' ) ).
           lo_mail->send( IMPORTING et_status = DATA(lt_status) ).
 
+          READ ENTITIES OF ztax_ddl_i_vat1_dec_report IN LOCAL MODE
+                 ENTITY ztax_ddl_i_vat1_dec_report
+                 FROM CORRESPONDING #( keys )
+                 RESULT DATA(found_data).
+
+          LOOP AT found_data INTO DATA(found).
+
+            INSERT VALUE #(
+                bukrs     = found-bukrs
+                gjahr     = found-gjahr
+                monat     = found-monat
+                lineitem  = found-lineitem
+                %param    = found
+            ) INTO TABLE result.
+
+          ENDLOOP.
+
 *          COMMIT WORK.
         CATCH cx_bcs_mail INTO DATA(lo_err).
           DATA(lv_error) = lo_err->get_longtext( ) .
       ENDTRY.
     ENDIF.
 
-    READ ENTITIES OF ztax_ddl_i_vat1_dec_report IN LOCAL MODE
-           ENTITY ztax_ddl_i_vat1_dec_report
-           FROM CORRESPONDING #( keys )
-           RESULT DATA(found_data).
 
-    LOOP AT found_data INTO DATA(found).
-
-      INSERT VALUE #(
-          bukrs     = found-bukrs
-          gjahr     = found-gjahr
-          monat     = found-monat
-          lineitem  = found-lineitem
-          %param    = found
-      ) INTO TABLE result.
-
-    ENDLOOP.
 
   ENDMETHOD.
 
