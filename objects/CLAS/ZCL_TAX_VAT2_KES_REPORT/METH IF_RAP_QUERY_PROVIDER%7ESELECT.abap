@@ -2,7 +2,7 @@
 
     TRY.
 
-
+        DATA : lv_lineitem TYPE int4.
         DATA(lt_filter) = io_request->get_filter( )->get_as_ranges( ).
         DATA: lt_bukrs_range  TYPE RANGE OF bukrs,
               lt_gjahr_range  TYPE RANGE OF gjahr,
@@ -48,7 +48,10 @@
 *        ENDLOOP.
 
 
-
+        LOOP AT lt_output ASSIGNING FIELD-SYMBOL(<fs_output>).
+          lv_lineitem = lv_lineitem + 1.
+          <fs_output>-lineitem = lv_lineitem.
+        ENDLOOP.
 
         IF io_request->is_total_numb_of_rec_requested(  ).
           io_response->set_total_number_of_records( iv_total_number_of_records = lines( lt_output ) ).
