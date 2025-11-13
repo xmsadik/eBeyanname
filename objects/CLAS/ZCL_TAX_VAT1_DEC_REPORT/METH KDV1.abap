@@ -1,7 +1,8 @@
   METHOD kdv1.
 
     DATA ls_bkpf  TYPE mty_bkpf.
-    DATA lt_bkpf  TYPE SORTED TABLE OF mty_bkpf WITH UNIQUE KEY bukrs belnr gjahr.
+    DATA lt_bkpf  TYPE SORTED TABLE OF mty_bkpf WITH non-UNIQUE KEY bukrs belnr gjahr. "YiğitcanÖzdemir
+*    DATA lt_bkpf  TYPE SORTED TABLE OF mty_bkpf WITH UNIQUE KEY bukrs belnr gjahr.
     DATA lt_bset  TYPE mtty_bset.
     DATA ls_bset  TYPE mty_bset.
     DATA lv_tabix TYPE sy-tabix.
