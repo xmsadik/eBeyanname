@@ -173,7 +173,8 @@
     SORT lt_odt BY odmtr.
     SORT lt_bseg_koart_k BY bukrs belnr gjahr.
 
-    lt_bseg_tax = lt_bseg.
+*    lt_bseg_tax = lt_bseg.
+    MOVE-CORRESPONDING lt_bseg TO lt_bseg_tax.
 
     DELETE lt_bseg_tax WHERE buzid NE 'T'.
 
@@ -191,7 +192,9 @@
            FROM ztax_t_k2ita
            INTO @lv_ita.
 
-    lt_hesap = mt_hesap.
+*    lt_hesap = mt_hesap.
+    MOVE-CORRESPONDING mt_hesap TO lt_hesap.
+
     DELETE lt_hesap WHERE hesaptip NE '001'
                       AND hesaptip NE '004'
                       AND hesaptip NE '005'.
@@ -206,7 +209,10 @@
     DELETE ADJACENT DUPLICATES FROM lt_hesap COMPARING hesaptip kschl.
 
     CLEAR lt_parameters.
-    lt_parameters = lt_hesap.
+*    lt_parameters = lt_hesap.
+
+    MOVE-CORRESPONDING lt_hesap TO lt_parameters.
+
     SORT lt_parameters BY kschl.
     DELETE ADJACENT DUPLICATES FROM lt_parameters COMPARING kschl.
 
