@@ -116,23 +116,23 @@
 
       CASE lv_hesaptip.
         WHEN '001'.
-          IF <fs_mws> IS NOT INITIAL.
+          IF <fs_mws> IS ASSIGNED.
             lv_result =  <fs_mws>.
           ENDIF.
         WHEN '002'.
-          IF <fs_mws> IS NOT INITIAL.
+          IF <fs_mws>  IS ASSIGNED.
             lv_result =  <fs_mws> / 10.
           ENDIF.
         WHEN '003'.
-          IF <fs_mws> IS NOT INITIAL AND <fs_mws> IS NOT INITIAL.
+          IF <fs_mws>  IS ASSIGNED AND <fs_mws>  IS ASSIGNED.
             lv_result = ( <fs_ztra> / <fs_mws> )  * 10.
           ENDIF.
         WHEN '004'.
-          IF <fs_mws> IS NOT INITIAL.
+          IF <fs_mws> IS ASSIGNED.
             lv_result =  <fs_mws>.
           ENDIF.
         WHEN '005'.
-          IF <fs_ztra> IS NOT INITIAL.
+          IF <fs_ztra>  IS ASSIGNED.
             lv_result =  <fs_ztra>.
           ENDIF.
 
