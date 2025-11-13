@@ -181,10 +181,12 @@
                i_journalentryitem~taxcode AS mwskz
 
                FROM i_journalentryitem
+
                FOR ALL ENTRIES IN @et_bset
                WHERE i_journalentryitem~companycode EQ @et_bset-bukrs
                  AND i_journalentryitem~accountingdocument EQ @et_bset-belnr
                  AND i_journalentryitem~fiscalyear EQ @et_bset-gjahr
+
                  INTO CORRESPONDING FIELDS OF TABLE @et_bseg.
       ELSEIF lines( et_bkpf ) GT 0.
         SELECT i_journalentryitem~companycode AS bukrs,

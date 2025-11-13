@@ -176,7 +176,7 @@
 *    lt_bseg_tax = lt_bseg.
     MOVE-CORRESPONDING lt_bseg TO lt_bseg_tax.
 
-    DELETE lt_bseg_tax WHERE buzid NE 'T'.
+*    DELETE lt_bseg_tax WHERE buzid NE 'T'. "YiğitcanÖzdemir
 
     SORT lt_bseg_tax BY bukrs belnr gjahr mwskz.
 
