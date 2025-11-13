@@ -95,7 +95,7 @@
 *                                 et_bset     = lt_bset
 *                                 et_bseg     = lt_bseg ).
     MOVE-CORRESPONDING mt_bkpf[] TO lt_bkpf[].
-*    MOVE-CORRESPONDING mt_bset[] TO lt_bset[].
+    MOVE-CORRESPONDING mt_bset[] TO lt_bset[].
     MOVE-CORRESPONDING mt_bseg[] TO lt_bseg[].
     "GIB Tabloları
     SELECT *
