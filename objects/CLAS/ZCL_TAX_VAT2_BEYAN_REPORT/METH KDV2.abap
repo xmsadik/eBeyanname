@@ -185,7 +185,7 @@
           ls_kschl_mwskz-acklm2 = ls_map-acklm2.
           ls_kschl_mwskz-mwskz  = ls_bset-mwskz.
           ls_kschl_mwskz-shkzg  = ls_bset-shkzg.
-*          ls_kschl_mwskz-kbetr  = ls_bset-kbetr.
+          ls_kschl_mwskz-kbetr  = ls_bset-kbetr.
           ls_kschl_mwskz-hwbas  = ls_bset-hwbas.
           ls_kschl_mwskz-kschl  = ls_bset-kschl.
           ls_kschl_mwskz-hwste  = ls_bset-hwste.
