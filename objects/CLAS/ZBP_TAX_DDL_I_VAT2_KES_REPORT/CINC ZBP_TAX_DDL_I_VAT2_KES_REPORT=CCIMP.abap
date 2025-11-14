@@ -54,8 +54,8 @@ CLASS LHC_ZTAX_DDL_I_VAT2_KES_REPORT DEFINITION INHERITING FROM CL_ABAP_BEHAVIOR
     METHODS UPDATERECORD FOR MODIFY
       IMPORTING KEYS FOR ACTION ZTAX_DDL_I_VAT2_KES_REPORT~UPDATERECORD  RESULT RESULT.
 
-    METHODS CREATEXML FOR MODIFY
-      IMPORTING KEYS FOR ACTION ZTAX_DDL_I_VAT2_KES_REPORT~CREATEXML  RESULT RESULTL.
+    METHODS createxml FOR MODIFY
+      IMPORTING keys FOR ACTION ztax_ddl_i_vat2_kes_report~createxml RESULT result.
 
 
 
@@ -316,15 +316,17 @@ CLASS LHC_ZTAX_DDL_I_VAT2_KES_REPORT IMPLEMENTATION.
     DATA: LO_VAT2_REPORT TYPE REF TO ZCL_TAX_VAT2_KES_REPORT.
     CREATE OBJECT LO_VAT2_REPORT.
 
-    DATA(LT_KEYS) = KEYS.
+    DATA(lt_keys) = keys.
 
-    READ TABLE LT_KEYS INTO DATA(LS_KEYS) INDEX 1.
-    IF SY-SUBRC EQ 0.
+    READ TABLE lt_keys INTO DATA(ls_keys) INDEX 1.
+    IF sy-subrc EQ 0.
 
-      DATA(P_BUKRS) = LS_KEYS-%PARAM-BUKRS.
-      DATA(P_GJAHR) = LS_KEYS-%PARAM-GJAHR.
-      DATA(P_MONAT) = LS_KEYS-%PARAM-MONAT.
-      DATA(P_DONEMB) = 01.
+*
+      DATA(p_bukrs) = ls_keys-bukrs.
+      DATA(p_gjahr) = ls_keys-gjahr.
+      DATA(p_monat) = ls_keys-monat.
+      DATA(p_donemb) = 01.
+
 
 
       CALL METHOD LO_VAT2_REPORT->GET_DATA
@@ -710,13 +712,20 @@ CLASS LHC_ZTAX_DDL_I_VAT2_KES_REPORT IMPLEMENTATION.
     IF lv_xml_string IS NOT INITIAL.
       TRY.
           DATA(lo_mail) = cl_bcs_mail_message=>create_instance( ).
-          lo_mail->set_sender( iv_address    = CONV #( 'deneme@nttdata.com' ) ).
-          lo_mail->add_recipient( iv_address = CONV #( 'sumeyye.ak@nttdata.com' ) ).
+
+          DATA(lv_username) = cl_abap_context_info=>get_user_technical_name(  ).
+
+          SELECT SINGLE defaultemailaddress
+            FROM i_businessuservh WHERE userid = @lv_username
+            INTO @DATA(lv_email).
+
+          lo_mail->set_sender( iv_address    = CONV #( lv_email ) ).
+          lo_mail->add_recipient( iv_address = CONV #( lv_email ) ).
+
 
 
           DATA(lv_subject) = |Beyanname;|.
           DATA(lv_content) = |{ lv_xml_string }|.
-
 
           lo_mail->set_subject( CONV #( lv_subject ) ).
           lo_mail->set_main( cl_bcs_mail_textpart=>create_instance( iv_content      = lv_content
