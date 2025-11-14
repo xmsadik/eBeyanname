@@ -44,6 +44,11 @@
           IMPORTING
             et_collect = lt_collect.
 
+        LOOP AT lt_collect ASSIGNING FIELD-SYMBOL(<fs_col>).
+          <fs_col>-bukrs = p_bukrs.
+          <fs_col>-gjahr = p_gjahr.
+          <fs_col>-monat = p_monat.
+        ENDLOOP.
 
         IF io_request->is_total_numb_of_rec_requested(  ).
           io_response->set_total_number_of_records( iv_total_number_of_records = lines( lt_collect ) ).
