@@ -585,7 +585,7 @@ CLASS lhc_ztax_ddl_i_vat2_beyan_repo IMPLEMENTATION.
       ENDLOOP.
 
       DATA: lo_vat2_kesinti TYPE REF TO zcl_tax_vat2_kes_report.
-      CREATE OBJECT lo_vat2_report.
+      CREATE OBJECT lo_vat2_kesinti.
 
       lt_keys = keys.
 
