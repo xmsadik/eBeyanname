@@ -35,6 +35,7 @@ authorization master ( instance )
     Demail = Demail;
     Dalkod = Dalkod;
     Dtelno = Dtelno;
+    tsicil = tsicil;
 
   }
 

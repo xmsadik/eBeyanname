@@ -136,6 +136,7 @@ CLASS lhc_ZTAX_DDL_I_VAT1_DEC_REPORT IMPLEMENTATION.
     TYPES demail   TYPE ztax_t_beyg-demail.
     TYPES dalkod   TYPE ztax_t_beyg-dalkod.
     TYPES dtelno   TYPE ztax_t_beyg-dtelno.
+    TYPES tsicil   TYPE ztax_t_beyg-tsicil.
     TYPES END OF lty_beyg.
 
     DATA lv_donem_txt(30).
@@ -206,6 +207,7 @@ CLASS lhc_ZTAX_DDL_I_VAT1_DEC_REPORT IMPLEMENTATION.
     DATA lv_deposta       TYPE string.
     DATA lv_dalankodu     TYPE string.
     DATA lv_dtelno        TYPE string.
+    DATA lv_tsicil        TYPE string.
     DATA lv_filename      TYPE string.
     DATA lt_x             TYPE mtty_x.
     DATA lv_size          TYPE i.
@@ -521,6 +523,11 @@ CLASS lhc_ZTAX_DDL_I_VAT1_DEC_REPORT IMPLEMENTATION.
                 '</telNo>'
                 INTO lv_dtelno.
 
+    CONCATENATE '<ticSicilNo>'
+                ls_beyg-tsicil
+                '</ticSicilNo>'
+                INTO lv_tsicil.
+
     CONCATENATE '<?xml version="1.0" encoding="ISO-8859-9"?>'
                 '<beyanname'
                 lv_kodver
@@ -544,6 +551,7 @@ CLASS lhc_ZTAX_DDL_I_VAT1_DEC_REPORT IMPLEMENTATION.
                 lv_meposta
                 lv_malankodu
                 lv_mtelno
+                lv_tsicil
                 '</mukellef>'
                 lv_hsv
                 lv_hsvsoyadi

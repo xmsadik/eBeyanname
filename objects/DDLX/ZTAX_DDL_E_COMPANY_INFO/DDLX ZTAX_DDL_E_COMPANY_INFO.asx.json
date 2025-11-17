@@ -7,9 +7,9 @@
     "DDLXNAME":"ZTAX_DDL_E_COMPANY_INFO",
     "VERSION":"A",
     "CHANGED_BY":"SAP_CUSTOMER",
-    "CHANGED_ON":"2024-10-24",
-    "CHANGED_AT":"12:17:01",
-    "UUID":"C1CC6765374D1EEFA4C03BF2183C824A",
+    "CHANGED_ON":"2025-11-17",
+    "CHANGED_AT":"01:06:03",
+    "UUID":"FA163EBBCF7E1FE0B0EA32CF237566CF",
     "ABAP_LANGUAGE_VERSION":"5"
    }
   ]
@@ -34,7 +34,7 @@
     "DDLXNAME":"ZTAX_DDL_E_COMPANY_INFO",
     "VERSION":"A",
     "UUID":"",
-    "SOURCE":"@Metadata.layer : #CORE\r\n@Search.searchable:true\r\n@UI:{\r\nheaderInfo:{\r\ntypeNamePlural:'Şirket Bilgileri',\r\ntypeName:'Şirket Bilgileri',\r\ntitle:{type:#STANDARD,label:'Şirket Bilgileri',value:'CompanyCode'}\r\n}\r\n}\r\nannotate entity ztax_ddl_p_company_info with\r\n{\r\n  @UI.facet:[{id:'Informations',\r\n  purpose:#STANDARD,\r\n  type:#IDENTIFICATION_REFERENCE,\r\n  label:'Beyanname Dosya Yolu',\r\n  position:10}]\r\n\r\n  @UI:{lineItem:[{position:10,importance:#HIGH}],\r\n  identification:[{position:10}],\r\n  selectionField:[{position:10}]}\r\n  @Search.defaultSearchElement:true\r\n  @Consumption.valueHelpDefinition: [ { entity: { name: 'I_CompanyCodeVH', element: 'CompanyCode' }}]\r\n  CompanyCode;\r\n  @UI:{lineItem:[{position:20}],\r\n  identification:[{position:20}],\r\n  selectionField:[{position:20}]}\r\n  Vdkod;\r\n  @UI:{lineItem:[{position:30}],\r\n  identification:[{position:30}],\r\n  selectionField:[{position:30}]}\r\n  Mvkno;\r\n  @UI:{lineItem:[{position:40}],\r\n  identification:[{position:40}],\r\n  selectionField:[{position:40}]}\r\n  Mtckn;\r\n\r\n  @UI:{lineItem:[{position:50}],\r\n  identification:[{position:50}],\r\n  selectionField:[{position:50}]}\r\n  Msoyad;\r\n  @UI:{lineItem:[{position:60}],\r\n  identification:[{position:60}],\r\n  selectionField:[{position:60}]}\r\n  Mad;\r\n  @UI:{lineItem:[{position:70}],\r\n  identification:[{position:70}],\r\n  selectionField:[{position:70}]}\r\n  Memail;\r\n  @UI:{lineItem:[{position:80}],\r\n  identification:[{position:80}],\r\n  selectionField:[{position:80}]}\r\n  Malkod;\r\n  @UI:{lineItem:[{position:90}],\r\n  identification:[{position:90}],\r\n  selectionField:[{position:90}]}\r\n  Mtelno;\r\n  @UI:{lineItem:[{position:100}],\r\n  identification:[{position:100}],\r\n  selectionField:[{position:100}]}\r\n  Hsvvkn;\r\n  @UI:{lineItem:[{position:110}],\r\n  identification:[{position:110}],\r\n  selectionField:[{position:110}]}\r\n  @Consumption.valueHelpDefinition: [ { entity: { name: 'ZTAX_DDL_VH_HSV', element: 'Hsv' }}]\r\n  Hsv;\r\n  @UI:{lineItem:[{position:120}],\r\n  identification:[{position:120}],\r\n  selectionField:[{position:120}]}\r\n  Hsvtckn;\r\n  @UI:{lineItem:[{position:130}],\r\n  identification:[{position:130}],\r\n  selectionField:[{position:130}]}\r\n  Hsvemail;\r\n  @UI:{lineItem:[{position:140}],\r\n  identification:[{position:140}],\r\n  selectionField:[{position:140}]}\r\n  Hsvakod;\r\n  @UI:{lineItem:[{position:150}],\r\n  identification:[{position:150}],\r\n  selectionField:[{position:150}]}\r\n  Hsvtelno;\r\n  @UI:{lineItem:[{position:160}],\r\n  identification:[{position:160}],\r\n  selectionField:[{position:160}]}\r\n  Dvkno;\r\n  @UI:{lineItem:[{position:170}],\r\n  identification:[{position:170}],\r\n  selectionField:[{position:170}]}\r\n  Dtckn;\r\n  @UI:{lineItem:[{position:180}],\r\n  identification:[{position:180}],\r\n  selectionField:[{position:180}]}\r\n  Dsoyad;\r\n  @UI:{lineItem:[{position:190}],\r\n  identification:[{position:190}],\r\n  selectionField:[{position:190}]}\r\n  Dad;\r\n  @UI:{lineItem:[{position:200}],\r\n  identification:[{position:200}],\r\n  selectionField:[{position:200}]}\r\n  Demail;\r\n  @UI:{lineItem:[{position:210}],\r\n  identification:[{position:210}],\r\n  selectionField:[{position:210}]}\r\n  Dalkod;\r\n  @UI:{lineItem:[{position:220}],\r\n  identification:[{position:220}],\r\n  selectionField:[{position:220}]}\r\n  Dtelno;\r\n}"
+    "SOURCE":"@Metadata.layer : #CORE\r\n@Search.searchable:true\r\n@UI:{\r\nheaderInfo:{\r\ntypeNamePlural:'Şirket Bilgileri',\r\ntypeName:'Şirket Bilgileri',\r\ntitle:{type:#STANDARD,label:'Şirket Bilgileri',value:'CompanyCode'}\r\n}\r\n}\r\nannotate entity ztax_ddl_p_company_info with\r\n{\r\n  @UI.facet:[{id:'Informations',\r\n  purpose:#STANDARD,\r\n  type:#IDENTIFICATION_REFERENCE,\r\n  label:'Beyanname Dosya Yolu',\r\n  position:10}]\r\n\r\n  @UI:{lineItem:[{position:10,importance:#HIGH}],\r\n  identification:[{position:10}],\r\n  selectionField:[{position:10}]}\r\n  @Search.defaultSearchElement:true\r\n  @Consumption.valueHelpDefinition: [ { entity: { name: 'I_CompanyCodeVH', element: 'CompanyCode' }}]\r\n  CompanyCode;\r\n  @UI:{lineItem:[{position:20}],\r\n  identification:[{position:20}],\r\n  selectionField:[{position:20}]}\r\n  Vdkod;\r\n  @UI:{lineItem:[{position:30}],\r\n  identification:[{position:30}],\r\n  selectionField:[{position:30}]}\r\n  Mvkno;\r\n  @UI:{lineItem:[{position:40}],\r\n  identification:[{position:40}],\r\n  selectionField:[{position:40}]}\r\n  Mtckn;\r\n\r\n  @UI:{lineItem:[{position:50}],\r\n  identification:[{position:50}],\r\n  selectionField:[{position:50}]}\r\n  Msoyad;\r\n  @UI:{lineItem:[{position:60}],\r\n  identification:[{position:60}],\r\n  selectionField:[{position:60}]}\r\n  Mad;\r\n  @UI:{lineItem:[{position:70}],\r\n  identification:[{position:70}],\r\n  selectionField:[{position:70}]}\r\n  Memail;\r\n  @UI:{lineItem:[{position:80}],\r\n  identification:[{position:80}],\r\n  selectionField:[{position:80}]}\r\n  Malkod;\r\n  @UI:{lineItem:[{position:90}],\r\n  identification:[{position:90}],\r\n  selectionField:[{position:90}]}\r\n  Mtelno;\r\n  @UI:{lineItem:[{position:100}],\r\n  identification:[{position:100}],\r\n  selectionField:[{position:100}]}\r\n  Hsvvkn;\r\n  @UI:{lineItem:[{position:110}],\r\n  identification:[{position:110}],\r\n  selectionField:[{position:110}]}\r\n  @Consumption.valueHelpDefinition: [ { entity: { name: 'ZTAX_DDL_VH_HSV', element: 'Hsv' }}]\r\n  Hsv;\r\n  @UI:{lineItem:[{position:120}],\r\n  identification:[{position:120}],\r\n  selectionField:[{position:120}]}\r\n  Hsvtckn;\r\n  @UI:{lineItem:[{position:130}],\r\n  identification:[{position:130}],\r\n  selectionField:[{position:130}]}\r\n  Hsvemail;\r\n  @UI:{lineItem:[{position:140}],\r\n  identification:[{position:140}],\r\n  selectionField:[{position:140}]}\r\n  Hsvakod;\r\n  @UI:{lineItem:[{position:150}],\r\n  identification:[{position:150}],\r\n  selectionField:[{position:150}]}\r\n  Hsvtelno;\r\n  @UI:{lineItem:[{position:160}],\r\n  identification:[{position:160}],\r\n  selectionField:[{position:160}]}\r\n  Dvkno;\r\n  @UI:{lineItem:[{position:170}],\r\n  identification:[{position:170}],\r\n  selectionField:[{position:170}]}\r\n  Dtckn;\r\n  @UI:{lineItem:[{position:180}],\r\n  identification:[{position:180}],\r\n  selectionField:[{position:180}]}\r\n  Dsoyad;\r\n  @UI:{lineItem:[{position:190}],\r\n  identification:[{position:190}],\r\n  selectionField:[{position:190}]}\r\n  Dad;\r\n  @UI:{lineItem:[{position:200}],\r\n  identification:[{position:200}],\r\n  selectionField:[{position:200}]}\r\n  Demail;\r\n  @UI:{lineItem:[{position:210}],\r\n  identification:[{position:210}],\r\n  selectionField:[{position:210}]}\r\n  Dalkod;\r\n  @UI:{lineItem:[{position:220}],\r\n  identification:[{position:220}],\r\n  selectionField:[{position:220}]}\r\n  Dtelno;\r\n  \r\n    @UI:{lineItem:[{position:230}],\r\n  identification:[{position:230}],\r\n  selectionField:[{position:230}]}\r\n  tsicil;\r\n}"
    }
   ]
  },
@@ -604,6 +604,27 @@
    },
    {
     "DDLXNAME":"ZTAX_DDL_E_COMPANY_INFO",
+    "ELEMENT":"TSICIL",
+    "NAME":"UI.IDENTIFICATION$1$.POSITION",
+    "ELEMENT_TYPE":"S",
+    "VALUE":"230"
+   },
+   {
+    "DDLXNAME":"ZTAX_DDL_E_COMPANY_INFO",
+    "ELEMENT":"TSICIL",
+    "NAME":"UI.LINEITEM$1$.POSITION",
+    "ELEMENT_TYPE":"S",
+    "VALUE":"230"
+   },
+   {
+    "DDLXNAME":"ZTAX_DDL_E_COMPANY_INFO",
+    "ELEMENT":"TSICIL",
+    "NAME":"UI.SELECTIONFIELD$1$.POSITION",
+    "ELEMENT_TYPE":"S",
+    "VALUE":"230"
+   },
+   {
+    "DDLXNAME":"ZTAX_DDL_E_COMPANY_INFO",
     "ELEMENT":"VDKOD",
     "NAME":"UI.IDENTIFICATION$1$.POSITION",
     "ELEMENT_TYPE":"S",
@@ -668,8 +689,8 @@
     "EXTENDED_ARTIFACT":"ZTAX_DDL_P_COMPANY_INFO",
     "VARIANT":"",
     "LAYER":1500,
-    "DT_UUID":"C1CC6765374D1EEFA4C03BF2183C824A",
-    "RT_HASH":"404BB382BB9F89B7C78B48B33F927CD2ED102E7A",
+    "DT_UUID":"FA163EBBCF7E1FE0B0EA32CF237566CF",
+    "RT_HASH":"A1752A72E0A14274F6C35E984ED3984FD4C1CE29",
     "GEN_VERSION":"0",
     "TYPE":"0"
    }

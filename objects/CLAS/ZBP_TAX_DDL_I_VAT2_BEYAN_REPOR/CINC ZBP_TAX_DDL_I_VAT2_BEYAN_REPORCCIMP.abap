@@ -105,6 +105,7 @@ CLASS lhc_ztax_ddl_i_vat2_beyan_repo IMPLEMENTATION.
       TYPES demail   TYPE ztax_t_beyg-demail.
       TYPES dalkod   TYPE ztax_t_beyg-dalkod.
       TYPES dtelno   TYPE ztax_t_beyg-dtelno.
+      TYPES tsicil   TYPE ztax_t_beyg-tsicil.
       TYPES END OF lty_beyg.
 
       TYPES: BEGIN OF ty_kesinti_lifnr_sum,
@@ -181,6 +182,7 @@ CLASS lhc_ztax_ddl_i_vat2_beyan_repo IMPLEMENTATION.
       DATA lv_deposta       TYPE string.
       DATA lv_dalankodu     TYPE string.
       DATA lv_dtelno        TYPE string.
+      DATA lv_tsicil        TYPE string.
       DATA lv_mcod1         TYPE string.
       DATA lv_kesinti_vergino TYPE string.
       DATA lv_filename      TYPE string.
@@ -241,7 +243,8 @@ CLASS lhc_ztax_ddl_i_vat2_beyan_repo IMPLEMENTATION.
              dad,
              demail,
              dalkod,
-             dtelno
+             dtelno,
+             tsicil
 
              FROM ztax_t_beyg
              WHERE bukrs EQ @p_bukrs
@@ -414,6 +417,11 @@ CLASS lhc_ztax_ddl_i_vat2_beyan_repo IMPLEMENTATION.
                   '</telNo>'
                   INTO lv_dtelno.
 
+    CONCATENATE '<ticSicilNo>'
+                ls_beyg-tsicil
+                '</ticSicilNo>'
+                INTO lv_tsicil.
+
       CONCATENATE '<?xml version="1.0" encoding="ISO-8859-9"?>'
                   '<beyanname'
                   lv_kodver
@@ -437,6 +445,7 @@ CLASS lhc_ztax_ddl_i_vat2_beyan_repo IMPLEMENTATION.
                   lv_meposta
                   lv_malankodu
                   lv_mtelno
+                  lv_tsicil
                   '</mukellef>'
                   lv_hsv
                   lv_hsvsoyadi
