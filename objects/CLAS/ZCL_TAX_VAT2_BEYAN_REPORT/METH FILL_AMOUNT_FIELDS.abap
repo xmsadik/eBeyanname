@@ -118,7 +118,8 @@
         WHEN '001'.
           lv_result =  <fs_mws>.
         WHEN '002'.
-          lv_result =  <fs_mws> / 10.
+*          lv_result =  <fs_mws> / 10.
+          lv_result =  <fs_mws>.
         WHEN '003'.
           lv_result = ( <fs_ztra> / <fs_mws> )  * 10.
         WHEN '004'.

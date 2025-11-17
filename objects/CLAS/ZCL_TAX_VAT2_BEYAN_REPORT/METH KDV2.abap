@@ -381,9 +381,9 @@
       ls_collect-tevkifato = lv_conv_int.
 
       SHIFT ls_collect-tevkifato LEFT DELETING LEADING space.
-*      CONCATENATE ls_collect-tevkifato
-*                  '/10'
-*                  INTO ls_collect-tevkifato .
+      CONCATENATE ls_collect-tevkifato
+                  '/10'
+                  INTO ls_collect-tevkifato .
       CLEAR lv_conv_int.
       lv_conv_int = ls_collect-oran.
       CLEAR ls_collect-oran.
@@ -432,9 +432,9 @@
 
       ls_collect-tevkifato = lv_percent.
       SHIFT ls_collect-tevkifato LEFT DELETING LEADING space.
-*      CONCATENATE ls_collect-tevkifato
-*                  '/10'
-*                  INTO ls_collect-tevkifato.
+      CONCATENATE ls_collect-tevkifato
+                  '/10'
+                  INTO ls_collect-tevkifato.
       ls_collect-kiril3 = ls_k2mt-mwskz.
 
       CLEAR lv_percent.
