@@ -76,7 +76,16 @@
                          AND gjahr_rev  EQ ls_rbkp-gjahr
                          AND budat+4(2) EQ ls_rbkp-budat+4(2).
       ENDLOOP.
+
+
+
+
     ENDIF.
+
+
+
+
+
 
     CLEAR lt_bkpf_rmrp.
     CLEAR lt_rbkp.
@@ -126,8 +135,15 @@
                          AND stblg      EQ ls_bkpf_rev_cont-belnr
                          AND stjah      EQ ls_bkpf_rev_cont-gjahr
                          AND budat+4(2) EQ ls_bkpf_rev_cont-budat+4(2).
+
+
       ENDLOOP.
+
+
     ENDIF.
+
+
+
 
     IF is_read_tab-bset EQ abap_true.
       IF lines( et_bkpf ) GT 0.

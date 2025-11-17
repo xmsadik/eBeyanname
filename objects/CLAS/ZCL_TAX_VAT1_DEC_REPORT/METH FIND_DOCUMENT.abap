@@ -62,6 +62,8 @@
                          AND gjahr_rev  EQ ls_rbkp-gjahr
                          AND budat+4(2) EQ ls_rbkp-budat+4(2).
       ENDLOOP.
+
+
     ENDIF.
 
     CLEAR lt_bkpf_rmrp.

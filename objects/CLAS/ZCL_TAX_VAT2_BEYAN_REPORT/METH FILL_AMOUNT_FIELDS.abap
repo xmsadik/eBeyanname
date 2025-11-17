@@ -138,7 +138,11 @@
         WHEN '004'.
           cs_collect-vergi     = lv_result.
         WHEN '005'.
-          cs_collect-tevkifat  = lv_result.
+          IF lv_result < 0. "YiğitcanÖzdemir
+            cs_collect-tevkifat  = lv_result * -1.
+          ELSE.
+            cs_collect-tevkifat = lv_result.
+          ENDIF.
       ENDCASE.
 
     ENDDO.
