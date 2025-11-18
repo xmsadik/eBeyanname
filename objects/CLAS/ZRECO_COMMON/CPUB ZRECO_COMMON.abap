@@ -25,7 +25,7 @@ CLASS zreco_common DEFINITION
     TYPES: BEGIN OF ty_cform,
              hesap_tur TYPE zreco_account_type,
              hesap_no  TYPE zreco_ktonr_av,
-             waers     TYPE waers,
+*             waers     TYPE waers,
              kunnr     TYPE kunnr,
              lifnr     TYPE lifnr,
            END OF ty_cform.
@@ -80,7 +80,8 @@ CLASS zreco_common DEFINITION
            gv_spl_dmbtr TYPE zreco_wrbtr, "Toplam ÖDK tutarı
            gt_exch      TYPE TABLE OF zreco_exch,
            gv_kur       TYPE abap_boolean,
-           gs_adrc      TYPE Zreco_adrc.
+*           gs_adrc      TYPE Zreco_adrc.
+           gs_adrc      TYPE zreco_ddl_i_address2.
 
     DATA: lv_c1 TYPE c LENGTH 1.
 
