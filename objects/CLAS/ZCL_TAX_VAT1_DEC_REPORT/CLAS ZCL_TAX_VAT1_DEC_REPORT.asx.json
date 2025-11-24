@@ -2462,7 +2462,7 @@
     "BCMTDSYN":0,
     "BCEVTCAT":0,
     "TYPESRC_LENG":466,
-    "TYPESRC":"BEGIN OF mty_bset.\r\n    TYPES bukrs TYPE bukrs.\r\n    TYPES belnr TYPE belnr_d.\r\n    TYPES gjahr TYPE gjahr.\r\n    TYPES buzei TYPE buzei.\r\n    TYPES mwskz TYPE mwskz.\r\n    TYPES shkzg TYPE shkzg.\r\n    TYPES hwbas TYPE p LENGTH 16 DECIMALS 2.\r\n    TYPES hwste TYPE p LENGTH 16 DECIMALS 2. \"hwste.\r\n    TYPES ktosl TYPE ktosl.\r\n    TYPES kbetr TYPE p LENGTH 16 DECIMALS 2. \"kbetr.\r\n    TYPES kschl TYPE kschl.\r\n    TYPES hkont TYPE hkont.\r\n\r\n    TYPES END OF mty_bset\r\n"
+    "TYPESRC":"BEGIN OF mty_bset.\r\n    TYPES bukrs TYPE bukrs.\r\n    TYPES belnr TYPE belnr_d.\r\n    TYPES gjahr TYPE gjahr.\r\n    TYPES buzei TYPE buzei.\r\n    TYPES mwskz TYPE mwskz.\r\n    TYPES shkzg TYPE shkzg.\r\n    TYPES hwbas TYPE p LENGTH 16 DECIMALS 5.\r\n    TYPES hwste TYPE p LENGTH 16 DECIMALS 5. \"hwste.\r\n    TYPES ktosl TYPE ktosl.\r\n    TYPES kbetr TYPE p LENGTH 16 DECIMALS 5. \"kbetr.\r\n    TYPES kschl TYPE kschl.\r\n    TYPES hkont TYPE hkont.\r\n\r\n    TYPES END OF mty_bset\r\n"
    },
    {
     "CLSNAME":"ZCL_TAX_VAT1_DEC_REPORT",
