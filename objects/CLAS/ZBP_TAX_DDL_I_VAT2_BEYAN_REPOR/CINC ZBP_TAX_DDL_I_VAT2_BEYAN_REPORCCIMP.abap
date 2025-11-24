@@ -216,9 +216,9 @@ CLASS lhc_ztax_ddl_i_vat2_beyan_repo IMPLEMENTATION.
 
       CASE p_donemb.
         WHEN '01'.
-          lv_donem_txt = TEXT-d01.
+          lv_donem_txt = 'aylik'."TEXT-d01.
         WHEN '02'.
-          lv_donem_txt = TEXT-d02.
+          lv_donem_txt = '3 aylik'."TEXT-d02.
       ENDCASE.
 
       SELECT SINGLE
@@ -417,10 +417,10 @@ CLASS lhc_ztax_ddl_i_vat2_beyan_repo IMPLEMENTATION.
                   '</telNo>'
                   INTO lv_dtelno.
 
-    CONCATENATE '<ticSicilNo>'
-                ls_beyg-tsicil
-                '</ticSicilNo>'
-                INTO lv_tsicil.
+      CONCATENATE '<ticSicilNo>'
+                  ls_beyg-tsicil
+                  '</ticSicilNo>'
+                  INTO lv_tsicil.
 
       CONCATENATE '<?xml version="1.0" encoding="ISO-8859-9"?>'
                   '<beyanname'
@@ -514,6 +514,8 @@ CLASS lhc_ztax_ddl_i_vat2_beyan_repo IMPLEMENTATION.
                             SEPARATED BY space.
             ENDCASE.
 
+
+            CONDENSE ls_kiril3-kiril2.
             CONCATENATE lv_xml_string
                         '<islemTuru>'
                         ls_kiril3-kiril2
@@ -533,7 +535,7 @@ CLASS lhc_ztax_ddl_i_vat2_beyan_repo IMPLEMENTATION.
             SHIFT lv_char_amount3 LEFT DELETING LEADING space.
 
 
-
+            CONDENSE  lv_char_amount1.
             CONCATENATE lv_xml_string
                         '<matrah>'
                         lv_char_amount1
@@ -541,6 +543,7 @@ CLASS lhc_ztax_ddl_i_vat2_beyan_repo IMPLEMENTATION.
                         INTO lv_xml_string
                         SEPARATED BY space.
 
+            CONDENSE ls_kiril3-oran.
             CONCATENATE lv_xml_string
                         '<oran>'
                          ls_kiril3-oran
@@ -548,6 +551,7 @@ CLASS lhc_ztax_ddl_i_vat2_beyan_repo IMPLEMENTATION.
                          INTO lv_xml_string
                          SEPARATED BY space.
 
+            CONDENSE ls_kiril3-tevkifato.
             CONCATENATE lv_xml_string
                         '<tevkifatOrani>'
                         ls_kiril3-tevkifato
@@ -555,6 +559,7 @@ CLASS lhc_ztax_ddl_i_vat2_beyan_repo IMPLEMENTATION.
                         INTO lv_xml_string
                         SEPARATED BY space.
 
+            CONDENSE  lv_char_amount3.
             CONCATENATE lv_xml_string
                         '<vergi>'
                         lv_char_amount3

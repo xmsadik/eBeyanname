@@ -47,10 +47,10 @@ CLASS zcl_tax_vat1_dec_report DEFINITION
     TYPES buzei TYPE buzei.
     TYPES mwskz TYPE mwskz.
     TYPES shkzg TYPE shkzg.
-    TYPES hwbas TYPE p LENGTH 16 DECIMALS 5.
-    TYPES hwste TYPE p LENGTH 16 DECIMALS 5. "hwste.
+    TYPES hwbas TYPE p LENGTH 16 DECIMALS 2.
+    TYPES hwste TYPE p LENGTH 16 DECIMALS 2. "hwste.
     TYPES ktosl TYPE ktosl.
-    TYPES kbetr TYPE p LENGTH 16 DECIMALS 5. "kbetr.
+    TYPES kbetr TYPE p LENGTH 16 DECIMALS 2. "kbetr.
     TYPES kschl TYPE kschl.
     TYPES hkont TYPE hkont.
 
