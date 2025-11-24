@@ -420,12 +420,12 @@
 *
 *                CONTINUE.
 *              ENDLOOP.
-**              READ TABLE lt_bseg INTO ls_bseg WITH TABLE KEY bukrs = ls_bset-bukrs
-**                                                             belnr = ls_bset-belnr
-**                                                             gjahr = ls_bset-gjahr
-**                                                             buzid = 'T'
-*
-*
+*              READ TABLE lt_bseg INTO ls_bseg WITH TABLE KEY bukrs = ls_bset-bukrs
+*                                                             belnr = ls_bset-belnr
+*                                                             gjahr = ls_bset-gjahr
+*                                                             buzid = 'T'
+
+
 *              <fs_detail>-bukrs  = p_bukrs.
 *              <fs_detail>-butxt  = lv_butxt.
 *              <fs_detail>-kiril1 = ls_map-kiril1.
@@ -446,7 +446,7 @@
 *              <fs_detail>-tevkt  = ls_bset-hwste.
 *              UNASSIGN <fs_detail>.
 *            ENDIF.
-*
+
             CLEAR ls_collect.
 
             IF ls_map-kiril1 NE '031'.
@@ -530,7 +530,6 @@
                          INTO  @<t_outtab>.
 
 
-
                   ENDCASE.
 
                   IF <t_outtab> EQ ls_map-kiril2.
@@ -571,6 +570,41 @@
                     UNASSIGN <fs_value>.
                   ENDIF.
                 ENDLOOP.
+
+              ELSE.
+
+                ls_collect-kiril1 = ls_map-kiril1.
+                ls_collect-acklm1 = ls_map-acklm1.
+                IF ls_tax_voran-oran IS NOT INITIAL .
+                  CASE ls_bset-shkzg.
+                    WHEN 'H'.
+                      ls_collect-matrah   = ls_bset-hwbas.
+                      ls_collect-vergi    = ( ls_bset-hwbas * ls_tax_voran-oran ) / 100.
+                      lv_kbetr_h          = ( ls_tax_voran-oran * 10 ).
+                      lv_kbetr_s          = ( ls_tax_voran-oran * 10 ) - ls_bset-kbetr.
+                      ls_collect-tevkifat = ( ( ls_bset-hwbas * ls_tax_voran-oran ) / 100 - ls_bset-hwste ).
+                      ls_collect-vergi    = ls_collect-vergi + ( -1 * ( ( ls_bset-hwbas * ls_tax_voran-oran ) / 100 - ls_bset-hwste ) ).
+                  ENDCASE.
+                ELSE.
+                  CASE ls_bset-shkzg.
+                    WHEN 'H'.
+                      ls_collect-matrah   = ls_bset-hwbas.
+                      ls_collect-vergi    = ls_bset-hwste.
+                      lv_kbetr_h          = ls_bset-kbetr.
+                    WHEN 'S'.
+                      lv_kbetr_s          = ls_bset-kbetr.
+                      ls_collect-tevkifat = ls_bset-hwste.
+                      ls_collect-vergi    = -1 * ls_bset-hwste.
+                  ENDCASE.
+                ENDIF.
+                COLLECT ls_collect INTO mt_collect.
+                ls_collect-kiril2 = ls_map-kiril2.
+                ls_collect-acklm2 = ls_map-acklm2.
+                COLLECT ls_collect INTO mt_collect.
+                "3
+                ls_collect-kiril3 = ls_map-mwskz.
+                COLLECT ls_collect INTO mt_collect.
+
               ENDIF.
 
             ELSE.
