@@ -34,7 +34,6 @@
              and i_journalentry~IsReversed = @space
              and i_journalentry~IsReversal = @space
             INTO TABLE @et_bkpf.
-
     IF sy-subrc IS NOT INITIAL.
       RETURN.
     ENDIF.

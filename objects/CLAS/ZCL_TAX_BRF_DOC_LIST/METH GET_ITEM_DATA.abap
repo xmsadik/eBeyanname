@@ -264,9 +264,9 @@
                                                AND ( ( gricd~IsReversal IS INITIAL AND gricd~DebitCreditCode EQ 'H' ) OR ( gricd~IsReversal EQ @abap_true AND gricd~DebitCreditCode  EQ 'S' ) )
                                             )
                             )
-                APPENDING CORRESPONDING FIELDS OF TABLE @et_data.
+                       APPENDING CORRESPONDING FIELDS OF TABLE @et_data.
 
-    "ters kayıtların temizlen mesi
+    "ters kayıtların temizlenmesi
     lt_reversed  = et_data.
     lt_reversing = et_data.
 

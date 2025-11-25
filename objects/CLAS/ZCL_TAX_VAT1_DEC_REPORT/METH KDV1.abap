@@ -1035,10 +1035,10 @@
           ENDIF.
 
           "Ana hesap +Vergi göstergesi
-        WHEN '010'.
+        WHEN '010'. "
           CLEAR lv_tabix.
           CLEAR ls_bseg.
-          DELETE ADJACENT DUPLICATES FROM lt_bseg ."COMPARING bukrs hkont gjahr mwskz.
+*          DELETE ADJACENT DUPLICATES FROM lt_bseg COMPARING bukrs hkont gjahr mwskz.
           LOOP AT lt_bseg INTO ls_bseg WHERE  hkont = ls_map-saknr
                                          AND  mwskz = ls_map-mwskz
                                          AND  bukrs = p_bukrs
